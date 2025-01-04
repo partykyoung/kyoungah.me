@@ -3,11 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "build": "rm -rf ./build && rollup -c"
   },
   "browserslist": [
     "defaults"
@@ -21,13 +19,17 @@
     "@kyoungah.me/eslint-config": "workspace:*",
     "@kyoungah.me/typescript-config": "workspace:*",
     "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-typescript": "^12.1.2",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
-    "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
-    "glob": "^11.0.0",
-    "typescript": "~5.6.2",
-    "vite": "^6.0.5",
-    "vite-plugin-dts": "^4.4.0"
-  }
+    "postcss": "^8.4.49",
+    "rollup": "^4.29.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "typescript": "~5.6.2"
+  },
+  "keywords": [],
+  "license": "ISC"
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 
-import * as style from "./button.module.css";
+import styles from "./button.module.css";
 
 interface ButtonProps
   extends React.PropsWithChildren<
@@ -9,7 +9,7 @@ interface ButtonProps
   > {}
 
 function Button({ children, className }: ButtonProps) {
-  return <button className={clsx(style.root, className)}>{children}</button>;
+  return <button className={clsx(styles.root, className)}>{children}</button>;
 }
 
 export type { ButtonProps };
