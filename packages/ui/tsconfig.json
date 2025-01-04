@@ -2,10 +2,8 @@
   "extends": "@kyoungah.me/typescript-config/react.json",
     "compilerOptions": {
       "rootDir": "src",
-      "noEmit": true,
-      "allowImportingTsExtensions": true,
-      "esModuleInterop": true,
-      "allowSyntheticDefaultImports": true,
+      "outDir": "./build",
+      "moduleResolution": "nodenext"
     },
     "include": ["src", "global.d.ts"],
     "exclude": ["node_modules", "dist"]
