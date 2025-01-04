@@ -5,19 +5,19 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf ./build && rollup -c"
+    "build": "rm -rf ./build && tsc && rollup -c "
   },
   "browserslist": [
     "defaults"
   ],
-  "dependencies": {
-    "clsx": "^2.1.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
-  },
   "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.26.3",
+    "@babel/preset-typescript": "^7.26.0",
     "@kyoungah.me/eslint-config": "workspace:*",
     "@kyoungah.me/typescript-config": "workspace:*",
+    "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-typescript": "^12.1.2",
@@ -29,6 +29,11 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "typescript": "~5.6.2"
+  },
+  "peerDependencies": {
+    "clsx": "^2.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "keywords": [],
   "license": "ISC"
