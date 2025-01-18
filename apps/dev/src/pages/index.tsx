@@ -1,7 +1,10 @@
 import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
 
-import { Button } from "@kyoungah.me/ui/build/button";
+import "@kyoungah.me/ui/build/styles/global.css";
+import "../app/styles/global.css";
+
+import { Button } from "@kyoungah.me/ui/build/components/button";
 
 const pageStyles = {
   color: "#232129",
