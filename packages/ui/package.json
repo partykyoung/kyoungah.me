@@ -3,10 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "exports": {
-    "./components/*": "./build/components/*",
-    "./styles/*": "./build/styles/*"
-  },
   "scripts": {
     "build": "rm -rf ./build && tsc && rollup -c "
   },
