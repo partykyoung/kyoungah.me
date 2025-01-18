@@ -3,10 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "main": "index.js",
+  "exports": {
+    "./components/*": "./build/components/*",
+    "./styles/*": "./build/styles/*"
+  },
   "scripts": {
     "build": "rm -rf ./build && tsc && rollup -c "
   },
+  
   "browserslist": [
     "defaults"
   ],
