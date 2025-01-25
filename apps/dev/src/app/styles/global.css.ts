@@ -3,6 +3,8 @@ import { globalStyle } from "@vanilla-extract/css";
 globalStyle(":root", {
   vars: {
     "--opacity": "1",
+    "--white": "rgba(255, 255, 255, var(--opacity))",
+
     "--grey100": "rgba(231, 241, 246, var(--opacity))",
     "--grey200": "rgba(208, 226, 238, var(--opacity))",
     "--grey300": "rgba(165, 188, 204, var(--opacity))",
