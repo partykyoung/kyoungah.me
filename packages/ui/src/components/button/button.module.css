@@ -3,4 +3,8 @@
   align-items: center;
   justify-content: center;
   gap: 4px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid transparent;
+  background-color: transparent;
 }

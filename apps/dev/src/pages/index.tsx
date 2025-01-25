@@ -4,7 +4,7 @@ import type { HeadFC, PageProps } from "gatsby";
 import "@kyoungah.me/ui/build/styles/global.css";
 import "../app/styles/global.css";
 
-import { Button } from "@kyoungah.me/ui/build/components/button";
+import { Button } from "../shared/button";
 
 const pageStyles = {
   color: "#232129",
@@ -148,6 +148,15 @@ const IndexPage: React.FC<PageProps> = () => {
         <span>배고파</span>
         <span>아니 배불러</span>
       </Button>
+      <Button size="medium">
+        <span>배고파</span>
+        <span>아니 배불러</span>
+      </Button>
+      <Button size="large">
+        <span>배고파</span>
+        <span>아니 배불러</span>
+      </Button>
+
       <h1 style={headingStyles}>
         Congratulations
         <br />
