@@ -50,7 +50,7 @@ table {
   border-spacing: 0;
 }
 
-:root {
+/* :root {
   --base-blue: 202, 100%;
   --base-gray: 211, 19%;
   --base-danger: 6, 100%;
@@ -88,4 +88,4 @@ table {
 
   --background-color: var(--palette-white);
   --text-color: hsla(var(--palette-gray-100), 100%);
-}
+} */
