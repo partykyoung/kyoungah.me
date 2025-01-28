@@ -1,0 +1,28 @@
+:root {
+  --font-size-h1: 36px;
+  --font-size-h2: 32px;
+  --font-size-h3: 28px;
+  --font-size-body-lg: 24px;
+  --font-size-body: 20px;
+  --font-size-body-sm: 16px;
+  --font-size-caption: 12px;
+
+  --line-height-h1: 44px;
+  --line-height-h2: 40px;
+  --line-height-h3: 36px;
+  --line-height-body-lg: 36px;
+  --line-height-body: 30px;
+  --line-height-body-sm: 24px;
+  --line-height-caption: 18px;
+
+  --letter-spacing-h1: -0.5px;
+  --letter-spacing-h2: -0.25px;
+  --letter-spacing-h3: 0px;
+  --letter-spacing-body-lg: 0.5px;
+  --letter-spacing-body: 0.5px;
+  --letter-spacing-body-sm: 0.5px;
+  --letter-spacing-caption: 0px;
+
+  --default-font-family: 맑은 고딕, malgun gothic, AppleGothicNeoSD,
+    Apple SD 산돌고딕 Neo, Microsoft NeoGothic, Droid sans, sans-serif;
+}

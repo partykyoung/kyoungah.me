@@ -2,6 +2,7 @@ import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
 
 import "@kyoungah.me/ui/build/styles/global.css";
+import "@kyoungah.me/ui/build/styles/typography.css";
 import "../app/styles/global.css";
 
 import { Button } from "../shared/button";

@@ -29,6 +29,8 @@ const styles = readdirSync("./src/styles")
   .filter((file) => file.endsWith(".css"))
   .map((file) => path.resolve("./src/styles", file));
 
+console.log(styles);
+
 export default [
   {
     input: components,
@@ -70,6 +72,7 @@ export default [
         plugins: [autoprefixer()],
         extract: false,
         modules: true,
+        inject: { insertAt: "top" },
       }),
     ],
     external: ["react", "react-dom", "react/jsx-runtime", "clsx"],
@@ -80,12 +83,21 @@ export default [
       dir: "build/styles", // 모든 CSS를 `build/styles` 폴더에 생성
       entryFileNames: "[name].css", // 각 CSS 파일 이름 유지
     },
-    plugins: [
+    plugins: styles.map((style) =>
       postcss({
-        plugins: [autoprefixer()],
-        extract: true,
+        include: style,
+        extract: (file) => `${file.name}.css`, // 파일 이름 기반으로 CSS 추출
         minimize: true,
-      }),
-    ],
+        sourceMap: false,
+      })
+    ),
+    // plugins: [
+    //   postcss({
+    //     plugins: [autoprefixer()],
+    //     extract: true,
+    //     modules: false,
+    //     minimize: true,
+    //   }),
+    // ],
   },
 ];
