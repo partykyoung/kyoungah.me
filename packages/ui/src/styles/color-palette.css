@@ -1,0 +1,60 @@
+:root {
+  --opacity: 1;
+  --white: hsla(0, 0%, 100%, var(--opacity));
+
+  --grey100: hsla(200, 25%, 92%, var(--opacity));
+  --grey200: hsla(204, 26%, 82%, var(--opacity));
+  --grey300: hsla(204, 21%, 66%, var(--opacity));
+  --grey400: hsla(204, 15%, 51%, var(--opacity));
+  --grey500: hsla(210, 24%, 29%, var(--opacity));
+  --grey600: hsla(210, 25%, 21%, var(--opacity));
+  --grey700: hsla(210, 24%, 16%, var(--opacity));
+  --grey800: hsla(210, 25%, 12%, var(--opacity));
+  --grey900: hsla(211, 27%, 8%, var(--opacity));
+
+  --blue100: hsla(190, 100%, 94%, var(--opacity));
+  --blue200: hsla(190, 100%, 85%, var(--opacity));
+  --blue300: hsla(190, 100%, 76%, var(--opacity));
+  --blue400: hsla(195, 100%, 72%, var(--opacity));
+  --blue500: hsla(199, 100%, 56%, var(--opacity));
+  --blue600: hsla(204, 76%, 46%, var(--opacity));
+  --blue700: hsla(208, 77%, 40%, var(--opacity));
+  --blue800: hsla(211, 80%, 34%, var(--opacity));
+  --blue900: hsla(215, 80%, 30%, var(--opacity));
+
+  --green100: hsla(84, 80%, 91%, var(--opacity));
+  --green200: hsla(84, 77%, 83%, var(--opacity));
+  --green300: hsla(84, 60%, 74%, var(--opacity));
+  --green400: hsla(84, 61%, 64%, var(--opacity));
+  --green500: hsla(123, 73%, 44%, var(--opacity));
+  --green600: hsla(123, 68%, 34%, var(--opacity));
+  --green700: hsla(123, 65%, 25%, var(--opacity));
+  --green800: hsla(123, 69%, 21%, var(--opacity));
+  --green900: hsla(123, 78%, 17%, var(--opacity));
+
+  --yellow100: hsla(54, 100%, 89%, var(--opacity));
+  --yellow200: hsla(54, 100%, 80%, var(--opacity));
+  --yellow300: hsla(54, 100%, 67%, var(--opacity));
+  --yellow400: hsla(48, 100%, 60%, var(--opacity));
+  --yellow500: hsla(48, 96%, 49%, var(--opacity));
+  --yellow600: hsla(45, 86%, 43%, var(--opacity));
+  --yellow700: hsla(43, 89%, 36%, var(--opacity));
+  --yellow800: hsla(37, 94%, 32%, var(--opacity));
+  --yellow900: hsla(35, 98%, 29%, var(--opacity));
+
+  --red100: hsla(10, 100%, 85%, var(--opacity));
+  --red200: hsla(14, 100%, 75%, var(--opacity));
+  --red300: hsla(10, 100%, 65%, var(--opacity));
+  --red400: hsla(9, 100%, 60%, var(--opacity));
+  --red500: hsla(4, 100%, 54%, var(--opacity));
+  --red600: hsla(360, 68%, 48%, var(--opacity));
+  --red700: hsla(358, 68%, 40%, var(--opacity));
+  --red800: hsla(358, 80%, 34%, var(--opacity));
+  --red900: hsla(359, 85%, 31%, var(--opacity));
+
+  --info: var(--grey500);
+  --primary: var(--blue500);
+  --success: var(--green500);
+  --warning: var(--yellow500);
+  --danger: var(--red500);
+}
