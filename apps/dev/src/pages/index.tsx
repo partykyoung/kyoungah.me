@@ -1,8 +1,10 @@
 import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
+import { Link } from "gatsby";
 
 import "@kyoungah.me/ui/build/styles/global.css";
 import "@kyoungah.me/ui/build/styles/typography.css";
+import "@kyoungah.me/ui/build/styles/color-palette.css";
 import "../app/styles/global.css";
 
 import { Button } from "../shared/button";
@@ -156,6 +158,9 @@ const IndexPage: React.FC<PageProps> = () => {
       <Button size="large">
         <span>배고파</span>
         <span>아니 배불러</span>
+      </Button>
+      <Button asChild>
+        <Link to="/test">테스트</Link>
       </Button>
 
       <h1 style={headingStyles}>

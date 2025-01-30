@@ -44,7 +44,7 @@ export default [
           react: "React",
           "react-dom": "ReactDOM",
           "react/jsx-runtime": "jsxRuntime",
-          clsx: "clsx",
+          "@radix-ui/react-slot": "RadixSlot",
         },
       },
     ],
@@ -75,7 +75,7 @@ export default [
         inject: { insertAt: "top" },
       }),
     ],
-    external: ["react", "react-dom", "react/jsx-runtime", "clsx"],
+    external: ["react", "react-dom", "react/jsx-runtime"],
   },
   {
     input: styles, // styles 폴더 내의 CSS 파일만 입력으로 설정
@@ -91,13 +91,5 @@ export default [
         sourceMap: false,
       })
     ),
-    // plugins: [
-    //   postcss({
-    //     plugins: [autoprefixer()],
-    //     extract: true,
-    //     modules: false,
-    //     minimize: true,
-    //   }),
-    // ],
   },
 ];
