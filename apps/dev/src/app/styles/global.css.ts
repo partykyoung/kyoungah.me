@@ -7,3 +7,17 @@ globalStyle("html, body", {
 globalStyle("code, pre", {
   fontFamily: "Fira Code",
 });
+
+globalStyle(":root", {
+  vars: {
+    "--header-height": "56px",
+  },
+});
+
+globalStyle(".container", {
+  width: "100%",
+  maxWidth: "1200px",
+  margin: "0 auto",
+  paddingLeft: "16px",
+  paddingRight: "16px",
+});

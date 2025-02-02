@@ -41,6 +41,9 @@ importers:
       gatsby:
         specifier: ^5.14.0
         version: 5.14.0(babel-eslint@10.1.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.6.2)
+      gatsby-omni-font-loader:
+        specifier: ^2.0.2
+        version: 2.0.2(gatsby@5.14.0)(react-helmet@6.1.0)
       gatsby-plugin-google-gtag:
         specifier: ^5.14.0
         version: 5.14.0(gatsby@5.14.0)(react-dom@18.3.1)(react@18.3.1)
@@ -77,6 +80,9 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
+      react-helmet:
+        specifier: ^6.1.0
+        version: 6.1.0(react@18.3.1)
     devDependencies:
       '@types/node':
         specifier: ^20.11.19
@@ -8478,6 +8484,16 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
+  /gatsby-omni-font-loader@2.0.2(gatsby@5.14.0)(react-helmet@6.1.0):
+    resolution: {integrity: sha512-Bp6truuUwbDRHWtL+u/lUvMsAT5ipO45LNJgqNdOzTUGw3GB7dw8k4RHDtpxwFTgacdk25kH8aOYfh460jJYCQ==}
+    peerDependencies:
+      gatsby: ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0
+      react-helmet: '>=6.0.0'
+    dependencies:
+      gatsby: 5.14.0(babel-eslint@10.1.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.6.2)
+      react-helmet: 6.1.0(react@18.3.1)
+    dev: false
+
   /gatsby-page-utils@3.14.0:
     resolution: {integrity: sha512-/Od94fkzkkSzngqglctGMTssQPvHt/Cnjl9hFPM2Clh5UIBSsHjOgOiqM0EPg7VRLXBZypq3DspG2lNaeqCNIA==}
     engines: {node: '>=18.0.0'}
@@ -12731,6 +12747,22 @@ packages:
     resolution: {integrity: sha512-/6UZ2qgEyH2aqzYZgQPxEnz33NJ2gNsnHA2o5+o4wW9bLM/JYQitNP9xPhsXwC08hMMovfGe/8retsdDsczPRg==}
     dev: false
 
+  /react-fast-compare@3.2.2:
+    resolution: {integrity: sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==}
+    dev: false
+
+  /react-helmet@6.1.0(react@18.3.1):
+    resolution: {integrity: sha512-4uMzEY9nlDlgxr61NL3XbKRy1hEkXmKNXhjbAIOVw5vcFrsdYbH2FEwcNyWvWinl103nXgzYNlns9ca+8kFiWw==}
+    peerDependencies:
+      react: '>=16.3.0'
+    dependencies:
+      object-assign: 4.1.1
+      prop-types: 15.8.1
+      react: 18.3.1
+      react-fast-compare: 3.2.2
+      react-side-effect: 2.1.2(react@18.3.1)
+    dev: false
+
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -12751,6 +12783,14 @@ packages:
       neo-async: 2.6.2
       react: 18.3.1
       webpack: 5.97.1
+    dev: false
+
+  /react-side-effect@2.1.2(react@18.3.1):
+    resolution: {integrity: sha512-PVjOcvVOyIILrYoyGEpDN3vmYNLdy1CajSFNt4TDsVQC5KpTijDvWVoR+/7Rz2xT978D8/ZtFceXxzsPwZEDvw==}
+    peerDependencies:
+      react: ^16.3.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.3.1
     dev: false
 
   /react@18.3.1:
