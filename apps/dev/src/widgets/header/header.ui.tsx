@@ -1,8 +1,7 @@
-import { Link } from "gatsby";
 import React from "react";
+import { Link } from "gatsby";
 
 import { headerRoot, headerLogo } from "./header.ui.css";
-import clsx from "clsx";
 
 function Header() {
   return (
@@ -11,7 +10,6 @@ function Header() {
         <Link to="/">
           <img
             src="/images/logo.png"
-            // srcSet={`/images/logo-small.png 360w, /images/logo.png`}
             alt="dev.kyoungah.me"
             className={headerLogo}
           />

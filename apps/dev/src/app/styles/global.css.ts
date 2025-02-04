@@ -11,6 +11,7 @@ globalStyle("code, pre", {
 globalStyle(":root", {
   vars: {
     "--header-height": "56px",
+    "--footer-height": "106px",
   },
 });
 

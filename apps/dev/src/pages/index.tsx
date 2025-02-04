@@ -8,18 +8,18 @@ import "@kyoungah.me/ui/build/styles/color-palette.css";
 import "../app/styles/global.css";
 
 import { Button } from "../shared/button";
-import { Header } from "../widgets/header/header.ui";
-import { DefaultLayout } from "../widgets/layout/layout.ui";
+import { Header } from "../widgets/header";
+import { Layout } from "../widgets/layout";
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
-    <DefaultLayout>
+    <Layout>
       <Button>happy</Button>
       <Button size="medium">테스트</Button>
       <Button asChild>
         <Link to="/test">12345</Link>
       </Button>
-    </DefaultLayout>
+    </Layout>
   );
 };
 
