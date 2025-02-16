@@ -1,4 +1,5 @@
 import { style } from "@vanilla-extract/css";
+import { bgBlue500 } from "../../app/styles/color-palette.css";
 
 export const headerRoot = style({
   display: "flex",
@@ -10,129 +11,103 @@ export const headerRoot = style({
   boxShadow: "0px 0px 8px var(--grey100)",
 });
 
-export const headerLogo = style({
-  maxWidth: "205px",
-  height: "auto",
+export const headerContainer = style({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  width: "100%",
+  maxWidth: "1200px",
+  height: "100%",
+  margin: "0 auto",
 });
-// .header-root {
-//   display: flex;
-//   width: 100%;
-//   height: var(--header-height);
-//   padding: 0 12px;
-//   align-items: center;
-//   justify-content: space-between;
-//   box-shadow: 0px 0px 8px hsla(var(--palette-gray-20), 100%);
 
-//   a {
-//     color: hsla(var(--palette-gray-60), 100%);
-//   }
-// }
+export const headerLogo = style({
+  maxWidth: "156px",
+  height: "auto",
 
-// .header-logo {
-//   max-width: 194px;
-//   height: auto;
-// }
+  "@media": {
+    "screen and (min-width: 768px)": {
+      maxWidth: "196px",
+    },
+  },
+});
 
-// .header-navigation {
-//   padding-left: 28px;
-// }
+export const headerNavList = style({
+  display: "flex",
+  alignItems: "center",
+  columnGap: "8px",
+  listStyle: "none",
 
-// .header-navigation-list {
-//   display: flex;
-//   column-gap: 12px;
-//   list-style: none;
-// }
+  "@media": {
+    "screen and (min-width: 320px)": {
+      columnGap: "12px",
+    },
+    "screen and (min-width: 768px)": {
+      columnGap: "24px",
+    },
+  },
+});
 
-// .header-navigation-item {
-//   height: 36px;
-//   line-height: 36px;
-// }
+export const headerNavItem = style({
+  height: "36px",
+  lineHeight: "36px",
+});
 
-// .header-navigation-item-link {
-//   display: inline-flex;
-//   position: relative;
-//   width: 36px;
-//   height: 100%;
-//   border-radius: 100%;
-//   align-items: center;
-//   justify-content: center;
-//   background-color: hsla(var(--palette-gray-20), 100%);
-//   border-radius: 9999px;
+export const headerNavItemLink = style([
+  {
+    vars: {
+      "--opacity": "0.3",
+    },
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "36px",
+    height: "100%",
+    borderRadius: "9999px",
 
-//   &:after {
-//     position: absolute;
-//     width: 100%;
-//     height: 100%;
-//     border-radius: 9999px;
-//     background-color: hsla(var(--palette-gray-80), 100%);
-//     mask-size: 24px;
-//     mask-position: center;
-//     mask-repeat: no-repeat;
-//     top: 0;
-//     left: 0;
-//     right: 0;
-//     bottom: 0;
-//     content: '';
-//   }
+    "@media": {
+      "screen and (min-width: 768px)": {
+        width: "auto",
+        backgroundColor: "transparent",
+      },
+    },
+  },
+  bgBlue500,
+]);
 
-//   &.tags {
-//     &:after {
-//       mask-image: url('/images/tag.svg');
-//     }
-//   }
+export const headerNavItemLinkImage = style({
+  width: "24px",
+  height: "24px",
+  color: "var(--blue700)",
 
-//   &.about {
-//     &:after {
-//       mask-image: url('/images/person.svg');
-//     }
-//   }
-// }
+  "@media": {
+    "screen and (min-width: 768px)": {
+      display: "none",
+    },
+  },
+});
 
-// @mixin min-width $xxSmallDevice {
-//   .header-root {
-//     padding: 0 24px;
-//   }
-// }
+export const headerNavItemLinkText = style([
+  {
+    position: "absolute",
+    overflow: "hidden",
+    width: "1px",
+    height: "1px",
+    margin: "-1px",
+    clip: "rect(0, 0, 0, 0)",
 
-// @mixin min-width $smallDevice {
-//   .header-navigation {
-//     padding-left: 0;
-//   }
-
-//   .header-navigation-list {
-//     column-gap: 32px;
-//   }
-
-//   .header-navigation-item-link {
-//     width: auto;
-//     height: auto;
-//     background-color: transparent;
-//     font-size: 18px;
-//     color: hsla(var(--palette-gray-60), 100%);
-
-//     &:hover {
-//       color: hsla(var(--palette-gray-80), 100%);
-//     }
-
-//     &:after {
-//       position: relative;
-//       background: none;
-//       mask: none;
-//     }
-
-//     &.tags {
-//       &:after {
-//         width: auto;
-//         content: 'Tags';
-//         mask-image: none;
-//       }
-//     }
-
-//     &.about {
-//       &:after {
-//         content: 'About';
-//         mask-image: none;
-//       }
-//     }
-//   }
-// }
+    "@media": {
+      "screen and (min-width: 768px)": {
+        position: "static", // 위치 재설정
+        overflow: "visible",
+        width: "auto",
+        height: "auto",
+        margin: "0",
+        clip: "unset",
+        fontSize: "18px",
+        color: "var(--blue700)",
+        fontWeight: 400,
+      },
+    },
+  },
+]);

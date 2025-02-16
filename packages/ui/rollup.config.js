@@ -29,8 +29,6 @@ const styles = readdirSync("./src/styles")
   .filter((file) => file.endsWith(".css"))
   .map((file) => path.resolve("./src/styles", file));
 
-console.log(styles);
-
 export default [
   {
     input: components,
@@ -50,7 +48,9 @@ export default [
     ],
     plugins: [
       peerDepsExternal(),
-      resolve(),
+      resolve({
+        extensions: [".ts", ".tsx", ".js", ".jsx"],
+      }),
       babel({
         babelHelpers: "bundled",
         extensions: [".ts", ".tsx", ".js", ".jsx"],
@@ -75,10 +75,20 @@ export default [
         inject: { insertAt: "top" },
       }),
     ],
-    external: ["react", "react-dom", "react/jsx-runtime"],
+    external: [
+      "react",
+      "react-dom",
+      "react/jsx-runtime",
+      "clsx",
+      "@radix-ui/react-slot",
+    ],
+    watch: {
+      include: "src/**",
+      exclude: "node_modules/**",
+    },
   },
   {
-    input: styles, // styles 폴더 내의 CSS 파일만 입력으로 설정
+    input: styles,
     output: {
       dir: "build/styles", // 모든 CSS를 `build/styles` 폴더에 생성
       entryFileNames: "[name].css", // 각 CSS 파일 이름 유지

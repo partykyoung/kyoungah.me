@@ -1,11 +1,14 @@
+import React from "react";
 import clsx from "clsx";
-import { AspectRatio } from "../aspect-ratio/index.js";
+import { AspectRatio } from "../aspect-ratio";
+
+import styles from "./post-preview.module.css";
 
 function PostPreview({
   children,
   className,
 }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={clsx(className)}>{children}</div>;
+  return <div className={clsx(styles.root, className)}>{children}</div>;
 }
 
 function PostPreviewTitle({
