@@ -1,14 +1,19 @@
 import { style } from "@vanilla-extract/css";
-import { bgBlue500 } from "../../app/styles/color-palette.css";
 
 export const headerRoot = style({
   display: "flex",
   width: "100%",
   height: "var(--header-height)",
-  padding: "0 12px",
+  padding: "0 16px",
   alignItems: "center",
   justifyContent: "space-between",
   boxShadow: "0px 0px 8px var(--grey100)",
+
+  "@media": {
+    "screen and (min-width: 1920px)": {
+      padding: "0",
+    },
+  },
 });
 
 export const headerContainer = style({
@@ -16,7 +21,7 @@ export const headerContainer = style({
   alignItems: "center",
   justifyContent: "space-between",
   width: "100%",
-  maxWidth: "1200px",
+  maxWidth: "1440px",
   height: "100%",
   margin: "0 auto",
 });
@@ -55,15 +60,13 @@ export const headerNavItem = style({
 
 export const headerNavItemLink = style([
   {
-    vars: {
-      "--opacity": "0.3",
-    },
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
     width: "36px",
     height: "100%",
     borderRadius: "9999px",
+    backgroundColor: "rgba(var(--grey100-rgb), 0.3)",
 
     "@media": {
       "screen and (min-width: 768px)": {
@@ -72,13 +75,13 @@ export const headerNavItemLink = style([
       },
     },
   },
-  bgBlue500,
 ]);
 
 export const headerNavItemLinkImage = style({
   width: "24px",
   height: "24px",
-  color: "var(--blue700)",
+  filter:
+    "invert(62%) sepia(19%) saturate(231%) hue-rotate(150deg) brightness(87%) contrast(84%)",
 
   "@media": {
     "screen and (min-width: 768px)": {
@@ -105,7 +108,7 @@ export const headerNavItemLinkText = style([
         margin: "0",
         clip: "unset",
         fontSize: "18px",
-        color: "var(--blue700)",
+        color: "var(--grey400)",
         fontWeight: 400,
       },
     },
