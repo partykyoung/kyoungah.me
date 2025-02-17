@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "gatsby";
 
 import * as style from "./header.ui.css";
-import clsx from "clsx";
 
 function Header() {
   return (
@@ -42,26 +41,6 @@ function Header() {
           </ul>
         </nav>
       </div>
-      {/* <nav className={headerNavigation}>
-        <ul className={headerNavigationList}>
-          <li className={headerNavigationItem}>
-            <Link to="/tags">
-              <span
-                aria-label="tags"
-                className={clsx(headerNavigationItemLink, tags)}
-              />
-            </Link>
-          </li>
-          <li className={headerNavigationItem}>
-            <a href="/about" rel="noopener" target="_blank">
-              <span
-                aria-label="about"
-                className={clsx(headerNavigationItemLink, about)}
-              />
-            </a>
-          </li>
-        </ul>
-      </nav> */}
     </header>
   );
 }
