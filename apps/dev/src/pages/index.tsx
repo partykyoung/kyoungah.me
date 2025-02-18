@@ -10,7 +10,7 @@ import { Layout } from "../widgets/layout";
 
 import {
   PostPreview,
-  PostPreviewExcerpt,
+  PostPreviewDate,
   PostPreviewTitle,
 } from "@kyoungah.me/ui/build/components/post-preview";
 
@@ -18,8 +18,12 @@ const IndexPage: React.FC<PageProps> = () => {
   return (
     <Layout>
       <PostPreview>
-        <PostPreviewTitle>포스트 제목</PostPreviewTitle>
-        <PostPreviewExcerpt>포스트 내용</PostPreviewExcerpt>
+        <PostPreviewDate>2024.12.12</PostPreviewDate>
+        <PostPreviewTitle className="body-lg">포스트 제목</PostPreviewTitle>
+      </PostPreview>
+      <PostPreview>
+        <PostPreviewDate>2024.12.12</PostPreviewDate>
+        <PostPreviewTitle className="body-lg">포스트 제목</PostPreviewTitle>
       </PostPreview>
     </Layout>
   );

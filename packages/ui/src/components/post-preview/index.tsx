@@ -15,7 +15,7 @@ function PostPreviewTitle({
   children,
   className,
 }: React.HTMLAttributes<HTMLHeadingElement>) {
-  return <h2 className={clsx(className)}>{children}</h2>;
+  return <h2 className={clsx(styles.title, className)}>{children}</h2>;
 }
 
 function PostPreviewThumbnail({
@@ -29,7 +29,17 @@ function PostPreviewThumbnail({
   );
 }
 
-function PostPreviewDate() {}
+function PostPreviewDate({
+  className,
+  children,
+  ...props
+}: React.HTMLAttributes<HTMLSpanElement>) {
+  return (
+    <span className={clsx(styles.date, className)} {...props}>
+      {children}
+    </span>
+  );
+}
 
 function PostPreviewTags() {}
 
