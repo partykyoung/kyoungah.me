@@ -7,24 +7,12 @@ import "@kyoungah.me/ui/build/styles/color-palette.css";
 import "../app/styles/global.css";
 
 import { Layout } from "../widgets/layout";
-
-import {
-  PostPreview,
-  PostPreviewDate,
-  PostPreviewTitle,
-} from "@kyoungah.me/ui/build/components/post-preview";
+import { PostPreviews } from "../features/post-previews";
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
     <Layout>
-      <PostPreview>
-        <PostPreviewDate>2024.12.12</PostPreviewDate>
-        <PostPreviewTitle className="body-lg">포스트 제목</PostPreviewTitle>
-      </PostPreview>
-      <PostPreview>
-        <PostPreviewDate>2024.12.12</PostPreviewDate>
-        <PostPreviewTitle className="body-lg">포스트 제목</PostPreviewTitle>
-      </PostPreview>
+      <PostPreviews />
     </Layout>
   );
 };

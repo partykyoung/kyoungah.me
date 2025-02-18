@@ -35,6 +35,14 @@ const config: GatsbyConfig = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
+        name: "jsons",
+        path: `${__dirname}/static/jsons/`,
+      },
+      __key: "jsons",
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
         name: "pages",
         path: "./src/pages/",
       },

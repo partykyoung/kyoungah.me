@@ -6,7 +6,7 @@ export const root = style({
   margin: "0 auto",
 
   "@media": {
-    "screen and (min-width: 768px)": {
+    "screen and (min-width: 992px)": {
       width: "768px",
       padding: "0",
     },
