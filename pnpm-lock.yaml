@@ -56,6 +56,9 @@ importers:
       gatsby-plugin-mdx:
         specifier: ^5.14.0
         version: 5.14.0(@mdx-js/react@3.1.0)(gatsby-source-filesystem@5.14.0)(gatsby@5.14.1)(graphql@16.10.0)(react-dom@18.3.1)(react@18.3.1)
+      gatsby-plugin-page-creator:
+        specifier: ^5.14.0
+        version: 5.14.0(gatsby@5.14.1)(graphql@16.10.0)
       gatsby-plugin-sharp:
         specifier: ^5.14.0
         version: 5.14.0(gatsby@5.14.1)(graphql@16.10.0)
@@ -65,6 +68,12 @@ importers:
       gatsby-plugin-vanilla-extract:
         specifier: ^4.0.2
         version: 4.0.2(@vanilla-extract/css@1.17.1)(@vanilla-extract/webpack-plugin@2.3.17)(gatsby@5.14.1)
+      gatsby-remark-images:
+        specifier: ^7.14.0
+        version: 7.14.0(gatsby-plugin-sharp@5.14.0)(gatsby@5.14.1)
+      gatsby-remark-prismjs:
+        specifier: ^7.14.0
+        version: 7.14.0(gatsby@5.14.1)(prismjs@1.29.0)
       gatsby-source-filesystem:
         specifier: ^5.14.0
         version: 5.14.0(gatsby@5.14.1)
@@ -6668,6 +6677,30 @@ packages:
     resolution: {integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==}
     dev: false
 
+  /cheerio-select@2.1.0:
+    resolution: {integrity: sha512-9v9kG0LvzrlcungtnJtpGNxY+fzECQKhK4EGJX2vByejiMX84MFNQw4UxPJl3bFbTMw+Dfs37XaIkCwTZfLh4g==}
+    dependencies:
+      boolbase: 1.0.0
+      css-select: 5.1.0
+      css-what: 6.1.0
+      domelementtype: 2.3.0
+      domhandler: 5.0.3
+      domutils: 3.2.2
+    dev: false
+
+  /cheerio@1.0.0-rc.12:
+    resolution: {integrity: sha512-VqR8m68vM46BNnuZ5NtnGBKIE/DfN0cRIzg9n40EIq9NOv90ayxLBXA8fXC5gquFRGJSTRqBq25Jt2ECLR431Q==}
+    engines: {node: '>= 6'}
+    dependencies:
+      cheerio-select: 2.1.0
+      dom-serializer: 2.0.0
+      domhandler: 5.0.3
+      domutils: 3.2.2
+      htmlparser2: 8.0.2
+      parse5: 7.2.1
+      parse5-htmlparser2-tree-adapter: 7.1.0
+    dev: false
+
   /chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
     engines: {node: '>= 8.10.0'}
@@ -7125,6 +7158,16 @@ packages:
       domhandler: 4.3.1
       domutils: 2.8.0
       nth-check: 2.1.1
+
+  /css-select@5.1.0:
+    resolution: {integrity: sha512-nwoRF1rvRRnnCqqY7updORDsuqKzqYJ28+oSMaJMMgOauh3fvwHqMS7EZpIPqK8GL+g9mKxF1vP/ZjSeNjEVHg==}
+    dependencies:
+      boolbase: 1.0.0
+      css-what: 6.1.0
+      domhandler: 5.0.3
+      domutils: 3.2.2
+      nth-check: 2.1.1
+    dev: false
 
   /css-selector-parser@1.4.1:
     resolution: {integrity: sha512-HYPSb7y/Z7BNDCOrakL4raGO2zltZkbeXyAd6Tg9obzix6QhzxCotdBl6VT0Dv4vZfJGVz3WL/xaEI9Ly3ul0g==}
@@ -9940,6 +9983,41 @@ packages:
       prop-types: 15.8.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
+    dev: false
+
+  /gatsby-remark-images@7.14.0(gatsby-plugin-sharp@5.14.0)(gatsby@5.14.1):
+    resolution: {integrity: sha512-P1FTQ5DEARWLh3AXXdGSjwAlA/mWWF7M5J/9szdTO6EmmF0+AnfvkIXAtNMtqGqXmbeSgriKvoXeIiyvIYeuRA==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      gatsby: ^5.0.0-next
+      gatsby-plugin-sharp: ^5.0.0-next
+    dependencies:
+      '@babel/runtime': 7.26.7
+      chalk: 4.1.2
+      cheerio: 1.0.0-rc.12
+      gatsby: 5.14.1(babel-eslint@10.1.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.3)
+      gatsby-core-utils: 4.14.0
+      gatsby-plugin-sharp: 5.14.0(gatsby@5.14.1)(graphql@16.10.0)
+      is-relative-url: 3.0.0
+      lodash: 4.17.21
+      mdast-util-definitions: 4.0.0
+      query-string: 6.14.1
+      unist-util-select: 3.0.4
+      unist-util-visit-parents: 3.1.1
+    dev: false
+
+  /gatsby-remark-prismjs@7.14.0(gatsby@5.14.1)(prismjs@1.29.0):
+    resolution: {integrity: sha512-GzwAECHpglROwrUQHdYGNiortpMlp59Yz7PeqxG5qncZ9h9tGfuNMH1g5NST6fDnqHX0cqvtXBRqLP0JcMAFYA==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      gatsby: ^5.0.0-next
+      prismjs: ^1.15.0
+    dependencies:
+      '@babel/runtime': 7.26.7
+      gatsby: 5.14.1(babel-eslint@10.1.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.3)
+      parse-numeric-range: 1.3.0
+      prismjs: 1.29.0
+      unist-util-visit: 2.0.3
     dev: false
 
   /gatsby-script@2.14.0(@gatsbyjs/reach-router@2.0.1)(react-dom@18.3.1)(react@18.3.1):
@@ -13403,12 +13481,29 @@ packages:
       unist-util-visit-children: 1.1.4
     dev: false
 
+  /parse-numeric-range@1.3.0:
+    resolution: {integrity: sha512-twN+njEipszzlMJd4ONUYgSfZPDxgHhT9Ahed5uTigpQn90FggW4SA/AIPq/6a149fTbE9qBEcSwE3FAEp6wQQ==}
+    dev: false
+
   /parse-srcset@1.0.2:
     resolution: {integrity: sha512-/2qh0lav6CmI15FzA3i/2Bzk2zCgQhGMkvhOhKNcBVQ1ldgpbfiNTVslmooUmWJcADi1f1kIeynbDRVzNlfR6Q==}
     dev: false
 
+  /parse5-htmlparser2-tree-adapter@7.1.0:
+    resolution: {integrity: sha512-ruw5xyKs6lrpo9x9rCZqZZnIUntICjQAd0Wsmp396Ul9lN/h+ifgVV1x1gZHi8euej6wTfpqX8j+BFQxF0NS/g==}
+    dependencies:
+      domhandler: 5.0.3
+      parse5: 7.2.1
+    dev: false
+
   /parse5@6.0.1:
     resolution: {integrity: sha512-Ofn/CTFzRGTTxwpNEs9PP93gXShHcTq255nzRYSKe8AkVpZY7e1fpmTfOyoIvjP5HG7Z2ZM7VS9PPhQGW2pOpw==}
+    dev: false
+
+  /parse5@7.2.1:
+    resolution: {integrity: sha512-BuBYQYlv1ckiPdQi/ohiivi9Sagc9JG+Ozs0r7b/0iK3sKmrb0b9FdWdBbOdx6hBCM/F9Ir82ofnBhtZOjCRPQ==}
+    dependencies:
+      entities: 4.5.0
     dev: false
 
   /parseurl@1.3.3:
@@ -14352,6 +14447,11 @@ packages:
     dependencies:
       lodash: 4.17.21
       renderkid: 2.0.7
+    dev: false
+
+  /prismjs@1.29.0:
+    resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
+    engines: {node: '>=6'}
     dev: false
 
   /probe-image-size@7.2.3:
