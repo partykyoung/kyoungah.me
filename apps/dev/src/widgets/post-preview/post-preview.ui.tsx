@@ -6,7 +6,7 @@ import {
 } from "@kyoungah.me/ui/build/components/post-preview";
 
 import { postPreviewDate } from "./post-preview.css";
-import { Post } from "../../entities/post/types";
+import { Post } from "../../../../dev/src/entities/post/types";
 import { Link } from "gatsby";
 
 function PostPreview({

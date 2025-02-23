@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "gatsby";
+import Link from "next/link";
 
 import * as style from "./header.ui.css";
 
@@ -7,7 +7,7 @@ function Header() {
   return (
     <header className={style.headerRoot}>
       <div className={style.headerContainer}>
-        <Link to="/">
+        <Link href="/">
           <img
             src="/images/logo.png"
             alt="dev.kyoungah.me"
@@ -17,7 +17,7 @@ function Header() {
         <nav>
           <ul className={style.headerNavList}>
             <li className={style.headerNavItem}>
-              <Link to="/tags" className={style.headerNavItemLink}>
+              <Link href="/tags" className={style.headerNavItemLink}>
                 <img
                   src="/svgs/tag.svg"
                   alt="Tags"
@@ -28,7 +28,7 @@ function Header() {
               </Link>
             </li>
             <li className={style.headerNavItem}>
-              <Link to="/about" className={style.headerNavItemLink}>
+              <Link href="/about" className={style.headerNavItemLink}>
                 <img
                   src="/svgs/person.svg"
                   alt="About"

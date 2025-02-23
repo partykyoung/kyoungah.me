@@ -4,7 +4,7 @@ import type { HeadFC, PageProps } from "gatsby";
 import "@kyoungah.me/ui/build/styles/global.css";
 import "@kyoungah.me/ui/build/styles/typography.css";
 import "@kyoungah.me/ui/build/styles/color-palette.css";
-import "../app/styles/global.css";
+import "../../../dev/src/app/styles/global.css";
 
 import { Layout } from "../widgets/layout";
 import { PostPreviews } from "../features/post-previews";

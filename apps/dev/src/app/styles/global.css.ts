@@ -1,7 +1,7 @@
 import { globalStyle } from "@vanilla-extract/css";
 
 globalStyle("html, body", {
-  fontFamily: `"Roboto", "42dot Sans", var(--default-font-family)`,
+  fontFamily: `var(--font-roboto), var(--font-noto-sans-kr), var(--font-fira-code), var(--default-font-family)`,
 });
 
 globalStyle("code, pre", {
