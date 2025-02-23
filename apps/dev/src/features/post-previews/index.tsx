@@ -8,8 +8,8 @@ function PostPreviews() {
 
   return (
     <>
-      {posts.map(({ date, title }, index) => (
-        <PostPreview key={index} date={date} title={title} />
+      {posts.map(({ date, slug, title }, index) => (
+        <PostPreview key={index} date={date} slug={slug} title={title} />
       ))}
     </>
   );

@@ -7,13 +7,20 @@ import {
 
 import { postPreviewDate } from "./post-preview.css";
 import { Post } from "../../entities/post/types";
+import { Link } from "gatsby";
 
-function PostPreview({ date, title }: Pick<Post, "date" | "title">) {
+function PostPreview({
+  date,
+  slug,
+  title,
+}: Pick<Post, "date" | "slug" | "title">) {
   return (
-    <BasePostPreview>
-      <PostPreviewDate className={postPreviewDate}>{date}</PostPreviewDate>
-      <PostPreviewTitle className="body">{title}</PostPreviewTitle>
-    </BasePostPreview>
+    <Link to={slug}>
+      <BasePostPreview>
+        <PostPreviewDate className={postPreviewDate}>{date}</PostPreviewDate>
+        <PostPreviewTitle className="body">{title}</PostPreviewTitle>
+      </BasePostPreview>
+    </Link>
   );
 }
 
