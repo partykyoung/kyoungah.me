@@ -4,7 +4,7 @@ import { parse } from "yaml";
 const cwd = process.cwd();
 
 function createJSON(pageData) {
-  const JSONS_DERECTORY = `${cwd}/static/jsons`;
+  const JSONS_DERECTORY = `${cwd}/public/jsons`;
 
   if (!fs.existsSync(JSONS_DERECTORY)) {
     fs.mkdirSync(JSONS_DERECTORY);
