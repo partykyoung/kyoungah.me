@@ -63,12 +63,24 @@ globalStyle(":root", {
     "--red800": "rgba(var(--red800-rgb), 1)",
     "--red900": "rgba(var(--red900-rgb), 1)",
 
-    /* ===== Semantic Colors ===== */
     "--info": "rgba(var(--info-rgb), 1)",
     "--primary": "rgba(var(--primary-rgb), 1)",
     "--success": "rgba(var(--success-rgb), 1)",
     "--warning": "rgba(var(--warning-rgb), 1)",
     "--danger": "rgba(var(--danger-rgb), 1)",
+  },
+});
+
+globalStyle(".container", {
+  width: "100%",
+  padding: "0 16px",
+  margin: "0 auto",
+
+  "@media": {
+    "screen and (min-width: 992px)": {
+      width: "768px",
+      padding: "0",
+    },
   },
 });
 

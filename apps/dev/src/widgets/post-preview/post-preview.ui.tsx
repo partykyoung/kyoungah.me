@@ -5,9 +5,10 @@ import {
   PostPreviewTitle,
 } from "@kyoungah.me/ui/build/components/post-preview";
 
-import { postPreviewDate } from "./post-preview.css";
+import { postPreviewDate, postPreviewTitle } from "./post-preview.css";
 import { Post } from "../../../../dev/src/entities/post/types";
-import { Link } from "gatsby";
+import Link from "next/link";
+import dayjs from "dayjs";
 
 function PostPreview({
   date,
@@ -15,10 +16,14 @@ function PostPreview({
   title,
 }: Pick<Post, "date" | "slug" | "title">) {
   return (
-    <Link to={slug}>
+    <Link href={slug}>
       <BasePostPreview>
-        <PostPreviewDate className={postPreviewDate}>{date}</PostPreviewDate>
-        <PostPreviewTitle className="body">{title}</PostPreviewTitle>
+        <PostPreviewDate className={postPreviewDate}>
+          {dayjs(date).format("YYYY.MM.DD")}
+        </PostPreviewDate>
+        <PostPreviewTitle className={`body ${postPreviewTitle}`}>
+          {title}
+        </PostPreviewTitle>
       </BasePostPreview>
     </Link>
   );
