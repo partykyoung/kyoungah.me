@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Roboto, Noto_Sans_KR, Fira_Code } from "next/font/google";
 
 import "@kyoungah.me/ui/build/styles/global.css";
@@ -42,7 +41,7 @@ export default function RootLayout({
     >
       <body>
         <Header />
-        {children}
+        <div className="container">{children}</div>
         <Footer />
       </body>
     </html>
