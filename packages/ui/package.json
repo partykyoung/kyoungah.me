@@ -11,8 +11,8 @@
     "defaults"
   ],
   "devDependencies": {
-    "@babel/core": "^7.26.0",
-    "@babel/preset-env": "^7.26.0",
+    "@babel/core": "^7.26.9",
+    "@babel/preset-env": "^7.26.9",
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.26.0",
     "@kyoungah.me/eslint-config": "workspace:*",
@@ -21,20 +21,20 @@
     "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-typescript": "^12.1.2",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
     "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.49",
-    "rollup": "^4.29.1",
+    "postcss": "^8.5.3",
+    "rollup": "^4.34.9",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
-    "typescript": "~5.6.2"
+    "typescript": "~5.6.3"
   },
   "peerDependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
     "@radix-ui/react-slot": "^1.1.1",
-    "clsx": "^2.1.1"
+    "clsx": "^2.1.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "keywords": [],
   "license": "ISC"

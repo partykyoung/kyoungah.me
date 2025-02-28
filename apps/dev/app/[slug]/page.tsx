@@ -1,6 +1,8 @@
-import dayjs from "dayjs";
 import fs from "fs";
 import matter from "gray-matter";
+import { compile } from "@mdx-js/mdx";
+import { MDXContent } from "@/mdx-components";
+import { PostDetailH1 } from "@kyoungah.me/ui/build/components/post-detail";
 
 const cwd = process.cwd();
 
@@ -12,21 +14,18 @@ export default async function Page({
   const slug = (await params).slug;
   const decodedSlug = /%[0-9A-F]{2}/i.test(slug) ? decodeURI(slug) : slug;
 
-  const { default: Post } = await import(`../../posts/${decodedSlug}.md`);
-  const source = fs.readFileSync(
-    `${cwd}/posts/${decodedSlug}.md`,
-    {
-      encoding: "utf-8",
-    }
-    // path.join(root, "data", dataType, postSlug),
-  );
+  const source = fs.readFileSync(`${cwd}/posts/${decodedSlug}.md`, {
+    encoding: "utf-8",
+  });
   const { data, content } = matter(source);
-
-  console.log(Post);
+  const code = await compile(content, {
+    outputFormat: "function-body",
+  });
 
   return (
     <>
-      <Post />
+      <PostDetailH1 className="h1">{data.title}</PostDetailH1>
+      <MDXContent code={code.value as string} />
     </>
   );
 }
