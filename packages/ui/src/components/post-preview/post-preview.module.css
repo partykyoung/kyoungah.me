@@ -1,12 +1,15 @@
 .root {
   width: 100%;
-  padding: 16px;
 }
 
 .title {
-  font-size: 24px;
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-body-lg);
+  letter-spacing: var(--letter-spacing-body-lg);
 }
 
 .date {
-  font-size: 14px;
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-sm);
+  letter-spacing: var(--letter-spacing-body-sm);
 }
