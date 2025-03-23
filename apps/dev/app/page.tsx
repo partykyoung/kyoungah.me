@@ -1,5 +1,5 @@
-import { PostPreviews } from "@/features/post-previews";
+import { PostPreviewsPage } from "../src/pages/post-previews";
 
 export default function Home() {
-  return <PostPreviews />;
+  return <PostPreviewsPage />;
 }

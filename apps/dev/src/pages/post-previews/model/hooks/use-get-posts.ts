@@ -1,9 +1,8 @@
 import React from "react";
+import type { Post } from "../types/post";
+import { getPosts } from "../../api/get-posts";
 
-import { Post } from "../../../../../dev/src/entities/post/types";
-import { getPosts } from "../../../../../dev/src/entities/post/api";
-
-function usePosts() {
+function useGetPosts() {
   const [posts, setPosts] = React.useState<Post[]>([]);
 
   React.useEffect(() => {
@@ -15,4 +14,4 @@ function usePosts() {
   return { posts };
 }
 
-export { usePosts };
+export { useGetPosts };
