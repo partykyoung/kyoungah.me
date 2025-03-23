@@ -29,12 +29,11 @@ const sharedComponents = {
   h6: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
     return <PostDetailH6 className={clsx("h6", className)} {...props} />;
   },
-  // Add your global components here
 };
 
-// parse the Velite generated MDX code into a React component function
 const useMDXComponent = (code: string) => {
   const fn = new Function(code);
+
   return fn({ ...runtime }).default;
 };
 
@@ -44,7 +43,7 @@ interface MDXProps {
 }
 
 // MDXContent component
-export const MDXContent = ({ code }: MDXProps) => {
+export const MDXContent = ({ code, components = {} }: MDXProps) => {
   const Component = useMDXComponent(code);
-  return <Component components={{ ...sharedComponents }} />;
+  return <Component components={{ ...sharedComponents, ...components }} />;
 };

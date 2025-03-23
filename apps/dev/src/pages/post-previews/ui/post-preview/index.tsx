@@ -1,4 +1,7 @@
 import React from "react";
+import Link from "next/link";
+import dayjs from "dayjs";
+
 import {
   PostPreview as BasePostPreview,
   PostPreviewDate,
@@ -6,9 +9,7 @@ import {
 } from "@kyoungah.me/ui/build/components/post-preview";
 
 import { postPreviewDate, postPreviewTitle } from "./post-preview.css";
-import { Post } from "../../../../dev/src/entities/post/types";
-import Link from "next/link";
-import dayjs from "dayjs";
+import type { Post } from "../../model/types/post";
 
 function PostPreview({
   date,
