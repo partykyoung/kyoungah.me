@@ -33,3 +33,40 @@
   line-height: var(--line-height-h6);
   letter-spacing: var(--letter-spacing-h6);
 }
+
+.p {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  letter-spacing: var(--letter-spacing-body);
+}
+
+.ul {
+  line-height: var(--line-height-body);
+  letter-spacing: var(--letter-spacing-body);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.ol {
+  line-height: var(--line-height-body);
+  letter-spacing: var(--letter-spacing-body);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.li {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  letter-spacing: var(--letter-spacing-body);
+}
+
+.link {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  letter-spacing: var(--letter-spacing-body);
+}
+
+.img {
+  max-width: 100%;
+  height: auto;
+}

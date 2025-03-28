@@ -43,7 +43,7 @@ Mac(m1) 기준으로 /ect/hosts에서 도메인을 등록할 수 있었다.
 sudo vi /private/etc/hosts
 ```
 
-![](../images/posts/Next.js-App-Router에서-Cookie-사용하기-1.png)
+![](/images/posts/Next.js-App-Router에서-Cookie-사용하기-1.png)
 
 ### localhost에서 HTTPS 허용하기
 
