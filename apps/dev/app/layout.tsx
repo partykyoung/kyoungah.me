@@ -9,14 +9,14 @@ import { Header } from "../src/widgets/header/header.ui";
 import { Footer } from "../src/widgets/footer/footer.ui";
 
 const roboto = Roboto({
-  weight: ["400", "800"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
   variable: "--font-roboto",
   display: "swap",
 });
 
 const notoSansKR = Noto_Sans_KR({
-  weight: ["400", "800"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
   variable: "--font-noto-sans-kr",
   display: "swap",

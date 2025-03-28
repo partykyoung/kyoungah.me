@@ -4,94 +4,129 @@ import clsx from "clsx";
 import styles from "./post-detail.module.css";
 import { Slot } from "@radix-ui/react-slot";
 
-function PostDetailH1({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLHeadingElement>) {
+// ----------- h1 ----------- //
+interface PostDetailH1Props extends React.HTMLAttributes<HTMLHeadingElement> {}
+
+function PostDetailH1({ className, ...props }: PostDetailH1Props) {
   return <h1 className={clsx(styles.h1, className)} {...props} />;
 }
 
-function PostDetailH2({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLHeadingElement>) {
+// ----------- h2 ----------- //
+
+interface PostDetailH2Props extends React.HTMLAttributes<HTMLHeadingElement> {}
+
+function PostDetailH2({ className, ...props }: PostDetailH2Props) {
   return <h2 className={clsx(styles.h2, className)} {...props} />;
 }
 
-function PostDetailH3({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLHeadingElement>) {
+// ----------- h3 ----------- //
+
+interface PostDetailH3Props extends React.HTMLAttributes<HTMLHeadingElement> {}
+
+function PostDetailH3({ className, ...props }: PostDetailH3Props) {
   return <h3 className={clsx(styles.h3, className)} {...props} />;
 }
 
-function PostDetailH4({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLHeadingElement>) {
+// ----------- h4 ----------- //
+
+interface PostDetailH4Props extends React.HTMLAttributes<HTMLHeadingElement> {}
+
+function PostDetailH4({ className, ...props }: PostDetailH4Props) {
   return <h4 className={clsx(styles.h4, className)} {...props} />;
 }
 
-function PostDetailH5({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLHeadingElement>) {
+// ----------- h5 ----------- //
+
+interface PostDetailH5Props extends React.HTMLAttributes<HTMLHeadingElement> {}
+
+function PostDetailH5({ className, ...props }: PostDetailH5Props) {
   return <h5 className={clsx(styles.h5, className)} {...props} />;
 }
 
-function PostDetailH6({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLHeadingElement>) {
+// ----------- h6 ----------- //
+
+interface PostDetailH6Props extends React.HTMLAttributes<HTMLHeadingElement> {}
+
+function PostDetailH6({ className, ...props }: PostDetailH6Props) {
   return <h6 className={clsx(styles.h6, className)} {...props} />;
 }
 
-function PostDetailP({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLParagraphElement>) {
+// ----------- p ----------- //
+
+interface PostDetailPProps extends React.HTMLAttributes<HTMLParagraphElement> {}
+
+function PostDetailP({ className, ...props }: PostDetailPProps) {
   return <p className={clsx(styles.p, className)} {...props} />;
 }
+// ----------- ul ----------- //
 
-function PostDetailUl({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLUListElement>) {
+interface PostDetailUlProps extends React.HTMLAttributes<HTMLUListElement> {}
+
+function PostDetailUl({ className, ...props }: PostDetailUlProps) {
   return <ul className={clsx(styles.ul, className)} {...props} />;
 }
 
-function PostDetailOl({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLOListElement>) {
+// ----------- ol ----------- //
+
+interface PostDetailOlProps extends React.HTMLAttributes<HTMLOListElement> {}
+
+function PostDetailOl({ className, ...props }: PostDetailOlProps) {
   return <ol className={clsx(styles.ol, className)} {...props} />;
 }
 
-function PostDetailLi({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLLIElement>) {
+// ----------- li ----------- //
+
+interface PostDetailLiProps extends React.HTMLAttributes<HTMLLIElement> {}
+
+function PostDetailLi({ className, ...props }: PostDetailLiProps) {
   return <li className={clsx(styles.li, className)} {...props} />;
 }
 
-interface PostDetailLinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
+// ----------- link ----------- //
+
+interface PostDetailLinkProps<T> extends React.AnchorHTMLAttributes<T> {
   asChild?: boolean;
 }
 
-function PostDetailLink({ asChild, className, ...props }: PostDetailLinkProps) {
+function PostDetailLink<T extends HTMLAnchorElement = HTMLAnchorElement>({
+  asChild,
+  className,
+  ...props
+}: PostDetailLinkProps<T>) {
   const Comp = asChild ? Slot : "a";
 
   return <Comp className={clsx(styles.link, className)} {...props} />;
 }
 
-function PostDetailImg({
+// ----------- img ----------- //
+
+interface PostDetailImgProps<T> extends React.ImgHTMLAttributes<T> {
+  asChild?: boolean;
+}
+
+function PostDetailImg<T extends HTMLImageElement = HTMLImageElement>({
+  asChild,
   className,
   ...props
-}: React.HTMLAttributes<HTMLImageElement>) {
-  return <img className={clsx(styles.img, className)} {...props} />;
+}: PostDetailImgProps<T>) {
+  const Comp = asChild ? Slot : "img";
+
+  return <Comp className={clsx(styles.img, className)} {...props} />;
 }
 
 export {
+  type PostDetailH1Props,
+  type PostDetailH2Props,
+  type PostDetailH3Props,
+  type PostDetailH4Props,
+  type PostDetailH5Props,
+  type PostDetailH6Props,
+  type PostDetailPProps,
+  type PostDetailUlProps,
+  type PostDetailOlProps,
+  type PostDetailLiProps,
+  type PostDetailLinkProps,
+  type PostDetailImgProps,
   PostDetailH1,
   PostDetailH2,
   PostDetailH3,
