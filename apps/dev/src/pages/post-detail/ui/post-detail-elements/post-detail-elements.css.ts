@@ -12,7 +12,9 @@ export const h5 = style({});
 
 export const h6 = style({});
 
-export const p = style({});
+export const p = style({
+  fontWeight: "var(--font-weight-light)",
+});
 
 export const ul = style({});
 
