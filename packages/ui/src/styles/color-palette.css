@@ -52,9 +52,9 @@
   --red900-rgb: 94, 15, 15;
 
   /* ===== Semantic Colors ===== */
-  --info-rgb: var(--grey500);
-  --primary-rgb: var(--blue500);
-  --success-rgb: var(--green500);
-  --warning-rgb: var(--yellow500);
-  --danger-rgb: var(--red500);
+  --info-rgb: var(--grey500-rgb);
+  --primary-rgb: var(--blue500-rgb);
+  --success-rgb: var(--green500-rgb);
+  --warning-rgb: var(--yellow500-rgb);
+  --danger-rgb: var(--red500-rgb);
 }

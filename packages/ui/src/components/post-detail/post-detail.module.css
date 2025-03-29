@@ -77,3 +77,10 @@
   height: auto;
   margin: 0 auto;
 }
+
+.span {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  letter-spacing: var(--letter-spacing-body);
+  font-weight: var(--font-weight-regular);
+}

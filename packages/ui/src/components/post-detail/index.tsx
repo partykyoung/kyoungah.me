@@ -114,6 +114,14 @@ function PostDetailImg<T extends HTMLImageElement = HTMLImageElement>({
   return <Comp className={clsx(styles.img, className)} {...props} />;
 }
 
+// ----------- span ----------- //
+
+interface PostDetailSpanProps extends React.HTMLAttributes<HTMLSpanElement> {}
+
+function PostDetailSpan({ className, ...props }: PostDetailSpanProps) {
+  return <span className={clsx(styles.span, className)} {...props} />;
+}
+
 export {
   type PostDetailH1Props,
   type PostDetailH2Props,
@@ -127,6 +135,7 @@ export {
   type PostDetailLiProps,
   type PostDetailLinkProps,
   type PostDetailImgProps,
+  type PostDetailSpanProps,
   PostDetailH1,
   PostDetailH2,
   PostDetailH3,
@@ -139,4 +148,5 @@ export {
   PostDetailLi,
   PostDetailLink,
   PostDetailImg,
+  PostDetailSpan,
 };

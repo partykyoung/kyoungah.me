@@ -1,0 +1,11 @@
+.tags {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tag {
+  background-color: rgba(var(--grey100-rgb), 0.3);
+  color: rgba(var(--primary-rgb), 1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
