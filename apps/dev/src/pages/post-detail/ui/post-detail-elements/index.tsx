@@ -5,6 +5,15 @@ import * as PostDetail from "@kyoungah.me/ui/build/components/post-detail";
 
 import * as styles from "./post-detail-elements.css";
 
+function H1({ className, ...props }: PostDetail.PostDetailH1Props) {
+  return (
+    <PostDetail.PostDetailH1
+      className={clsx(styles.h1, className)}
+      {...props}
+    />
+  );
+}
+
 function H2({ className, ...props }: PostDetail.PostDetailH2Props) {
   return (
     <PostDetail.PostDetailH2
@@ -103,4 +112,4 @@ function Img({ alt = "", className, ...props }: ImageProps) {
   );
 }
 
-export { H2, H3, H4, H5, H6, P, Ul, Ol, Li, Link, Img };
+export { H1, H2, H3, H4, H5, H6, P, Ul, Ol, Li, Link, Img };
