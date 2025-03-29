@@ -1,7 +1,7 @@
 import fs from "fs";
-import { PostDetailH1 } from "@kyoungah.me/ui/build/components/post-detail";
 import { MDXContent } from "@/pages/post-detail";
 import { getPostDetail } from "@/pages/post-detail/api/get-post-detail";
+import { MdxFrontMatter } from "@/pages/post-detail/ui/mdx-frontmatter";
 
 const cwd = process.cwd();
 
@@ -16,7 +16,12 @@ export default async function Page({
 
     return (
       <>
-        <PostDetailH1 className="h1">{frontmatter.title}</PostDetailH1>
+        <MdxFrontMatter
+          title={frontmatter.title}
+          date={frontmatter.date}
+          tags={frontmatter.tags}
+        />
+
         <MDXContent code={code.value as string} />
       </>
     );
