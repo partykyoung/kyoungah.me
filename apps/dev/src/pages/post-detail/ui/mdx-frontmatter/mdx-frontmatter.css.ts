@@ -7,7 +7,7 @@ export const root = style({
   "@media": {
     "screen and (min-width: 992px)": {
       paddingTop: "6rem",
-      paddingBottom: "5rem",
+      paddingBottom: "2.5rem",
     },
   },
 });
