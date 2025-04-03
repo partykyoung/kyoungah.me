@@ -1,16 +1,28 @@
 import { style } from "@vanilla-extract/css";
 
-export const h1 = style({});
+export const heading = style({
+  marginTop: "2rem",
+  marginBottom: "0.75rem",
 
-export const h2 = style({});
+  selectors: {
+    ":is(h1, h2, h3, h4, h5, h6) + &": {
+      marginTop: "1rem",
+    },
+  },
 
-export const h3 = style({});
+  "@media": {
+    "screen and (min-width: 992px)": {
+      marginTop: "2.5rem",
+      marginBottom: "1rem",
 
-export const h4 = style({});
-
-export const h5 = style({});
-
-export const h6 = style({});
+      selectors: {
+        ":is(h1, h2, h3, h4, h5, h6) + &": {
+          marginTop: "1.5rem",
+        },
+      },
+    },
+  },
+});
 
 export const p = style({
   fontWeight: "var(--font-weight-light)",

@@ -8,7 +8,7 @@ import * as styles from "./post-detail-elements.css";
 function H1({ className, ...props }: PostDetail.PostDetailH1Props) {
   return (
     <PostDetail.PostDetailH1
-      className={clsx(styles.h1, className)}
+      className={clsx(styles.heading, className)}
       {...props}
     />
   );
@@ -17,7 +17,7 @@ function H1({ className, ...props }: PostDetail.PostDetailH1Props) {
 function H2({ className, ...props }: PostDetail.PostDetailH2Props) {
   return (
     <PostDetail.PostDetailH2
-      className={clsx(styles.h2, className)}
+      className={clsx(styles.heading, className)}
       {...props}
     />
   );
@@ -26,7 +26,7 @@ function H2({ className, ...props }: PostDetail.PostDetailH2Props) {
 function H3({ className, ...props }: PostDetail.PostDetailH3Props) {
   return (
     <PostDetail.PostDetailH3
-      className={clsx(styles.h3, className)}
+      className={clsx(styles.heading, className)}
       {...props}
     />
   );
@@ -35,7 +35,7 @@ function H3({ className, ...props }: PostDetail.PostDetailH3Props) {
 function H4({ className, ...props }: PostDetail.PostDetailH4Props) {
   return (
     <PostDetail.PostDetailH4
-      className={clsx(styles.h4, className)}
+      className={clsx(styles.heading, className)}
       {...props}
     />
   );
@@ -44,7 +44,7 @@ function H4({ className, ...props }: PostDetail.PostDetailH4Props) {
 function H5({ className, ...props }: PostDetail.PostDetailH5Props) {
   return (
     <PostDetail.PostDetailH5
-      className={clsx(styles.h5, className)}
+      className={clsx(styles.heading, className)}
       {...props}
     />
   );
@@ -53,7 +53,7 @@ function H5({ className, ...props }: PostDetail.PostDetailH5Props) {
 function H6({ className, ...props }: PostDetail.PostDetailH6Props) {
   return (
     <PostDetail.PostDetailH6
-      className={clsx(styles.h6, className)}
+      className={clsx(styles.heading, className)}
       {...props}
     />
   );
