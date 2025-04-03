@@ -68,7 +68,7 @@ function P({ className, ...props }: PostDetail.PostDetailPProps) {
 function Ul({ className, ...props }: PostDetail.PostDetailUlProps) {
   return (
     <PostDetail.PostDetailUl
-      className={clsx(styles.ul, className)}
+      className={clsx(styles.list, className)}
       {...props}
     />
   );
@@ -77,7 +77,7 @@ function Ul({ className, ...props }: PostDetail.PostDetailUlProps) {
 function Ol({ className, ...props }: PostDetail.PostDetailOlProps) {
   return (
     <PostDetail.PostDetailOl
-      className={clsx(styles.ol, className)}
+      className={clsx(styles.list, className)}
       {...props}
     />
   );

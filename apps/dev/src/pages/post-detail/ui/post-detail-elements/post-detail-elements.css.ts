@@ -24,15 +24,25 @@ export const heading = style({
   },
 });
 
+export const list = style({
+  paddingLeft: "1.625em",
+});
+
+export const li = style({
+  marginBottom: "1em", // Adjusted for spacing
+  paddingLeft: "0.25em", // Adjusted for alignment
+  fontWeight: "var(--font-weight-light)",
+
+  selectors: {
+    "li > ul > &": {
+      marginTop: "0.75em", // Adjusted for nested lists
+    },
+  },
+});
+
 export const p = style({
   fontWeight: "var(--font-weight-light)",
 });
-
-export const ul = style({});
-
-export const ol = style({});
-
-export const li = style({});
 
 export const img = style({});
 
