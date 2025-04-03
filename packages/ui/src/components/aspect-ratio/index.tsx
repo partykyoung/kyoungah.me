@@ -1,28 +1,28 @@
+import React from "react";
+import { Slot } from "@radix-ui/react-slot";
 interface AspectRatioProps extends React.HTMLAttributes<HTMLDivElement> {
-  ratio: number;
+  asChild?: boolean;
+  ratio?: number;
 }
 
-function AspectRatio({ className, ratio, style, ...props }: AspectRatioProps) {
+function AspectRatio({
+  asChild,
+  className,
+  ratio = 100,
+  style,
+  ...props
+}: AspectRatioProps) {
+  const Comp = asChild ? Slot : "div";
+
   return (
-    <div
+    <Comp
       style={{
         position: "relative",
         width: "100%",
-        paddingBottom: `${100 / ratio}%`,
+        paddingBottom: `${ratio}%`,
       }}
-    >
-      <div
-        {...props}
-        style={{
-          ...style,
-          position: "absolute",
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-        }}
-      />
-    </div>
+      {...props}
+    />
   );
 }
 

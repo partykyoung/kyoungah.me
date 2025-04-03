@@ -63,6 +63,9 @@ const sharedComponents = {
       <PostDetailEmements.Img className={clsx("img", className)} {...props} />
     );
   },
+  code: (props: React.HTMLAttributes<HTMLElement>) => {
+    return <PostDetailEmements.Code {...props} />;
+  },
 };
 
 const useMDXComponent = (code: string) => {

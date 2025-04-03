@@ -10,7 +10,14 @@ const withMDX = createMDX({
 });
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    localPatterns: [
+      {
+        pathname: "/images/**",
+        search: "",
+      },
+    ],
+  },
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   webpack: (config) => {
     config.resolve.fallback = { fs: false };

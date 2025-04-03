@@ -1,8 +1,9 @@
-import Image, { ImageProps } from "next/image";
+import React from "react";
+import { ImageProps } from "next/image";
 import NextLink, { LinkProps } from "next/link";
 import clsx from "clsx";
 import * as PostDetail from "@kyoungah.me/ui/build/components/post-detail";
-
+import { ClientImage } from "./client-image";
 import * as styles from "./post-detail-elements.css";
 
 function H1({ className, ...props }: PostDetail.PostDetailH1Props) {
@@ -104,12 +105,16 @@ function Link({
   );
 }
 
-function Img({ alt = "", className, ...props }: ImageProps) {
+function Img({ className, ...props }: Omit<ImageProps, "fill">) {
   return (
     <PostDetail.PostDetailImg asChild className={clsx(styles.img, className)}>
-      <Image alt={alt} {...props} />
+      <ClientImage {...props} />
     </PostDetail.PostDetailImg>
   );
 }
 
-export { H1, H2, H3, H4, H5, H6, P, Ul, Ol, Li, Link, Img };
+function Code({ className, ...props }: React.HTMLAttributes<HTMLElement>) {
+  return <code className={clsx(styles.code, className)} {...props} />;
+}
+
+export { H1, H2, H3, H4, H5, H6, P, Ul, Ol, Li, Link, Img, Code };
