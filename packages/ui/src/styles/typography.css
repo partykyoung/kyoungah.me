@@ -10,27 +10,16 @@
   --font-size-body-sm: 0.875rem; /* 14px */
   --font-size-small: 0.75rem; /* 12px */
 
-  --line-height-h1: 1.35;
-  --line-height-h2: 1.4;
-  --line-height-h3: 1.45;
-  --line-height-h4: 1.5;
-  --line-height-h5: 1.55;
-  --line-height-h6: 1.6;
+  --line-height-h1: 1.5;
+  --line-height-h2: 1.55;
+  --line-height-h3: 1.6;
+  --line-height-h4: 1.65;
+  --line-height-h5: 1.7;
+  --line-height-h6: 1.75;
   --line-height-body-lg: 1.75;
-  --line-height-body: 1.7;
-  --line-height-body-sm: 1.65;
-  --line-height-small: 1.6;
-
-  --letter-spacing-h1: -0.015rem;
-  --letter-spacing-h2: -0.01rem;
-  --letter-spacing-h3: -0.005rem;
-  --letter-spacing-h4: 0;
-  --letter-spacing-h5: 0.005rem;
-  --letter-spacing-h6: 0.005rem;
-  --letter-spacing-body-lg: 0.01rem;
-  --letter-spacing-body: 0.015rem;
-  --letter-spacing-body-sm: 0.02rem;
-  --letter-spacing-small: 0.025rem;
+  --line-height-body: 1.75;
+  --line-height-body-sm: 1.7;
+  --line-height-small: 1.65;
 
   --font-weight-bold: 700;
   --font-weight-semibold: 600;
