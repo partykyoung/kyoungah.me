@@ -42,12 +42,14 @@ export const li = style({
   marginTop: "0.5em",
   marginBottom: "0.75em",
   paddingLeft: "0.25em",
+  letterSpacing: "-0.004rem",
   fontWeight: "var(--font-weight-light)",
 });
 
 export const p = style({
   marginTop: "1.25em",
   marginBottom: "1.25em",
+  letterSpacing: "-0.004rem",
   fontWeight: "var(--font-weight-light)",
 
   selectors: {
@@ -74,8 +76,6 @@ export const link = style({
     },
   },
 });
-
-export const pre = style({});
 
 export const code = style({
   padding: "0.2em 0.4em",

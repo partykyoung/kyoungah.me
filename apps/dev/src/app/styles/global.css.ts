@@ -1,7 +1,7 @@
 import { globalStyle } from "@vanilla-extract/css";
 
 globalStyle("html, body", {
-  fontFamily: `var(--font-roboto), var(--font-noto-sans-kr), var(--font-fira-code), var(--default-font-family)`,
+  fontFamily: `var(--font-roboto), var(--font-pretendard), var(--font-fira-code), var(--default-font-family)`,
 });
 
 globalStyle("code, pre", {
@@ -87,59 +87,49 @@ globalStyle(".container", {
 globalStyle(".h1", {
   fontSize: "var(--font-size-h1)",
   lineHeight: "var(--line-height-h1)",
-  letterSpacing: "var(--letter-spacing-h1)",
 });
 
 globalStyle(".h2", {
   fontSize: "var(--font-size-h2)",
   lineHeight: "var(--line-height-h2)",
-  letterSpacing: "var(--letter-spacing-h2)",
 });
 
 globalStyle(".h3", {
   fontSize: "var(--font-size-h3)",
   lineHeight: "var(--line-height-h3)",
-  letterSpacing: "var(--letter-spacing-h3)",
 });
 
 globalStyle(".h4", {
   fontSize: "var(--font-size-h4)",
   lineHeight: "var(--line-height-h4)",
-  letterSpacing: "var(--letter-spacing-h4)",
 });
 
 globalStyle(".h5", {
   fontSize: "var(--font-size-h5)",
   lineHeight: "var(--line-height-h5)",
-  letterSpacing: "var(--letter-spacing-h5)",
 });
 
 globalStyle(".h6", {
   fontSize: "var(--font-size-h6)",
   lineHeight: "var(--line-height-h6)",
-  letterSpacing: "var(--letter-spacing-h6)",
 });
 
 globalStyle(".body-lg", {
   fontSize: "var(--font-size-body-lg)",
   lineHeight: "var(--line-height-body-lg)",
-  letterSpacing: "var(--letter-spacing-body-lg)",
 });
 
 globalStyle(".body", {
   fontSize: "var(--font-size-body)",
   lineHeight: "var(--line-height-body)",
-  letterSpacing: "var(--letter-spacing-body)",
 });
 
 globalStyle(".body-sm", {
   fontSize: "var(--font-size-body-sm)",
   lineHeight: "var(--line-height-body-sm)",
-  letterSpacing: "var(--letter-spacing-body-sm)",
 });
 
 globalStyle(".caption", {
   fontSize: "var(--font-size-caption)",
   lineHeight: "var(--line-height-caption)",
-  letterSpacing: "var(--letter-spacing-caption)",
 });

@@ -12,7 +12,7 @@ PropTypes 속성의 종류는 [React 공식 문서](https://reactjs.org/docs/typ
 
 #### 부모 컴포넌트
 
-```javascript
+```js
 import React, { Component } from "react";
 
 import Child from "./Child";
@@ -30,7 +30,7 @@ props값은 해당 컴포넌트를 불러와 사용하는 부모 컴포넌트에
 
 #### 자식 컴포넌트
 
-```javascript
+```js
 // 자식 컴포넌트
 import React, { Component } from "react";
 
@@ -59,7 +59,7 @@ props에 접근할 때는 this 키워드를 사용하여 접근한다.
 
 ### propTypes
 
-```javascript
+```js
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
@@ -78,7 +78,7 @@ export default Child;
 컴포넌트의 필수 props를 지정하거나 props 타입을 지정할 때는 propTypes를 사용한다. propTypes를 지정하려면 **prop-types** 모듈이 필요하다.
 필수 props를 지정하고 싶을 땐 propTypes를 설정할 때 isRequired를 사용하면 된다.
 
-```javascript
+```js
 export default class Parent extends Component {
   render() {
     return <Child singer={123} song="Home" />;
@@ -90,7 +90,7 @@ export default class Parent extends Component {
 
 props의 타입을 propTypes에서 설정한 타입과 다른 타입으로 넘겨주면 렌더링은 되나 개발자 도구에 오류 메시지가 출력된다.
 
-```javascript
+```js
 export default class Parent extends Component {
   render() {
     return <Child singer="Nell" />;
@@ -103,7 +103,7 @@ export default class Parent extends Component {
 
 ### defaultProps
 
-```javascript
+```js
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
@@ -126,7 +126,7 @@ export default Child;
 
 defaultProps를 사용해서 prop의 기본 값을 설정할 수 있다. defaultProps는 prop-types 모듈이 필요 없다.
 
-```javascript
+```js
 export default class Parent extends Component {
   render() {
     return <Child />;
@@ -139,7 +139,7 @@ props를 지정해주지 않으면 defaultProps에 있는 기본 값이 적용�
 
 ### transform-class-properties
 
-```javascript
+```js
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
@@ -174,7 +174,7 @@ propTypes, defaulProps를 클래스 내부에서 정의할 수도 있다. 이 �
 
 typeScript를 사용하여 props에 타입을 줘보자.
 
-```javascript
+```js
 import * as React from "react";
 
 interface ChildProps {
