@@ -1,9 +1,9 @@
 import * as runtime from "react/jsx-runtime";
-
-import * as PostDetailEmements from "../post-detail-elements";
-import clsx from "clsx";
 import { ImageProps } from "next/image";
 import { LinkProps } from "next/link";
+import clsx from "clsx";
+
+import * as PostDetailEmements from "../post-detail-elements";
 
 const sharedComponents = {
   h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
