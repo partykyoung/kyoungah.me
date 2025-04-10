@@ -1,0 +1,10 @@
+{
+  "name": "@kyoungah.me/scripts",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "author": "",
+  "license": "ISC"
+}
