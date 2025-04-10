@@ -1,5 +1,5 @@
 import fs from "fs";
-import { parse } from "yaml";
+import matter from "gray-matter";
 
 const cwd = process.cwd();
 
@@ -17,15 +17,10 @@ function createJSON(pageData) {
 }
 
 function extractDateFromMarkdown(fileContent, post) {
-  const yamlMatch = fileContent.match(/^---\n([\s\S]+?)\n---/);
-  const yamlData = yamlMatch ? parse(yamlMatch[1]) : {};
-
-  // 2. 본문 내용 추출 (YAML 헤더 제외)
-  const contentStart = yamlMatch ? yamlMatch[0].length : 0; // YAML 헤더 이후 시작점
-  let markdownBody = fileContent.slice(contentStart).trim(); // YAML 헤더 이후 본문
+  const { data: frontmatter, content } = matter(fileContent);
 
   // 3. 마크다운 문법 제거 (정규식 활용)
-  markdownBody = markdownBody
+  const onlyContentText = content
     .replace(/#+\s+/g, "") // 제목 (#, ##, ### 등)
     .replace(/```[\s\S]*?```/g, "") // 코드 블록 (``` 코드 ```)
     .replace(/`([^`]+)`/g, "$1") // 인라인 코드 (`code`)
@@ -40,11 +35,11 @@ function extractDateFromMarkdown(fileContent, post) {
     .trim();
 
   // 4. 본문 150자 추출
-  const excerpt = markdownBody.slice(0, 150).trim();
+  const excerpt = onlyContentText.slice(0, 150).trim();
   const [slug] = post.split(".");
 
   return {
-    ...yamlData,
+    ...frontmatter,
     slug: `/${slug}`,
     excerpt,
   };
