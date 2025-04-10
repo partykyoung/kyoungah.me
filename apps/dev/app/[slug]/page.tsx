@@ -21,7 +21,6 @@ export default async function Page({
           date={frontmatter.date}
           tags={frontmatter.tags}
         />
-
         <MDXContent code={code.value as string} />
       </>
     );
