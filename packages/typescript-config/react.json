@@ -5,7 +5,6 @@
     "lib": ["es2022", "DOM", "DOM.Iterable"],
     "jsx": "preserve",
     "declarationMap": true,
-    "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"],
     "moduleResolution": "NodeNext",
   }
 }
