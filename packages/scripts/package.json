@@ -3,6 +3,9 @@
   "type": "module",
   "version": "1.0.0",
   "description": "",
+  "bin": {
+    "scripts": "./build/index.js"
+  },
   "scripts": {
     "test": "vitest run",
     "build": "tsc --build"
@@ -11,9 +14,11 @@
   "license": "ISC",
   "devDependencies": {
     "@kyoungah.me/typescript-config": "workspace:*",
+    "@types/node": "^20",
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "commander": "^13.1.0",
     "gray-matter": "^4.0.3"
   }
 }
