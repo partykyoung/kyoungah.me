@@ -8,7 +8,7 @@ type Frontmatter = {
   publish: boolean;
 };
 
-function createJSON(tags: string[]): void {
+function createJSON(tags: Map<string, number>): void {
   const JSONS_DIRECTORY = `${cwd}/public/jsons`;
 
   if (!fs.existsSync(JSONS_DIRECTORY)) {
@@ -16,7 +16,9 @@ function createJSON(tags: string[]): void {
   }
 
   const filePath = `${JSONS_DIRECTORY}/tags.json`;
-  const dataToSave = JSON.stringify({ tags });
+  const dataToSave = JSON.stringify({
+    tags: Array.from(tags.entries()).map(([tag, count]) => `${tag} (${count})`),
+  });
 
   fs.writeFile(filePath, dataToSave, (err: NodeJS.ErrnoException | null) => {
     if (err) {
@@ -30,7 +32,7 @@ function createTagsJson(): void {
 
   const tags = fs
     .readdirSync(POSTS_DIRECTORY)
-    .map((post: string) => {
+    .reduce((acc: Map<string, number>, post: string) => {
       const file = fs.readFileSync(`${POSTS_DIRECTORY}/${post}`, {
         encoding: "utf-8",
       });
@@ -38,14 +40,14 @@ function createTagsJson(): void {
       const { data: frontmatter } = matter(file);
       const { tags, publish } = frontmatter as Frontmatter;
 
-      return { tags, publish };
-    })
-    .filter((post: any) => post.publish === true)
-    .reduce((acc: string[], { tags }: Frontmatter) => {
-      acc = Array.from(new Set(acc.concat(tags)));
+      if (publish) {
+        tags.forEach((tag: string) => {
+          acc.set(tag, (acc.get(tag) || 0) + 1);
+        });
+      }
 
       return acc;
-    }, [] as string[]);
+    }, new Map<string, number>());
 
   createJSON(tags);
 }
