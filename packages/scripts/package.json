@@ -10,7 +10,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^5.8.3",
-    "@kyoungah.me/typescript-config": "workspace:*"
+    "@kyoungah.me/typescript-config": "workspace:*",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3"
   }
 }
