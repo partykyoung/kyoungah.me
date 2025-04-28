@@ -164,6 +164,10 @@ importers:
         version: 8.13.0(eslint@9.14.0)(typescript@5.6.2)
 
   packages/scripts:
+    dependencies:
+      gray-matter:
+        specifier: ^4.0.3
+        version: 4.0.3
     devDependencies:
       '@kyoungah.me/typescript-config':
         specifier: workspace:*
