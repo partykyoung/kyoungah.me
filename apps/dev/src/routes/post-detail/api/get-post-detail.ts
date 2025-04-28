@@ -13,7 +13,14 @@ const rehypeExpressiveCodeOptions = {
   plugins: [pluginCollapsibleSections(), pluginLineNumbers()],
 };
 
-async function getPostDetail(slug: string) {
+async function getPostDetail(slug: string): Promise<{
+  frontmatter: {
+    [key: string]: string | string[];
+  };
+  code: {
+    value: string;
+  };
+}> {
   const source = fs.readFileSync(`${cwd}/posts/${decodeURI(slug)}.md`, {
     encoding: "utf-8",
   });
@@ -26,7 +33,7 @@ async function getPostDetail(slug: string) {
 
   return {
     frontmatter: data,
-    code,
+    code: code as { value: string },
   };
 }
 
