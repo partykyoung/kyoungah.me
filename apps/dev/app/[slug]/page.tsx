@@ -1,7 +1,7 @@
 import fs from "fs";
-import { MDXContent } from "@/pages/post-detail";
-import { getPostDetail } from "@/pages/post-detail/api/get-post-detail";
-import { MdxFrontMatter } from "@/pages/post-detail/ui/mdx-frontmatter";
+import { MDXContent } from "@/routes/post-detail";
+import { getPostDetail } from "@/routes/post-detail/api/get-post-detail";
+import { MdxFrontMatter } from "@/routes/post-detail/ui/mdx-frontmatter";
 
 const cwd = process.cwd();
 
@@ -17,9 +17,9 @@ export default async function Page({
     return (
       <>
         <MdxFrontMatter
-          title={frontmatter.title}
-          date={frontmatter.date}
-          tags={frontmatter.tags}
+          title={frontmatter.title as string}
+          date={frontmatter.date as string}
+          tags={frontmatter.tags as string[]}
         />
         <MDXContent code={code.value as string} />
       </>
