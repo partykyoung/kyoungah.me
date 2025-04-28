@@ -4,8 +4,9 @@
     "outDir": "./build",
     "rootDir": "./src",
     "declaration": false,
-    "moduleResolution": "Node",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext"
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"]
 }
