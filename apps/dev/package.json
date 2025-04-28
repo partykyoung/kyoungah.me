@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "gen:pagination": "scripts gen:pagination",
-    "gen:tags": "scripts gen:tags"
+    "scripts": "rm -rf public/jsons && scripts"
   },
   "dependencies": {
     "@expressive-code/plugin-collapsible-sections": "^0.40.2",
