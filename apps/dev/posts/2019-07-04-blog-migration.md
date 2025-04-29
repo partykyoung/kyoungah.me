@@ -55,7 +55,7 @@ yarn add typescript @types/react @types/react-dom gatsby-plugin-typescript @type
 
 ### gatsby-config.js
 
-```js
+```javascript
 module.exports = {
   // 생략...
 
@@ -79,7 +79,7 @@ yarn add gatsby-plugin-styled-components styled-components babel-plugin-styled-c
 
 ### gatsby-config.js
 
-```js
+```javascript
 module.exports = {
   // 생략...
   plugins: [
@@ -116,7 +116,7 @@ yarn add gatsby-source-filesystem gatsby-transformer-remark
 
 markdown 파일에서 가져온 정보를 뿌려주기 위한 템플릿을 만들어주자.
 
-```js
+```javascript
 // 생략...
 
 export default function Template({
@@ -158,7 +158,7 @@ export const pageQuery = graphql`
 
 ### gatsby-config.js
 
-```js
+```javascript
 module.exports = {
   // 생략...
 
@@ -181,7 +181,7 @@ module.exports = {
 
 gatsby는 Node API를 사용하여 정적페이지를 생성한다. 이 API를 사용하기 위해서는 gatsby-node.js 파일에서 설정이 필요하다.
 
-```js
+```javascript
 const path = require(`path`);
 const { createFilePath } = require("gatsby-source-filesystem");
 
@@ -249,7 +249,7 @@ yarn add gatsby-remark-prismjs prismjs
 
 ### gatsby-config.js
 
-```js
+```javascript
 module.exports = {
   // 생략...
   plugins: [
@@ -281,7 +281,7 @@ module.exports = {
 
 원하는 highlight 테마가 있으면 gatsby-browser 파일에다가 import 해주면된다.
 
-```js
+```javascript
 /**
  * Implement Gatsby's Browser APIs in this file.
  *
@@ -299,7 +299,7 @@ gatsby-cli로 생성된 프로젝트를 보면 SEO 컴포넌트가 있다. markd
 
 ### SEO.tsx
 
-```js
+```javascript
 // 생략...
 
 const SEO: React.SFC<SEOProps> = ({ description, title, url }) => {

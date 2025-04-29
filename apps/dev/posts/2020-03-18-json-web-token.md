@@ -93,7 +93,7 @@ HMACSHA256(
 
 이 서명은 메시지가 도중에 바뀌지는 않았는지 인증하는데 사용되며 비밀키로 서명된 토큰의 경우 발신자도 인증할 수 있다.
 
-![JWT Example](/images/posts/json-web-token-1.png)
+![JWT Example](/images/backend/json-web-token-1.png)
 Header 인코딩값, Payload 인코딩값, 서명을 .로 구분하면서 모두 합치면 JWT 토큰이 완성된다.
 
 [JWT 공식 사이트](https://jwt.io/)에서 JWT 토크를 생성 및 확인해볼 수 있다.

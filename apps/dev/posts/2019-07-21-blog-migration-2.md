@@ -23,7 +23,7 @@ yarn add gatsby-plugin-disqus
 
 plugins에 gatsby-plugin-disqus를 추가해주자.
 
-```js
+```javascript
 module.exports = {
   // 생략...
   plugins: [
@@ -42,7 +42,7 @@ module.exports = {
 
 포스트에 관련된 정보를 blogTemplate 컴포넌트에서 호출하고 있기 때문에 여기에 댓글 컴포넌트를 삽입하기로 했다. query문 호출 부분에 id를 호출 할 수 있도록 추가해주었고 gatsby-plugin-disqus의 Disqus 컴포넌트를 사용하여 아주 쉽게 댓글 영역을 추가해주었다.
 
-```js
+```javascript
 import React from "react";
 import { graphql } from "gatsby";
 import styled, { theme } from "../styledComponents";
@@ -97,7 +97,7 @@ yarn add gatsby-remark-katex katex
 
 ### gatsby-config.js
 
-```js
+```javascript
 module.exports = {
   // 생략...
   plugins: [
@@ -130,7 +130,7 @@ module.exports = {
 yarn add gatsby-plugin-google-analytics
 ```
 
-```js
+```javascript
 module.exports = {
   // 생략 ...
   plugins: [
@@ -159,7 +159,7 @@ yarn add gatsby-plugin-feed
 
 여러가지 옵션들을 추가할 수 있으나 뭐가 뭔지 잘 몰라서 일단 기본으로만 설정해두었다. 추후에 필요한 부분이 있으면 옵션을 추가하여 커스터마이징 할 생각이다.
 
-```js
+```javascript
 module.exports = {
   // 생략 ...
   plugins: [
