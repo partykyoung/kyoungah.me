@@ -4,7 +4,7 @@ import { createVanillaExtractPlugin } from "@vanilla-extract/next-plugin";
 const withVanillaExtract = createVanillaExtractPlugin();
 
 const nextConfig: NextConfig = {
-  output: "export",
+  output: process.env.NODE_ENV === "development" ? undefined : "export",
   webpack: (config) => {
     config.resolve.fallback = { fs: false };
 

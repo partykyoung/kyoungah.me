@@ -60,7 +60,8 @@ function extractDateFromMarkdown(fileContent: string, post: string): Post {
     .trim();
 
   const excerpt = onlyContentText.slice(0, 150).trim();
-  const [slug] = post.split(".");
+  const dot = post.lastIndexOf(".");
+  const slug = post.slice(0, dot);
 
   return {
     ...(frontmatter as Frontmatter),
