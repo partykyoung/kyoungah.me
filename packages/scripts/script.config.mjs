@@ -13,8 +13,9 @@ export default {
     inputPath: DEFAULT_INPUT,
     outputPath: DEFAULT_OUTPUT,
   },
-  "get:tag": {
+  "gen:tag": {
     inputPath: DEFAULT_INPUT,
     outputPath: DEFAULT_OUTPUT,
+    postPerPage: 20,
   },
 };
