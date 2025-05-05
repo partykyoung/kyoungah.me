@@ -1,1 +1,1 @@
-{"root":["./src/create-new-post.ts","./src/create-pagination-json.ts","./src/create-tag-json.ts","./src/create-tags-json.ts","./src/index.ts"],"version":"5.8.3"}
+{"root":["./src/create-new-post.ts","./src/create-pagination-json.ts","./src/create-tag-json.ts","./src/create-tags-json.ts","./src/index.ts","./src/root.config.ts"],"version":"5.8.3"}

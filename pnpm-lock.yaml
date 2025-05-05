@@ -29,9 +29,6 @@ importers:
       '@expressive-code/plugin-line-numbers':
         specifier: ^0.40.2
         version: 0.40.2
-      '@kyoungah.me/scripts':
-        specifier: workspace:*
-        version: link:../../packages/scripts
       '@kyoungah.me/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -81,6 +78,9 @@ importers:
       '@eslint/eslintrc':
         specifier: ^3
         version: 3.1.0
+      '@kyoungah.me/script':
+        specifier: workspace:*
+        version: link:../../packages/script
       '@kyoungah.me/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
@@ -163,7 +163,7 @@ importers:
         specifier: ^8.13.0
         version: 8.13.0(eslint@9.14.0)(typescript@5.6.2)
 
-  packages/scripts:
+  packages/script:
     dependencies:
       '@inquirer/checkbox':
         specifier: ^4.1.5

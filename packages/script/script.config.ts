@@ -8,6 +8,7 @@ export default {
   "gen:pages": {
     inputPath: DEFAULT_INPUT,
     outputPath: DEFAULT_OUTPUT,
+    perPage: 20,
   },
   "gen:tags": {
     inputPath: DEFAULT_INPUT,
@@ -16,6 +17,6 @@ export default {
   "gen:tag": {
     inputPath: DEFAULT_INPUT,
     outputPath: DEFAULT_OUTPUT,
-    postPerPage: 20,
+    perPage: 20,
   },
 };
