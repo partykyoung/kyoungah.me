@@ -1,5 +1,7 @@
 import fs from "fs";
+import path from "path";
 import matter from "gray-matter";
+import { ScriptConfig } from "../script.config.js";
 
 const cwd: string = process.cwd();
 
@@ -8,14 +10,12 @@ type Frontmatter = {
   publish: boolean;
 };
 
-function createJSON(tags: Map<string, number>): void {
-  const JSONS_DIRECTORY = `${cwd}/public/jsons`;
-
-  if (!fs.existsSync(JSONS_DIRECTORY)) {
-    fs.mkdirSync(JSONS_DIRECTORY);
+function createJSON(tags: Map<string, number>, outputPath: string): void {
+  if (!fs.existsSync(outputPath)) {
+    fs.mkdirSync(outputPath);
   }
 
-  const filePath = `${JSONS_DIRECTORY}/tags.json`;
+  const filePath = `${outputPath}/tags.json`;
   const dataToSave = JSON.stringify({
     tags: Array.from(tags.entries()).map(([tag, count]) => `${tag} (${count})`),
   });
@@ -27,13 +27,13 @@ function createJSON(tags: Map<string, number>): void {
   });
 }
 
-function createTagsJson(): void {
-  const POSTS_DIRECTORY = `${cwd}/posts`;
+function createTagsJson(config: ScriptConfig["gen:tags"]): void {
+  const INPUT_DIRECTORY = path.join(cwd, config.inputPath);
 
   const tags = fs
-    .readdirSync(POSTS_DIRECTORY)
+    .readdirSync(INPUT_DIRECTORY)
     .reduce((acc: Map<string, number>, post: string) => {
-      const file = fs.readFileSync(`${POSTS_DIRECTORY}/${post}`, {
+      const file = fs.readFileSync(`${INPUT_DIRECTORY}/${post}`, {
         encoding: "utf-8",
       });
 
@@ -49,7 +49,7 @@ function createTagsJson(): void {
       return acc;
     }, new Map<string, number>());
 
-  createJSON(tags);
+  createJSON(tags, config.outputPath);
 }
 
 export { createTagsJson };
