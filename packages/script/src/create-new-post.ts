@@ -1,10 +1,10 @@
 import fs from "fs";
+import path from "path";
 import input from "@inquirer/input";
 import checkbox, { Separator } from "@inquirer/checkbox";
 import dayjs from "dayjs";
 
-import { getRootConfig } from "../root.config.js";
-import defaultConfig from "../script.config.js";
+import type { ScriptConfig } from "../script.config.js";
 
 interface PostData {
   title: string;
@@ -15,6 +15,8 @@ interface PostFileInfo {
   postTitle: string;
   postFileName: string;
 }
+
+const cwd = process.cwd();
 
 function setPostFileName(postTitle: string): string {
   return postTitle.split(" ").join("-");
@@ -126,11 +128,8 @@ function refinePostContent({ title, tags }: PostData): string {
   return `---${postTitle}${postDate}${postTags}${publish}---`;
 }
 
-async function createNewPost(): Promise<void> {
-  const cwd = process.cwd();
-  const customConfig = getRootConfig()?.["gen:post"] ?? {};
-  const config = { ...defaultConfig, ...customConfig };
-  const POSTS_DIRECTORY = `${cwd}/${config["gen:post"]?.inputPath}`;
+async function createNewPost(config: ScriptConfig["gen:post"]): Promise<void> {
+  const POSTS_DIRECTORY = path.join(cwd, config.inputPath!);
 
   try {
     if (!fs.existsSync(POSTS_DIRECTORY)) {

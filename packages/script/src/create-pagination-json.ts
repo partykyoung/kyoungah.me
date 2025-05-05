@@ -1,7 +1,9 @@
 import fs from "fs";
+import path from "path";
 import matter from "gray-matter";
+import type { ScriptConfig } from "../script.config.js";
 
-const cwd: string = process.cwd();
+const cwd = process.cwd();
 
 type Frontmatter = {
   title: string;
@@ -25,14 +27,17 @@ type PageData = {
   };
 };
 
-function createJSON(pageData: PageData): void {
-  const JSONS_DIRECTORY = `${cwd}/public/jsons`;
+function createJSON(pageData: PageData, outputPath: string): void {
+  const OUTPUT_DIRECTORY = `${cwd}/${outputPath}`;
 
-  if (!fs.existsSync(JSONS_DIRECTORY)) {
-    fs.mkdirSync(JSONS_DIRECTORY);
+  if (!fs.existsSync(OUTPUT_DIRECTORY)) {
+    fs.mkdirSync(OUTPUT_DIRECTORY);
   }
 
-  const filePath = `${JSONS_DIRECTORY}/page${pageData.pageSuffix}.json`;
+  const filePath = path.join(
+    OUTPUT_DIRECTORY,
+    `page-${pageData.pageSuffix}.json`
+  );
   const dataToSave = JSON.stringify(pageData.context);
 
   fs.writeFile(filePath, dataToSave, (err: NodeJS.ErrnoException | null) => {
@@ -70,8 +75,8 @@ function extractDateFromMarkdown(fileContent: string, post: string): Post {
   };
 }
 
-function createPaginationJson(): void {
-  const POSTS_DIRECTORY = `${cwd}/posts`;
+function createPaginationJson(config: ScriptConfig["gen:pages"]): void {
+  const POSTS_DIRECTORY = path.join(cwd, config.inputPath);
 
   const posts: Post[] = fs
     .readdirSync(POSTS_DIRECTORY)
@@ -88,7 +93,7 @@ function createPaginationJson(): void {
     return new Date(next.date).getTime() - new Date(prev.date).getTime();
   });
 
-  const POSTS_PER_PAGE = 10;
+  const POSTS_PER_PAGE = config.perPage;
   const numPages = Math.ceil(posts.length / POSTS_PER_PAGE);
 
   for (let i = 0; i < numPages; i++) {
@@ -97,16 +102,19 @@ function createPaginationJson(): void {
       return postIndex >= skip && postIndex < skip + POSTS_PER_PAGE;
     });
 
-    createJSON({
-      pageSuffix: `${i + 1}`,
-      context: {
-        limit: POSTS_PER_PAGE,
-        skip,
-        numPages,
-        currentPage: i + 1,
-        posts: pagePosts,
+    createJSON(
+      {
+        pageSuffix: `${i + 1}`,
+        context: {
+          limit: POSTS_PER_PAGE,
+          skip,
+          numPages,
+          currentPage: i + 1,
+          posts: pagePosts,
+        },
       },
-    });
+      config.outputPath
+    );
   }
 }
 
