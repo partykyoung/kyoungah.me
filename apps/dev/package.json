@@ -7,10 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "scripts": "rm -rf public/jsons && scripts",
-    "gen:post": "scripts gen:post",
-    "gen:tag": "scripts gen:tag",
-    "release": "pnpm scripts && pnpm build && gh-pages -d out -b main -r https://github.com/partykyoung/dev-blog --nojekyll"
+    "script": "rm -rf public/jsons && script",
+    "gen:post": "script gen:post",
+    "gen:tag": "script gen:tag",
+    "gen:tags": "script gen:tags",
+    "gen:pages": "script gen:pages",
+    "gen:build": "pnpm gen:tag && pnpm gen:tags && pnpm gen:pages",
+    "release": "pnpm gen:build && pnpm build && gh-pages -d out -b main -r https://github.com/partykyoung/dev-blog --nojekyll"
   },
   "dependencies": {
     "@expressive-code/plugin-collapsible-sections": "^0.40.2",
