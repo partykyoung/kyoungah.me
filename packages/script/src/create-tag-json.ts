@@ -1,18 +1,20 @@
 import fs from "fs";
+import path from "path";
 import matter from "gray-matter";
+import { ScriptConfig } from "../script.config.js";
 
-const cwd: string = process.cwd();
+const cwd = process.cwd();
 
-function createTagJson(): void {
-  const POSTS_DIRECTORY = `${cwd}/posts`;
-  const JSONS_DIRECTORY = `${cwd}/public/jsons`;
+function createTagJson(config: ScriptConfig["gen:tag"]): void {
+  const INPUT_DIRECTORY = path.join(cwd, config.inputPath);
+  const OUTPUT_DIRECTORY = path.join(cwd, config.outputPath);
 
-  if (!fs.existsSync(JSONS_DIRECTORY)) {
-    fs.mkdirSync(JSONS_DIRECTORY);
+  if (!fs.existsSync(OUTPUT_DIRECTORY)) {
+    fs.mkdirSync(OUTPUT_DIRECTORY);
   }
 
-  const posts = fs.readdirSync(POSTS_DIRECTORY).map((post: string) => {
-    const file = fs.readFileSync(`${POSTS_DIRECTORY}/${post}`, {
+  const posts = fs.readdirSync(INPUT_DIRECTORY).map((post: string) => {
+    const file = fs.readFileSync(`${INPUT_DIRECTORY}/${post}`, {
       encoding: "utf-8",
     });
 
@@ -29,7 +31,7 @@ function createTagJson(): void {
     };
   });
 
-  const POSTS_PER_PAGE = 10;
+  const POSTS_PER_PAGE = config.perPage;
   const tagMap = new Map<
     string,
     { slug: string; excerpt: string; title: string; date: string }[]
@@ -66,7 +68,7 @@ function createTagJson(): void {
         })),
       };
 
-      const filePath = `${JSONS_DIRECTORY}/${tag.toLowerCase()}${i + 1}.json`;
+      const filePath = `${OUTPUT_DIRECTORY}/${tag.toLowerCase()}${i + 1}.json`;
       fs.writeFileSync(filePath, JSON.stringify(pageData, null, 2));
     }
   });
