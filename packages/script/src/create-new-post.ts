@@ -3,6 +3,9 @@ import input from "@inquirer/input";
 import checkbox, { Separator } from "@inquirer/checkbox";
 import dayjs from "dayjs";
 
+import { getRootConfig } from "../root.config.js";
+import config from "../script.config.js";
+
 interface PostData {
   title: string;
   tags?: string[];
@@ -125,7 +128,8 @@ function refinePostContent({ title, tags }: PostData): string {
 
 async function createNewPost(): Promise<void> {
   const cwd = process.cwd();
-  const POSTS_DIRECTORY = `${cwd}/posts`;
+  const rootConfig = getRootConfig() ?? config;
+  let POSTS_DIRECTORY = `${cwd}/${rootConfig?.["gen:post"]?.inputPath}`;
 
   try {
     // Ensure the posts directory exists

@@ -18,7 +18,6 @@
   "dependencies": {
     "@expressive-code/plugin-collapsible-sections": "^0.40.2",
     "@expressive-code/plugin-line-numbers": "^0.40.2",
-    "@kyoungah.me/scripts": "workspace:*",
     "@kyoungah.me/ui": "workspace:*",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/mdx": "^3.1.0",
@@ -37,7 +36,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@kyoungah.me/scripts": "workspace:*",
+    "@kyoungah.me/script": "workspace:*",
     "@kyoungah.me/typescript-config": "workspace:*",
     "@types/mdx": "^2.0.13",
     "@types/node": "^20",

@@ -2,11 +2,11 @@
   "extends": "@kyoungah.me/typescript-config/base.json",
   "compilerOptions": {
     "outDir": "./build",
-    "rootDir": "./src",
+    "rootDir": "./",
     "declaration": false,
     "module": "NodeNext",
     "moduleResolution": "nodenext"
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "*.config.ts", "index.ts"],
   "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"]
 }
