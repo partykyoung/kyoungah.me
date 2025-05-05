@@ -1,10 +1,10 @@
 {
-  "name": "@kyoungah.me/scripts",
+  "name": "@kyoungah.me/script",
   "type": "module",
   "version": "1.0.0",
   "description": "",
   "bin": {
-    "scripts": "./build/index.js"
+    "script": "./build/index.js"
   },
   "scripts": {
     "test": "vitest run",
