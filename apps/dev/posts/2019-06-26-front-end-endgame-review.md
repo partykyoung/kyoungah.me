@@ -1,7 +1,7 @@
 ---
 title: GDG FRONT-ENDGAME 컨퍼런스 후기
 date: 2019-06-26 23:33:12
-tags: ["Etc"]
+tags: ["후기", "Conference"]
 publish: true
 ---
 
