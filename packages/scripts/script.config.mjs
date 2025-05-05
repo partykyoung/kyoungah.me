@@ -2,17 +2,19 @@ const DEFAULT_INPUT = "posts";
 const DEFAULT_OUTPUT = "public/jsons";
 
 export default {
-  'gen:pages': {
+  "gen:post": {
     inputPath: DEFAULT_INPUT,
-    outputPath: DEFAULT_OUTPUT
   },
-  'gen:tags': {
+  "gen:pages": {
     inputPath: DEFAULT_INPUT,
-    outputPath: DEFAULT_OUTPUT
-
+    outputPath: DEFAULT_OUTPUT,
   },
-  'get:tag': {
+  "gen:tags": {
     inputPath: DEFAULT_INPUT,
-    outputPath: DEFAULT_OUTPUT
+    outputPath: DEFAULT_OUTPUT,
   },
-}
+  "get:tag": {
+    inputPath: DEFAULT_INPUT,
+    outputPath: DEFAULT_OUTPUT,
+  },
+};
