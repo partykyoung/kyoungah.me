@@ -1,7 +1,26 @@
+type ScriptConfig = {
+  "gen:post": { inputPath: string };
+  "gen:pages": {
+    inputPath: string;
+    outputPath: string;
+    perPage: number;
+  };
+  "gen:tags": { inputPath: string; outputPath: string };
+  "gen:tag": {
+    inputPath: string;
+    outputPath: string;
+    perPage: number;
+  };
+};
+
+type PartialScriptConfig = {
+  [K in keyof ScriptConfig]: Partial<ScriptConfig[K]>;
+};
+
 const DEFAULT_INPUT = "posts";
 const DEFAULT_OUTPUT = "public/jsons";
 
-export default {
+const scriptConfig = {
   "gen:post": {
     inputPath: DEFAULT_INPUT,
   },
@@ -20,3 +39,6 @@ export default {
     perPage: 20,
   },
 };
+
+export type { ScriptConfig, PartialScriptConfig };
+export { scriptConfig };
