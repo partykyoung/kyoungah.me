@@ -4,7 +4,7 @@ import checkbox, { Separator } from "@inquirer/checkbox";
 import dayjs from "dayjs";
 
 import { getRootConfig } from "../root.config.js";
-import config from "../script.config.js";
+import defaultConfig from "../script.config.js";
 
 interface PostData {
   title: string;
@@ -128,14 +128,13 @@ function refinePostContent({ title, tags }: PostData): string {
 
 async function createNewPost(): Promise<void> {
   const cwd = process.cwd();
-  const rootConfig = getRootConfig() ?? config;
-  let POSTS_DIRECTORY = `${cwd}/${rootConfig?.["gen:post"]?.inputPath}`;
+  const customConfig = getRootConfig()?.["gen:post"] ?? {};
+  const config = { ...defaultConfig, ...customConfig };
+  const POSTS_DIRECTORY = `${cwd}/${config["gen:post"]?.inputPath}`;
 
   try {
-    // Ensure the posts directory exists
     if (!fs.existsSync(POSTS_DIRECTORY)) {
-      console.error(`Posts directory not found: ${POSTS_DIRECTORY}`);
-      return;
+      fs.mkdirSync(POSTS_DIRECTORY);
     }
 
     const { postFileName, postTitle } = await fetchPostTitle(POSTS_DIRECTORY);
