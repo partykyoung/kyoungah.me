@@ -68,7 +68,7 @@ function createTagJson(config: ScriptConfig["gen:tag"]): void {
         })),
       };
 
-      const filePath = `${OUTPUT_DIRECTORY}/${tag.toLowerCase()}${i + 1}.json`;
+      const filePath = `${OUTPUT_DIRECTORY}/${tag.toLowerCase()}-${i + 1}.json`;
       fs.writeFileSync(filePath, JSON.stringify(pageData, null, 2));
     }
   });

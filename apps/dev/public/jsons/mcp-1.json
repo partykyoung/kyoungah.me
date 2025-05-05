@@ -1,0 +1,14 @@
+{
+  "limit": 20,
+  "skip": 0,
+  "numPages": 1,
+  "currentPage": 1,
+  "posts": [
+    {
+      "title": "MCP 파헤치기",
+      "date": "2025-05-05T16:06:10.000Z",
+      "slug": "MCP-파헤치기",
+      "excerpt": ""
+    }
+  ]
+}
