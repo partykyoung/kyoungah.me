@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "scripts": "rm -rf public/jsons && scripts",
+    "gen:post": "scripts gen:post",
     "release": "pnpm scripts && pnpm build && gh-pages -d out -b main -r https://github.com/partykyoung/dev-blog --nojekyll"
   },
   "dependencies": {
