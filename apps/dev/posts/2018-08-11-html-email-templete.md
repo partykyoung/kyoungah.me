@@ -1,7 +1,7 @@
 ---
 title: html 이메일 템플릿 작성하기
 date: 2018-08-23 00:16:39
-tags: ["Html", "Etc"]
+tags: ["HTML"]
 publish: true
 ---
 

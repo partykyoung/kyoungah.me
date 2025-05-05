@@ -1,7 +1,7 @@
 ---
 title: JWT(Json Web Token)
 date: 2020-03-18 23:31:00
-tags: ["Etc"]
+tags: ["JWT"]
 publish: true
 ---
 
