@@ -1,10 +1,9 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "./base.json",
   "compilerOptions": {
     "lib": ["es2022", "DOM", "DOM.Iterable"],
     "jsx": "preserve",
     "declarationMap": true,
-    "moduleResolution": "NodeNext",
+    "moduleResolution": "NodeNext"
   }
 }
