@@ -13,7 +13,7 @@ function useQueryClient(queryClient: any) {
 
   if (client === undefined || client === null) {
     throw new Error(
-      "QueryClient가 설정되지 않았습니다. QueryClientContextProvider를 사용하여 설정해주세요."
+      "No QueryClient set, use QueryClientContextProvider to set one."
     );
   }
 }

@@ -1,0 +1,3 @@
+class QueryCache {}
+
+export { QueryCache };
