@@ -103,3 +103,9 @@ export function hashQueryKeyByOptions(queryKey: any, options?: any): string {
 
   return hashFn(queryKey);
 }
+
+export const skipToken = Symbol();
+
+export function isValidTimeout(value: unknown): value is number {
+  return typeof value === "number" && value >= 0 && value !== Infinity;
+}
