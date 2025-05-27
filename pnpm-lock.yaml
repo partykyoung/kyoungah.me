@@ -163,6 +163,18 @@ importers:
         specifier: ^8.13.0
         version: 8.13.0(eslint@9.14.0)(typescript@5.6.2)
 
+  packages/query:
+    devDependencies:
+      '@kyoungah.me/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/node':
+        specifier: ^20
+        version: 20.17.23
+      typescript:
+        specifier: ^5.8.3
+        version: 5.8.3
+
   packages/script:
     dependencies:
       '@inquirer/checkbox':
