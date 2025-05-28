@@ -1,9 +1,52 @@
 import { isValidTimeout } from "./utils.js";
+import type { QueryCache } from "./query-cache.js";
 
-function getDefaultState(options: any) {
+// 쿼리 상태 타입 정의
+export interface QueryState<TData = unknown> {
+  data: TData | undefined;
+  dataUpdatedAt: number;
+  error: Error | null;
+  status: 'success' | 'error' | 'pending';
+  fetchStatus: 'idle' | 'fetching' | 'paused';
+}
+
+// 쿼리 구성 타입 정의
+export interface QueryConfig<TData = unknown> {
+  defaultOptions?: QueryOptions<TData>;
+  options: QueryOptions<TData>;
+  client: QueryClientType;
+  queryKey: unknown[];
+  queryHash: string;
+  state?: QueryState<TData>;
+}
+
+// 쿼리 클라이언트 타입 정의 (간소화)
+export interface QueryClientType {
+  getQueryCache: () => QueryCache;
+  defaultQueryOptions: <T>(options: QueryOptions<T>) => QueryOptions<T>;
+  getQueryDefaults: (queryKey: unknown[]) => QueryOptions<unknown>;
+}
+
+// 쿼리 옵션 타입 정의
+export interface QueryOptions<TData = unknown> {
+  queryKey?: unknown[];
+  queryHash?: string;
+  queryFn?: () => Promise<TData>;
+  initialData?: TData | (() => TData);
+  initialDataUpdatedAt?: number | (() => number | undefined);
+  gcTime?: number;
+  [key: string]: unknown;
+}
+
+// 쿼리 옵저버 타입 정의 (간소화)
+export interface QueryObserver {
+  onQueryUpdate: () => void;
+}
+
+function getDefaultState<TData>(options: QueryOptions<TData>): QueryState<TData> {
   const data =
     typeof options.initialData === "function"
-      ? options.initialData()
+      ? (options.initialData as () => TData)()
       : options.initialData;
 
   const hasData = data !== undefined;
@@ -18,37 +61,47 @@ function getDefaultState(options: any) {
     data,
     dataUpdatedAt: hasData ? (initialDataUpdatedAt ?? Date.now()) : 0,
     error: null,
-    status: hasData ? "success" : "pending", // 'success' | 'error' | 'pending'
-    fetchStatus: "idle", // 'idle' | 'fetching'
+    status: hasData ? "success" : "pending",
+    fetchStatus: "idle",
   };
 }
 
-class Query {
+// 쿼리 액션 타입 정의
+type QueryAction<TData = unknown> = 
+  | { type: 'failed'; error: Error }
+  | { type: 'pause' }
+  | { type: 'continue' }
+  | { type: 'fetch' }
+  | { type: 'success'; data: TData; dataUpdatedAt?: number }
+  | { type: 'error'; error: Error }
+  | { type: 'setState'; state: Partial<QueryState<TData>>; setStateOptions?: Record<string, unknown> };
+
+class Query<TData = unknown> {
   private gcTime: number;
   private gcTimeout?: ReturnType<typeof setTimeout>;
-  private queryKey: any;
-  private queryHash: string;
-  private options: any;
-  private state: any;
+  readonly queryKey: unknown[];
+  readonly queryHash: string;
+  private options!: QueryOptions<TData>; // definite assignment assertion
+  state: QueryState<TData>;
 
-  private initialState: any;
-  private cache: any;
-  private client: any;
-  private observers: any;
-  private defaultOptions?: any;
-  private promise: any;
+  private initialState: QueryState<TData>;
+  private cache: QueryCache;
+  private client: QueryClientType;
+  observers: QueryObserver[];
+  private defaultOptions?: QueryOptions<TData>;
+  private promise: Promise<TData> | null;
 
-  // 재시도 관련 코드 제거됨
-
-  constructor(config: any) {
+  constructor(config: QueryConfig<TData>) {
     this.gcTime = 1000 * 60 * 5;
     this.defaultOptions = config.defaultOptions;
-    this.setOptions(config.options);
     this.observers = [];
     this.client = config.client;
     this.cache = this.client.getQueryCache();
     this.queryKey = config.queryKey;
     this.queryHash = config.queryHash;
+    this.promise = null;
+    
+    this.setOptions(config.options);
     this.initialState = getDefaultState(this.options);
     this.state = config.state ?? this.initialState;
     this.scheduleGc();
@@ -88,8 +141,8 @@ class Query {
     }
   }
 
-  dispatch(action: any) {
-    const reducer = (state: any) => {
+  dispatch(action: QueryAction<TData>) {
+    const reducer = (state: QueryState<TData>): QueryState<TData> => {
       switch (action.type) {
         case "failed":
           return {
@@ -146,23 +199,23 @@ class Query {
 
     this.state = reducer(this.state);
 
-    this.observers.forEach((observer: any) => {
+    this.observers.forEach((observer: QueryObserver) => {
       observer.onQueryUpdate();
     });
 
     this.cache.notify({ query: this, type: "updated", action });
   }
 
-  setState(state: any, setStateOptions?: any): void {
+  setState(state: Partial<QueryState<TData>>, setStateOptions?: Record<string, unknown>): void {
     this.dispatch({ type: "setState", state, setStateOptions });
   }
 
-  setOptions(options?: any) {
+  setOptions(options?: QueryOptions<TData>) {
     this.options = { ...this.defaultOptions, ...options };
     this.updateGcTime(this.options.gcTime);
   }
 
-  fetch() {
+  fetch(): Promise<TData> {
     if (!this.promise) {
       this.promise = (async () => {
         this.dispatch({ type: "fetch" });
@@ -175,8 +228,11 @@ class Query {
           const data = await this.options.queryFn();
 
           this.dispatch({ type: "success", data, dataUpdatedAt: Date.now() });
+          return data;
         } catch (error) {
-          this.dispatch({ type: "error", error });
+          const typedError = error instanceof Error ? error : new Error(String(error));
+          this.dispatch({ type: "error", error: typedError });
+          throw error;
         } finally {
           this.promise = null;
         }
@@ -184,6 +240,29 @@ class Query {
     }
 
     return this.promise;
+  }
+  
+  // 옵저버 추가 메서드
+  addObserver(observer: QueryObserver): void {
+    if (!this.observers.includes(observer)) {
+      this.observers.push(observer);
+    }
+  }
+  
+  // 옵저버 제거 메서드
+  removeObserver(observer: QueryObserver): void {
+    this.observers = this.observers.filter((x) => x !== observer);
+    if (!this.observers.length) {
+      this.optionalRemove();
+    }
+  }
+  
+  // 옵저버 구독 메서드
+  subscribe(observer: QueryObserver): () => void {
+    this.addObserver(observer);
+    return () => {
+      this.removeObserver(observer);
+    };
   }
 }
 

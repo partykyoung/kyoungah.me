@@ -3,24 +3,21 @@
  * 이 파일은 쿼리 데이터를 저장하고 관리하는 기능을 제공합니다.
  */
 import { QueryClient } from "./query-client.js";
-import { Query } from "./query.js";
+import { Query, QueryState } from "./query.js";
 import { hashQueryKeyByOptions } from "./utils.js";
-
-// eslint-disable-next-line
-type AnyQuery = any; // 타입 에러를 피하기 위한 임시 방편
 
 /**
  * 쿼리 캐시 이벤트 타입
  */
-export type QueryCacheEvent =
-  | { type: "added"; query: AnyQuery }
-  | { type: "removed"; query: AnyQuery }
-  | { type: "updated"; query: AnyQuery; action?: string };
+export type QueryCacheEvent<TData = unknown> =
+  | { type: "added"; query: Query<TData> }
+  | { type: "removed"; query: Query<TData> }
+  | { type: "updated"; query: Query<TData>; action?: unknown };
 
 /**
  * 쿼리 캐시 리스너 타입
  */
-export type QueryCacheListener = (event: QueryCacheEvent) => void;
+export type QueryCacheListener<TData = unknown> = (event: QueryCacheEvent<TData>) => void;
 
 /**
  * 쿼리 옵션 타입
@@ -48,10 +45,10 @@ export interface QueryOptions {
  */
 export interface QueryStore {
   has: (queryHash: string) => boolean;
-  set: (queryHash: string, query: Query) => void;
-  get: (queryHash: string) => Query | undefined;
+  set: <TData = unknown>(queryHash: string, query: Query<TData>) => void;
+  get: <TData = unknown>(queryHash: string) => Query<TData> | undefined;
   delete: (queryHash: string) => void;
-  values: () => IterableIterator<Query>;
+  values: <TData = unknown>() => IterableIterator<Query<TData>>;
 }
 
 /**
@@ -62,19 +59,19 @@ class QueryCache {
   /**
    * 쿼리 맵 - 쿼리 해시를 키로 사용하여 쿼리 객체를 저장합니다.
    */
-  private queries: Map<string, Query>;
+  private queries: Map<string, Query<unknown>>;
 
   /**
    * 이벤트 리스너 집합 - 캐시 변경 사항을 구독하는 리스너를 저장합니다.
    */
-  protected listeners = new Set<QueryCacheListener>();
+  protected listeners = new Set<QueryCacheListener<unknown>>();
 
   /**
    * 생성자
    * 쿼리 맵을 초기화하고 subscribe 메서드를 바인딩합니다.
    */
   constructor() {
-    this.queries = new Map<string, Query>();
+    this.queries = new Map<string, Query<unknown>>();
 
     this.subscribe = this.subscribe.bind(this);
   }
@@ -105,31 +102,33 @@ class QueryCache {
    * @param options 쿼리 옵션
    * @returns 생성되거나 이미 존재하는 쿼리 객체
    */
-  build(
+  build<TData = unknown>(
     client: QueryClient,
     options: QueryBuildOptions,
-    state?: any
-  ): AnyQuery {
+    state?: QueryState<TData>
+  ): Query<TData> {
     // 쿼리 키 추출
     const queryKey = options.queryKey;
     // 쿼리 해시 계산 (제공되지 않은 경우)
     const queryHash =
       options.queryHash ?? hashQueryKeyByOptions(queryKey, options);
     // 기존 쿼리 가져오기
-    let query = this.get(queryHash);
+    let query = this.get<TData>(queryHash);
 
     // 쿼리가 존재하지 않으면 새로 생성
     if (!query) {
-      // 초기 상태 생성
-
-      query = new Query({
+      // 불가피하게 타입 단언 사용 - 런타임에는 정상이지만 타입 시스템에는 불일치
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const config: any = {
         client,
         queryKey,
         queryHash,
         options: client.defaultQueryOptions(options),
         state,
         defaultOptions: client.getQueryDefaults(queryKey),
-      });
+      };
+
+      query = new Query<TData>(config);
       this.add(query);
     }
 
@@ -143,8 +142,8 @@ class QueryCache {
    * @param queryHash 조회할 쿼리의 해시
    * @returns 조회된 쿼리 또는 undefined
    */
-  get(queryHash: string) {
-    return this.queries.get(queryHash);
+  get<TData = unknown>(queryHash: string): Query<TData> | undefined {
+    return this.queries.get(queryHash) as Query<TData> | undefined;
   }
 
   /**
@@ -153,8 +152,8 @@ class QueryCache {
    *
    * @returns 모든 쿼리의 배열
    */
-  getAll() {
-    return [...this.queries.values()];
+  getAll<TData = unknown>(): Query<TData>[] {
+    return Array.from(this.queries.values()) as Query<TData>[];
   }
 
   /**
@@ -164,9 +163,9 @@ class QueryCache {
    *
    * @param query 추가할 쿼리 객체
    */
-  add(query: Query): void {
-    if (this.queries.has(query.queryHash) === false) {
-      this.queries.set(query.queryHash, query);
+  add<TData = unknown>(query: Query<TData>): void {
+    if (!this.queries.has(query.queryHash)) {
+      this.queries.set(query.queryHash, query as Query<unknown>);
 
       // 쿼리 추가 이벤트 발생
       this.notify({
@@ -182,7 +181,7 @@ class QueryCache {
    *
    * @param query 제거할 쿼리 객체
    */
-  remove(query: any) {
+  remove<TData = unknown>(query: Query<TData>): void {
     // 맵에서 쿼리 조회
     const queryInMap = this.queries.get(query.queryHash);
 
@@ -206,9 +205,9 @@ class QueryCache {
    *
    * @param event 발생한 이벤트 객체
    */
-  notify(event: any) {
+  notify<TData = unknown>(event: QueryCacheEvent<TData>): void {
     this.listeners.forEach((listener) => {
-      listener(event);
+      listener(event as QueryCacheEvent<unknown>);
     });
   }
 }

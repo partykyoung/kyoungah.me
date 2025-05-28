@@ -2,17 +2,53 @@ import { QueryCache } from "./query-cache.js";
 import { hashQueryKeyByOptions, partialMatchKey, skipToken } from "./utils.js";
 
 /**
+ * QueryClient 설정 인터페이스
+ */
+interface QueryClientConfig {
+  queryCache?: QueryCache;
+  defaultOptions?: {
+    queries?: Record<string, unknown>;
+    [key: string]: unknown;
+  };
+}
+
+/**
+ * 쿼리 기본 옵션 인터페이스
+ */
+interface QueryDefaults {
+  queryKey: unknown[];
+  defaultOptions: Record<string, unknown>;
+}
+
+// 쿼리 옵션 타입 정의
+interface DefaultedQueryOptions extends Record<string, unknown> {
+  _defaulted: boolean;
+  queryKey?: unknown[];
+  queryHash?: string;
+  queryFn?: unknown;
+  refetchOnReconnect?: boolean;
+  networkMode?: string;
+  throwOnError?: boolean;
+  suspense?: boolean;
+  persister?: unknown;
+  enabled?: boolean;
+}
+
+/**
  * QueryClient는 쿼리 상태를 관리하고 쿼리 캐시와 상호작용하는 클라이언트 클래스입니다.
  * 이 클래스는 쿼리 데이터를 조회하고, 상태를 확인하며, 기본 옵션을 설정하는 역할을 합니다.
  * 쿼리 캐시를 중앙에서 관리하고 다양한 쿼리 작업을 수행하는 주요 인터페이스를 제공합니다.
  */
 class QueryClient {
   /** 쿼리 결과를 저장하고 관리하는 캐시 인스턴스 */
-  private queryCache: any;
+  private queryCache: QueryCache;
   /** 모든 쿼리에 적용될 기본 옵션 */
-  private defaultOptions: any;
+  private defaultOptions: {
+    queries?: Record<string, unknown>;
+    [key: string]: unknown;
+  };
   /** 특정 쿼리 키에 대한 기본 옵션을 저장하는 맵 - 특정 패턴의 쿼리에 커스텀 기본값 적용 가능 */
-  private queryDefaults: Map<string, any>;
+  private queryDefaults: Map<string, QueryDefaults>;
 
   /**
    * QueryClient 생성자
@@ -36,7 +72,7 @@ class QueryClient {
    *   }
    * });
    */
-  constructor(config: any = {}) {
+  constructor(config: QueryClientConfig = {}) {
     this.queryCache = config.queryCache || new QueryCache();
     this.defaultOptions = config.defaultOptions || {};
     this.queryDefaults = new Map();
@@ -54,21 +90,23 @@ class QueryClient {
    * @param options 원본 쿼리 옵션
    * @returns 모든 기본값이 적용되고 필요한 값이 계산된 최종 쿼리 옵션
    */
-  defaultQueryOptions(options: any) {
+  defaultQueryOptions(options: Record<string, unknown>): DefaultedQueryOptions {
     if (options._defaulted) {
-      return options;
+      return options as DefaultedQueryOptions;
     }
 
-    const defaultedOptions = {
-      ...this.defaultOptions.queries,
-      ...this.getQueryDefaults(options.queryKey),
+    const queryKey = options.queryKey as unknown[] | undefined;
+    
+    const defaultedOptions: DefaultedQueryOptions = {
+      ...(this.defaultOptions.queries || {}),
+      ...this.getQueryDefaults(queryKey),
       ...options,
       _defaulted: true,
     };
 
-    if (!defaultedOptions.queryHash) {
+    if (!defaultedOptions.queryHash && defaultedOptions.queryKey) {
       defaultedOptions.queryHash = hashQueryKeyByOptions(
-        defaultedOptions.queryKey,
+        defaultedOptions.queryKey as unknown[],
         defaultedOptions
       );
     }
@@ -109,11 +147,16 @@ class QueryClient {
    * @param queryKey 쿼리 키 - 문자열, 배열 또는 다른 직렬화 가능한 값
    * @returns 해당 쿼리 키와 일치하는 모든 기본 옵션의 병합 결과
    */
-  getQueryDefaults(queryKey: any): any {
-    // 모든 등록된 기본 옵션을 배열로 변환
-    const defaults = [...this.queryDefaults.values()];
+  getQueryDefaults(queryKey?: unknown[]): Record<string, unknown> {
+    // 쿼리 키가 없으면 빈 객체 반환
+    if (!queryKey) {
+      return {};
+    }
 
-    const result: any = {};
+    // 모든 등록된 기본 옵션을 배열로 변환
+    const defaults = Array.from(this.queryDefaults.values());
+
+    const result: Record<string, unknown> = {};
 
     // 쿼리 키와 부분적으로 일치하는 모든 기본 옵션을 병합
     // partialMatchKey 함수는 쿼리 키의 부분 일치를 확인합니다.
@@ -137,12 +180,14 @@ class QueryClient {
    * // posts/1에 대한 캐시된 데이터 가져오기
    * const post = queryClient.getQueryData(['posts', 1]);
    */
-  getQueryData(queryKey: any): any | undefined {
+  getQueryData<TData = unknown>(queryKey: unknown[]): TData | undefined {
     // 쿼리 키를 기반으로 기본 옵션을 적용
     const options = this.defaultQueryOptions({ queryKey });
 
     // 쿼리 해시로 캐시에서 데이터 접근
-    return this.queryCache.get(options.queryHash)?.state.data;
+    const queryHash = options.queryHash as string;
+    const query = this.queryCache.get<TData>(queryHash);
+    return query?.state.data;
   }
 
   /**
@@ -155,12 +200,13 @@ class QueryClient {
    * // posts/1의 상태 확인 (로딩 중인지, 에러가 있는지 등)
    * const { status, data, error } = queryClient.getQueryState(['posts', 1]);
    */
-  getQueryState(queryKey: any) {
+  getQueryState<TData = unknown>(queryKey: unknown[]) {
     // 쿼리 키를 기반으로 기본 옵션을 적용
     const options = this.defaultQueryOptions({ queryKey });
 
     // 쿼리 해시로 캐시에서 전체 상태 정보 접근
-    return this.queryCache.get(options.queryHash)?.state;
+    const queryHash = options.queryHash as string;
+    return this.queryCache.get<TData>(queryHash)?.state;
   }
 }
 
