@@ -17,7 +17,9 @@ export type QueryCacheEvent<TData = unknown> =
 /**
  * 쿼리 캐시 리스너 타입
  */
-export type QueryCacheListener<TData = unknown> = (event: QueryCacheEvent<TData>) => void;
+export type QueryCacheListener<TData = unknown> = (
+  event: QueryCacheEvent<TData>
+) => void;
 
 /**
  * 쿼리 옵션 타입
