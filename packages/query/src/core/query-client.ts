@@ -96,7 +96,7 @@ class QueryClient {
     }
 
     const queryKey = options.queryKey as unknown[] | undefined;
-    
+
     const defaultedOptions: DefaultedQueryOptions = {
       ...(this.defaultOptions.queries || {}),
       ...this.getQueryDefaults(queryKey),

@@ -6,8 +6,8 @@ export interface QueryState<TData = unknown> {
   data: TData | undefined;
   dataUpdatedAt: number;
   error: Error | null;
-  status: 'success' | 'error' | 'pending';
-  fetchStatus: 'idle' | 'fetching' | 'paused';
+  status: "success" | "error" | "pending";
+  fetchStatus: "idle" | "fetching" | "paused";
 }
 
 // 쿼리 구성 타입 정의
@@ -43,7 +43,9 @@ export interface QueryObserver {
   onQueryUpdate: () => void;
 }
 
-function getDefaultState<TData>(options: QueryOptions<TData>): QueryState<TData> {
+function getDefaultState<TData>(
+  options: QueryOptions<TData>
+): QueryState<TData> {
   const data =
     typeof options.initialData === "function"
       ? (options.initialData as () => TData)()
@@ -67,14 +69,18 @@ function getDefaultState<TData>(options: QueryOptions<TData>): QueryState<TData>
 }
 
 // 쿼리 액션 타입 정의
-type QueryAction<TData = unknown> = 
-  | { type: 'failed'; error: Error }
-  | { type: 'pause' }
-  | { type: 'continue' }
-  | { type: 'fetch' }
-  | { type: 'success'; data: TData; dataUpdatedAt?: number }
-  | { type: 'error'; error: Error }
-  | { type: 'setState'; state: Partial<QueryState<TData>>; setStateOptions?: Record<string, unknown> };
+type QueryAction<TData = unknown> =
+  | { type: "failed"; error: Error }
+  | { type: "pause" }
+  | { type: "continue" }
+  | { type: "fetch" }
+  | { type: "success"; data: TData; dataUpdatedAt?: number }
+  | { type: "error"; error: Error }
+  | {
+      type: "setState";
+      state: Partial<QueryState<TData>>;
+      setStateOptions?: Record<string, unknown>;
+    };
 
 class Query<TData = unknown> {
   private gcTime: number;
@@ -100,7 +106,7 @@ class Query<TData = unknown> {
     this.queryKey = config.queryKey;
     this.queryHash = config.queryHash;
     this.promise = null;
-    
+
     this.setOptions(config.options);
     this.initialState = getDefaultState(this.options);
     this.state = config.state ?? this.initialState;
@@ -206,7 +212,10 @@ class Query<TData = unknown> {
     this.cache.notify({ query: this, type: "updated", action });
   }
 
-  setState(state: Partial<QueryState<TData>>, setStateOptions?: Record<string, unknown>): void {
+  setState(
+    state: Partial<QueryState<TData>>,
+    setStateOptions?: Record<string, unknown>
+  ): void {
     this.dispatch({ type: "setState", state, setStateOptions });
   }
 
@@ -230,7 +239,8 @@ class Query<TData = unknown> {
           this.dispatch({ type: "success", data, dataUpdatedAt: Date.now() });
           return data;
         } catch (error) {
-          const typedError = error instanceof Error ? error : new Error(String(error));
+          const typedError =
+            error instanceof Error ? error : new Error(String(error));
           this.dispatch({ type: "error", error: typedError });
           throw error;
         } finally {
@@ -241,14 +251,14 @@ class Query<TData = unknown> {
 
     return this.promise;
   }
-  
+
   // 옵저버 추가 메서드
   addObserver(observer: QueryObserver): void {
     if (!this.observers.includes(observer)) {
       this.observers.push(observer);
     }
   }
-  
+
   // 옵저버 제거 메서드
   removeObserver(observer: QueryObserver): void {
     this.observers = this.observers.filter((x) => x !== observer);
@@ -256,7 +266,7 @@ class Query<TData = unknown> {
       this.optionalRemove();
     }
   }
-  
+
   // 옵저버 구독 메서드
   subscribe(observer: QueryObserver): () => void {
     this.addObserver(observer);

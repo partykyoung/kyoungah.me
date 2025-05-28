@@ -6,7 +6,7 @@
  * @param b 비교할 두 번째 값입니다. (이 값의 속성들이 a에 있는지 확인합니다.)
  * @returns 일치하면 true, 아니면 false를 반환합니다.
  */
-export function partialMatchKey(a: any, b: any): boolean {
+export function partialMatchKey(a: unknown, b: unknown): boolean {
   // a와 b가 완전히 같으면 바로 true를 반환합니다.
   if (a === b) {
     return true;
@@ -20,7 +20,12 @@ export function partialMatchKey(a: any, b: any): boolean {
   // a와 b가 둘 다 객체인 경우 재귀적으로 내부 속성을 비교합니다.
   if (a && b && typeof a === "object" && typeof b === "object") {
     // b의 모든 키가 a에도 존재하고 그 값도 일치하는지 확인합니다.
-    return Object.keys(b).every((key) => partialMatchKey(a[key], b[key]));
+    return Object.keys(b as Record<string, unknown>).every((key) =>
+      partialMatchKey(
+        (a as Record<string, unknown>)[key],
+        (b as Record<string, unknown>)[key]
+      )
+    );
   }
 
   // 위 조건에 해당되지 않으면 일치하지 않는 것으로 판단하여 false를 반환합니다.
@@ -32,7 +37,7 @@ export function partialMatchKey(a: any, b: any): boolean {
  * @param o 확인할 값입니다.
  * @returns Object 프로토타입을 가진 경우 true, 아니면 false를 반환합니다.
  */
-function hasObjectPrototype(o: any): boolean {
+function hasObjectPrototype(o: unknown): boolean {
   return Object.prototype.toString.call(o) === "[object Object]";
 }
 
@@ -41,19 +46,22 @@ function hasObjectPrototype(o: any): boolean {
  * @param o 확인할 객체입니다.
  * @returns 일반 객체이면 true, 아니면 false를 반환합니다.
  */
-export function isPlainObject(o: any) {
+export function isPlainObject(o: unknown): boolean {
   if (hasObjectPrototype(o) === false) {
     return false;
   }
 
+  // Record<string, unknown> 타입으로 변환하여 작업
+  const obj = o as Record<string, unknown>;
+
   // 생성자가 없는 경우 일반 객체로 간주합니다.
-  const ctor = o.constructor;
+  const ctor = obj.constructor;
   if (ctor === undefined) {
     return true;
   }
 
   // 프로토타입이 수정된 경우 일반 객체가 아닙니다.
-  const prot = ctor.prototype;
+  const prot = (ctor as { prototype: unknown }).prototype;
   if (!hasObjectPrototype(prot)) {
     return false;
   }
@@ -78,15 +86,18 @@ export function isPlainObject(o: any) {
  * @param queryKey 해시할 쿼리 키입니다.
  * @returns 해시된 문자열을 반환합니다.
  */
-export function hashKey(queryKey: any): string {
+export function hashKey(queryKey: unknown): string {
   return JSON.stringify(queryKey, (_, val) =>
     isPlainObject(val)
-      ? Object.keys(val)
+      ? Object.keys(val as Record<string, unknown>)
           .sort()
-          .reduce((result, key) => {
-            result[key] = val[key];
-            return result;
-          }, {} as any)
+          .reduce(
+            (result, key) => {
+              result[key] = (val as Record<string, unknown>)[key];
+              return result;
+            },
+            {} as Record<string, unknown>
+          )
       : val
   );
 }
@@ -98,9 +109,12 @@ export function hashKey(queryKey: any): string {
  * @param options 해시 옵션입니다. queryKeyHashFn이 포함될 수 있습니다.
  * @returns 해시된 문자열을 반환합니다.
  */
-export function hashQueryKeyByOptions(queryKey: any, options?: any): string {
-  const hashFn = options?.queryKeyHashFn || hashKey;
-
+export function hashQueryKeyByOptions(
+  queryKey: unknown,
+  options?: Record<string, unknown>
+): string {
+  const hashFn =
+    (options?.queryKeyHashFn as (key: unknown) => string) || hashKey;
   return hashFn(queryKey);
 }
 
