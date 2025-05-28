@@ -8,6 +8,7 @@ import "../src/app/styles/global.css.ts";
 
 import { Header } from "../src/widgets/header/header.ui";
 import { Footer } from "../src/widgets/footer/footer.ui";
+import { QueryClientProvider } from "@/app/providers/query-client-provider";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
@@ -58,9 +59,11 @@ export default function RootLayout({
       className={`${roboto.variable} ${pretendard.variable} ${firaCode.variable}`}
     >
       <body>
-        <Header />
-        <div className="container">{children}</div>
-        <Footer />
+        <QueryClientProvider>
+          <Header />
+          <div className="container">{children}</div>
+          <Footer />
+        </QueryClientProvider>
       </body>
     </html>
   );

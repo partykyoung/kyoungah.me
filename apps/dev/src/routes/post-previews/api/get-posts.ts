@@ -10,7 +10,7 @@ type Posts = {
 };
 
 function getPosts() {
-  return apiInstance<Posts>("/jsons/page1.json");
+  return apiInstance<Posts>("/jsons/page-1.json");
 }
 
 export { getPosts };

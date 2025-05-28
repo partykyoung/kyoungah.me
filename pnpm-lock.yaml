@@ -29,6 +29,9 @@ importers:
       '@expressive-code/plugin-line-numbers':
         specifier: ^0.40.2
         version: 0.40.2
+      '@kyoungah.me/query':
+        specifier: workspace:*
+        version: link:../../packages/query
       '@kyoungah.me/ui':
         specifier: workspace:*
         version: link:../../packages/ui

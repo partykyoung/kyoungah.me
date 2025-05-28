@@ -64,17 +64,23 @@ function useBaseQuery<TData = unknown>(
 
   // 구독 함수
   const subscribe = useCallback(
-    (onStoreChange: () => void) => observer.subscribe(onStoreChange),
+    (onStoreChange: () => void) => {
+      const unsubscribe = observer.subscribe(onStoreChange);
+      return unsubscribe;
+    },
     [observer]
   );
 
   // 현재 상태 가져오기
-  const getSnapshot = useCallback(() => observer.getResult(), [observer]);
+  const getSnapshot = useCallback(() => {
+    return observer.getResult();
+  }, [observer]);
 
-  // 외부 스토어와 동기화
-  useSyncExternalStore(subscribe, getSnapshot);
+  // 외부 스토어와 동기화 (getServerSnapshot 추가)
+  // 서버 스냅샷은 클라이언트 스냅샷과 동일한 초기 상태를 사용
+  useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
 
-  // 쿼리 상태 가져오기
+  // Observer의 getResult 메서드를 호출하여 현재 상태를 가져옴
   const state = observer.getResult();
 
   // 결과 반환 (편의 헬퍼 속성 포함)
