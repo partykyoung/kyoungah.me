@@ -76,13 +76,7 @@ class QueryObserver<TData = unknown> {
   constructor(client: QueryClientType, options?: QueryOptionsType<TData>) {
     this.client = client;
     this.options = options || ({} as QueryOptionsType<TData>);
-    this.bindMethods();
-  }
 
-  /**
-   * 메서드의 바인딩을 보장하기 위한 헬퍼 함수
-   */
-  private bindMethods(): void {
     this.subscribe = this.subscribe.bind(this);
     this.getQuery = this.getQuery.bind(this);
     this.getResult = this.getResult.bind(this);
