@@ -1,7 +1,8 @@
-import { useQuery } from "./src/react/use-query.js";
+import { QueryClient } from "./src/core/index.js";
 import {
+  useQuery,
   useQueryClient,
   QueryClientContextProvider,
-} from "./src/react/query-client-context.jsx";
+} from "./src/react/index.js";
 
-export { useQuery, useQueryClient, QueryClientContextProvider };
+export { useQuery, useQueryClient, QueryClientContextProvider, QueryClient };

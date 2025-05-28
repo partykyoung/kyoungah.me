@@ -17,7 +17,6 @@ export default defineConfig({
     options.target = ["es2020"]; // 지원 타겟 (모던 브라우저 기준)
   },
   treeshake: true, // 사용되지 않는 코드 제거
-  minify: false, // 디버깅을 위해 압축 비활성화
-  shims: true, // 일부 node 기능 shim
+  splitting: true, // 코드 스플리팅 활성화
   onSuccess: "echo 'Build completed successfully!'", // 빌드 성공 시 메시지 출력
 });
