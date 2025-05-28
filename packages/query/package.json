@@ -3,6 +3,21 @@
   "type": "module",
   "version": "1.0.0",
   "description": "",
+  "main": "./build/index.js",
+  "exports": {
+    ".": {
+      "import": "./build/index.js",
+      "types": "./build/index.d.ts"
+    },
+    "./core": {
+      "import": "./build/core.js",
+      "types": "./build/core.d.ts"
+    },
+    "./react": {
+      "import": "./build/react.js",
+      "types": "./build/react.d.ts"
+    }
+  },
   "bin": {
     "script": "./build/index.js"
   },
