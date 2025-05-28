@@ -118,8 +118,26 @@ export function hashQueryKeyByOptions(
   return hashFn(queryKey);
 }
 
-export const skipToken = Symbol();
-
 export function isValidTimeout(value: unknown): value is number {
   return typeof value === "number" && value >= 0 && value !== Infinity;
 }
+
+export function timeUntilStale(updatedAt: number, staleTime?: number): number {
+  return Math.max(updatedAt + (staleTime || 0) - Date.now(), 0);
+}
+
+export function resolveStaleTime(
+  staleTime: number | undefined | ((query: unknown) => number | undefined),
+  query: unknown
+): number | undefined {
+  return typeof staleTime === "function" ? staleTime(query) : staleTime;
+}
+
+export function resolveEnabled(
+  enabled: boolean | undefined | ((query: unknown) => boolean | undefined),
+  query: unknown
+): boolean | undefined {
+  return typeof enabled === "function" ? enabled(query) : enabled;
+}
+
+export const skipToken = Symbol();

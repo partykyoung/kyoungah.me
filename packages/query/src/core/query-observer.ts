@@ -2,6 +2,7 @@
  * QueryObserver 모듈은 쿼리의 상태를 관찰하고 변경사항을 구독자에게 알리는 역할을 담당합니다.
  */
 import type { QueryState, QueryOptions as BaseQueryOptions } from "./query.js";
+import { resolveEnabled, resolveStaleTime } from "./utils.js";
 
 /**
  * QueryClient 타입 정의
@@ -38,6 +39,7 @@ interface Query<TData = unknown> {
   fetch: () => Promise<TData>;
   addObserver: (observer: QueryObserver<TData>) => void;
   removeObserver: (observer: QueryObserver<TData>) => void;
+  isStaleByTime: (staleTime?: number) => boolean;
 }
 
 /**
@@ -55,6 +57,16 @@ type QueryOptionsType<TData = unknown> = BaseQueryOptions<TData> & {
  * 쿼리 결과가 변경되었을 때 호출되는 콜백 함수
  */
 type TListener<TData = unknown> = (result: QueryState<TData>) => void;
+
+function isStale<TData = unknown>(
+  query: Query<TData>,
+  options: QueryOptionsType<TData>
+): boolean {
+  return (
+    resolveEnabled(options.enabled, query) !== false &&
+    query.isStaleByTime(resolveStaleTime(options.staleTime, query))
+  );
+}
 
 /**
  * QueryObserver 클래스
@@ -160,12 +172,9 @@ class QueryObserver<TData = unknown> {
     const query = this.getQuery();
 
     // 쿼리의 데이터가 오래되었는지 확인
-    const { dataUpdatedAt } = query.state;
-    const { staleTime = 0 } = this.options;
 
     // 마지막 업데이트 시간이 없거나 staleTime보다 오래되었으면 다시 가져옴
-    const needsToFetch =
-      !dataUpdatedAt || Date.now() - dataUpdatedAt > staleTime;
+    const needsToFetch = isStale(query, this.options);
 
     if (needsToFetch) {
       query.fetch();

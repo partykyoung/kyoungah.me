@@ -1,4 +1,4 @@
-import { isValidTimeout } from "./utils.js";
+import { isValidTimeout, timeUntilStale } from "./utils.js";
 import type { QueryCache } from "./query-cache.js";
 
 // 쿼리 상태 타입 정의
@@ -273,6 +273,13 @@ class Query<TData = unknown> {
     return () => {
       this.removeObserver(observer);
     };
+  }
+
+  isStaleByTime(staleTime = 0): boolean {
+    return (
+      this.state.data === undefined ||
+      !timeUntilStale(this.state.dataUpdatedAt, staleTime)
+    );
   }
 }
 
