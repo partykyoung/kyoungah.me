@@ -3,7 +3,9 @@ import { resolve } from "path";
 
 export default defineConfig({
   entry: {
-    index: resolve(__dirname, "index.ts"), // 진입점
+    index: resolve(__dirname, "index.ts"), // 메인 진입점
+    core: resolve(__dirname, "src/core/index.ts"), // core 모듈 진입점
+    react: resolve(__dirname, "src/react/index.ts"), // react 모듈 진입점
   },
   format: ["esm"], // ESModule 형식으로 번들
   dts: true, // TypeScript 타입 정의 파일 생성
@@ -15,6 +17,7 @@ export default defineConfig({
     options.jsx = "automatic"; // React 17+ JSX 방식 사용
     options.platform = "neutral"; // node/browser 둘 다 호환
     options.target = ["es2020"]; // 지원 타겟 (모던 브라우저 기준)
+    options.legalComments = "none"; // 법적 주석 제거
   },
   treeshake: true, // 사용되지 않는 코드 제거
   splitting: true, // 코드 스플리팅 활성화
