@@ -111,22 +111,6 @@ class QueryClient {
       );
     }
 
-    // 의존적인 기본값 설정
-    if (defaultedOptions.refetchOnReconnect === undefined) {
-      // 네트워크 모드가 'always'가 아닐 경우에만 재연결 시 데이터 갱신
-      defaultedOptions.refetchOnReconnect =
-        defaultedOptions.networkMode !== "always";
-    }
-    if (defaultedOptions.throwOnError === undefined) {
-      // suspense 모드가 활성화된 경우 자동으로 에러 발생 시 throw 설정
-      defaultedOptions.throwOnError = !!defaultedOptions.suspense;
-    }
-
-    if (!defaultedOptions.networkMode && defaultedOptions.persister) {
-      // 지속성(persistence) 기능이 사용될 경우 기본 네트워크 모드를 'offlineFirst'로 설정
-      defaultedOptions.networkMode = "offlineFirst";
-    }
-
     if (defaultedOptions.queryFn === skipToken) {
       // skipToken이 사용된 경우 쿼리 비활성화
       defaultedOptions.enabled = false;
