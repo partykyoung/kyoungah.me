@@ -32,7 +32,8 @@ class QueryCache {
 
   add = <TData = unknown>(query: Query<TData>) => {
     if (!this.queries.has(query.queryHash)) {
-      this.queries.set(query.queryHash, query as Query<unknown>);
+      // 타입 단언을 안전하게 변경
+      this.queries.set(query.queryHash, query as unknown as Query<unknown>);
 
       this.notify();
     }
@@ -55,7 +56,7 @@ class QueryCache {
     const queryHash =
       options.queryHash ?? hashQueryKeyByOptions(queryKey, options);
 
-    let query = this.get(queryHash);
+    let query = this.get(queryHash) as Query<TData> | undefined;
 
     if (query === undefined) {
       query = new Query<TData>({
@@ -72,7 +73,7 @@ class QueryCache {
       this.add(query);
     }
 
-    return query;
+    return query as Query<TData>;
   };
 
   remove<TData = unknown>(query: Query<TData>): void {

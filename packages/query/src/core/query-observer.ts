@@ -41,9 +41,6 @@ type QueryOptionsType<TData = unknown> = BaseQueryOptions<TData> & {
   _defaulted?: boolean;
 };
 
-// 리스너 콜백 타입
-type TListener<TData = unknown> = (result: QueryState<TData>) => void;
-
 function isStale<TData = unknown>(
   query: Query<TData>,
   options: QueryOptionsType<TData>
@@ -54,13 +51,13 @@ function isStale<TData = unknown>(
   );
 }
 
+function noop() {}
+
 // 핵심 옵저버 클래스
 class QueryObserver<TData = unknown> {
   private client: QueryClientType;
   private options: QueryOptionsType<TData>;
-  private currentQuery: Query<TData> | null = null; // 현재 관찰 중인 쿼리
-  private currentResult: QueryState<TData> | null = null; // 마지막으로 계산된 쿼리 결과
-  protected listeners = new Set<TListener<TData>>(); // 상태 변화를 구독하는 리스너 집합
+  private notifyCallback = noop;
 
   /**
    * QueryObserver 생성자
@@ -73,21 +70,35 @@ class QueryObserver<TData = unknown> {
   }
 
   /**
+   * 쿼리 업데이트 시 호출되는 메서드
+   * query.ts에서 사용하기 위한 필수 구현
+   */
+  onQueryUpdate(): void {
+    this.notify();
+  }
+
+  /**
+   * 상태 변경 시 등록된 콜백 함수를 호출하는 메서드
+   * query.ts에서 직접 호출하는 public 메서드
+   */
+  notify(): void {
+    this.notifyCallback();
+  }
+
+  /**
    * 현재 쿼리 인스턴스를 가져옴
    * 클라이언트의 쿼리 캐시를 통해 쿼리를 생성하거나 기존 쿼리를 반환
    * @returns 쿼리 인스턴스
    */
   getQuery = (): Query<TData> => {
-    // 옵션에 defaultQueryOptions를 적용하여 완전한 옵션 객체 생성
     const defaultedOptions = this.client.defaultQueryOptions<TData>(
       this.options
     );
 
-    // 쿼리 캐시에서 쿼리 인스턴스 생성 또는 가져오기
     const query = this.client
       .getQueryCache()
       .build<TData>(this.client, defaultedOptions);
-    this.currentQuery = query;
+
     return query;
   };
 
@@ -96,6 +107,8 @@ class QueryObserver<TData = unknown> {
   }
 
   subscribe = (callback: () => void) => {
+    this.notifyCallback = callback;
+
     const query = this.getQuery();
     const unsubscribeQuery = query.subscribe(this);
 
@@ -108,6 +121,7 @@ class QueryObserver<TData = unknown> {
 
     const unsubscribe = () => {
       unsubscribeQuery();
+      this.notifyCallback = noop;
     };
 
     return unsubscribe;

@@ -41,6 +41,7 @@ export interface QueryOptions<TData = unknown> {
 // 쿼리 옵저버 타입 정의 (간소화)
 export interface QueryObserver {
   onQueryUpdate: () => void;
+  notify: () => void;
 }
 
 function getDefaultState<TData>(
@@ -95,29 +96,32 @@ class Query<TData = unknown> {
   private client: QueryClientType;
   observers: QueryObserver[];
   private defaultOptions?: QueryOptions<TData>;
-  private promise: Promise<TData> | null;
+  private promise: Promise<TData | undefined> | null;
 
   constructor(config: QueryConfig<TData>) {
-    this.gcTime = 1000 * 60 * 5;
-    this.defaultOptions = config.defaultOptions;
-    this.observers = [];
     this.client = config.client;
     this.cache = this.client.getQueryCache();
-    this.queryKey = config.queryKey;
+    this.defaultOptions = config.defaultOptions;
+    this.gcTime = 1000 * 60 * 5;
     this.queryHash = config.queryHash;
+    this.queryKey = config.queryKey;
+    this.options = { ...this.defaultOptions, ...config.options };
+    this.initialState = getDefaultState(this.options);
+    this.state = config.state ?? this.initialState;
+    this.observers = [];
     this.promise = null;
 
     this.setOptions(config.options);
-    this.initialState = getDefaultState(this.options);
-    this.state = config.state ?? this.initialState;
     this.scheduleGc();
   }
 
-  destroy(): void {
-    this.clearGcTimeout();
-  }
+  protected optionalRemove = () => {
+    if (this.observers.length === 0 && this.state.fetchStatus === "idle") {
+      this.cache.remove(this);
+    }
+  };
 
-  protected scheduleGc(): void {
+  protected scheduleGc = () => {
     this.clearGcTimeout();
 
     if (isValidTimeout(this.gcTime)) {
@@ -125,7 +129,7 @@ class Query<TData = unknown> {
         this.optionalRemove();
       }, this.gcTime);
     }
-  }
+  };
 
   protected updateGcTime(newGcTime: number | undefined): void {
     this.gcTime = Math.max(
@@ -141,13 +145,36 @@ class Query<TData = unknown> {
     }
   }
 
-  protected optionalRemove() {
-    if (!this.observers.length && this.state.fetchStatus === "idle") {
-      this.cache.remove(this);
-    }
+  protected subscribe = (observer: QueryObserver) => {
+    this.observers.push(observer);
+    this.clearGcTimeout();
+
+    const unsubscribe = () => {
+      this.observers = this.observers.filter((d) => {
+        return d !== observer;
+      });
+
+      if (this.observers.length === 0) {
+        this.scheduleGc();
+      }
+    };
+
+    return unsubscribe;
+  };
+
+  setState(
+    state: Partial<QueryState<TData>>,
+    setStateOptions?: Record<string, unknown>
+  ): void {
+    this.dispatch({ type: "setState", state, setStateOptions });
   }
 
-  dispatch(action: QueryAction<TData>) {
+  setOptions(options?: QueryOptions<TData>) {
+    this.options = { ...this.defaultOptions, ...options };
+    this.updateGcTime(this.options.gcTime);
+  }
+
+  dispatch = (action: QueryAction<TData>) => {
     const reducer = (state: QueryState<TData>): QueryState<TData> => {
       switch (action.type) {
         case "failed":
@@ -204,29 +231,20 @@ class Query<TData = unknown> {
     };
 
     this.state = reducer(this.state);
-
     this.observers.forEach((observer: QueryObserver) => {
-      observer.onQueryUpdate();
+      observer.notify();
     });
 
-    this.cache.notify({ query: this, type: "updated", action });
-  }
+    this.cache.notify();
+  };
 
-  setState(
-    state: Partial<QueryState<TData>>,
-    setStateOptions?: Record<string, unknown>
-  ): void {
-    this.dispatch({ type: "setState", state, setStateOptions });
-  }
-
-  setOptions(options?: QueryOptions<TData>) {
-    this.options = { ...this.defaultOptions, ...options };
-    this.updateGcTime(this.options.gcTime);
-  }
-
-  fetch(): Promise<TData> {
+  fetch = (): Promise<TData | undefined> => {
     if (!this.promise) {
       this.promise = (async () => {
+        if (this.state.fetchStatus !== "idle") {
+          return this.state.data; // 이미 fetching 상태인 경우, 현재 데이터 반환
+        }
+
         this.dispatch({ type: "fetch" });
 
         try {
@@ -250,37 +268,14 @@ class Query<TData = unknown> {
     }
 
     return this.promise;
-  }
+  };
 
-  // 옵저버 추가 메서드
-  addObserver(observer: QueryObserver): void {
-    if (!this.observers.includes(observer)) {
-      this.observers.push(observer);
-    }
-  }
-
-  // 옵저버 제거 메서드
-  removeObserver(observer: QueryObserver): void {
-    this.observers = this.observers.filter((x) => x !== observer);
-    if (!this.observers.length) {
-      this.optionalRemove();
-    }
-  }
-
-  // 옵저버 구독 메서드
-  subscribe(observer: QueryObserver): () => void {
-    this.addObserver(observer);
-    return () => {
-      this.removeObserver(observer);
-    };
-  }
-
-  isStaleByTime(staleTime = 0): boolean {
+  isStaleByTime = (staleTime = 0) => {
     return (
       this.state.data === undefined ||
       !timeUntilStale(this.state.dataUpdatedAt, staleTime)
     );
-  }
+  };
 }
 
 export { Query };
