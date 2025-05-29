@@ -1,26 +1,21 @@
-import { QueryCache } from "./query-cache.js";
-
-import { hashQueryKeyByOptions, partialMatchKey } from "./utils.js";
-
 /*
+  QueryClient
   - 모든 쿼리를 관리하는 중앙 클라이언트.
   - 생성 시 QueryCache를 초기화하여 this.queryCache에 저장한다.
   - 쿼리를 생성할 때 defaultOptions를 바탕으로 쿼리 기본 동작을 구성한다.
   - getQueryData, setQueryData, invalidateQueries 등의 API를 통해 쿼리 접근 및 갱신을 제공한다.
     - 여기서는 getQueryData, getQueryState만 구현한다.
- */
+*/
 
-/**
- * 쿼리 기본 옵션 인터페이스를 정의한다.
- */
+import { QueryCache } from "./query-cache.js";
+
+import { hashQueryKeyByOptions, partialMatchKey } from "./utils.js";
+
 interface QueryDefaults {
   queryKey: unknown[];
   defaultOptions: Record<string, unknown>;
 }
 
-/**
- * QueryClient 설정 인터페이스를 정의한다.
- */
 interface QueryClientConfig {
   queryCache?: QueryCache;
   defaultOptions?: {
@@ -29,7 +24,6 @@ interface QueryClientConfig {
   };
 }
 
-// 쿼리 옵션 타입을 정의한다.
 interface DefaultedQueryOptions extends Record<string, unknown> {
   _defaulted: boolean;
   queryKey?: unknown[];

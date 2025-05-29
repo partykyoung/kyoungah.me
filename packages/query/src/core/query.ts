@@ -1,3 +1,12 @@
+/*
+  Query
+  - 단일 쿼리를 표현하는 객체.
+  - 데이터 상태(data) 와 요청 상태(status, error 등) 를 관리한다.
+  - fetch 함수와 옵션을 갖고 있으며, fetch()를 통해 비동기 데이터를 가져온다.
+  - 내부적으로 요청 deduplication (중복 요청 제거) 로직을 포함한다.
+  - 동일한 쿼리가 요청 중이면 동일한 Promise를 공유한다.
+*/
+
 import { isValidTimeout, timeUntilStale } from "./utils.js";
 import type { QueryCache } from "./query-cache.js";
 
