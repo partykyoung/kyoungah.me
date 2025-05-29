@@ -39,12 +39,21 @@ interface DefaultedQueryOptions extends Record<string, unknown> {
 
 class QueryClient {
   private queryCache: QueryCache;
-  /** 모든 쿼리에 적용될 기본 옵션을 저장한다. */
+
+  /*
+    모든 쿼리에 적용될 기본 옵션을 저장한다.
+    defaultQueryOptions 값은 QueryClient 인스턴스를 생성하는 시점에 전달할 수 있다. 
+    defaultQueryOptions 옵션을 통해 Query 객체를 생성할 때 중복되는 코드 영역을 선언하지 않아도 된다.
+  */
   private defaultOptions: {
     queries?: Record<string, unknown>;
     [key: string]: unknown;
   };
-  /** 특정 쿼리 키에 대한 기본 옵션을 저장하는 맵으로, 특정 패턴의 쿼리에 커스텀 기본값을 적용할 수 있다. */
+
+  /*
+    특정 쿼리 키에 대한 기본 옵션을 저장하는 맵. 
+    특정 패턴의 쿼리에 커스텀 기본값을 적용할 수 있다. 
+  */
   private queryDefaults: Map<string, QueryDefaults>;
 
   constructor(config: QueryClientConfig = {}) {
@@ -88,9 +97,6 @@ class QueryClient {
    *
    * @param queryKey 조회할 쿼리 키 - 해당 쿼리를 식별하는 고유한 값
    * @returns 해당 쿼리의 데이터 또는 캐시에 데이터가 없는 경우 undefined
-   * @example
-   * // posts/1에 대한 캐시된 데이터 가져오기
-   * const post = queryClient.getQueryData(['posts', 1]);
    */
   getQueryData = (queryKey: unknown[]) => {
     // 쿼리 키를 기반으로 기본 옵션을 적용한다.
@@ -140,9 +146,6 @@ class QueryClient {
    *
    * @param queryKey 조회할 쿼리 키 - 해당 쿼리를 식별하는 고유한 값
    * @returns 해당 쿼리의 전체 상태 객체 (data, error, status, fetchStatus 등)
-   * @example
-   * // posts/1의 상태 확인 (로딩 중인지, 에러가 있는지 등)
-   * const { status, data, error } = queryClient.getQueryState(['posts', 1]);
    */
   getQueryState = (queryKey: unknown[]) => {
     // 쿼리 키를 기반으로 기본 옵션을 적용한다.

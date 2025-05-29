@@ -1,6 +1,8 @@
 /* 
   QueryObserver
   - 특정 쿼리에 대한 구독자 역할.
+    - 하나의 Query를 구독한다.
+    - queryKey 값을 기반으로 구독할 Query 객체를 결정하며 Query의 상태가 변경될 때 마다 새로운 상태를 전달 받는다.
   - QueryClient와 연결되어 있으며, 필요한 쿼리를 QueryCache에서 가져온다.
   - 구독 시 Query에 옵저버로 등록되어 쿼리 상태 변경 시 콜백을 통해 알림을 받는다.
   - 여러 컴포넌트에서 동일한 key로 쿼리를 구독할 경우, 동일한 Query 인스턴스를 공유하고 각자 QueryObserver가 연결된다.
@@ -120,7 +122,11 @@ class QueryObserver<TData = unknown> {
     const query = this.getQuery();
     const unsubscribeQuery = query.subscribe(this);
 
-    // 마지막 업데이트 시간이 없거나 staleTime보다 오래되었으면 다시 가져옴
+    /* 
+      마지막 업데이트 시간이 없거나 staleTime이 지났으면 오래되었으면 다시 가져온다.
+      - fresh: 신선한 상태 -> 쿼리 데이터가 최신 상태로 유지되는 시간
+      - stale: 신선하지 않은 상태 -> 쿼리 데이터가 오래되어 다시 가져와야 하는 상태
+    */
     const needsToFetch = isStale(query, this.options);
 
     if (needsToFetch) {

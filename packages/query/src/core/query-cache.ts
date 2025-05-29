@@ -2,6 +2,7 @@
   QueryCache
   - Query 인스턴스들을 저장하고 관리하는 저장소.
   - 쿼리를 생성(build), 삭제(remove), 검색(find)할 수 있다.
+  - Query 객체의 인스턴스를 브라우저 메모리에 저장하여 캐싱을 구현한다.
   - Query 상태가 변경되었을 때 등록된 리스너들에게 알림(notification)을 전달한다.
  */
 
@@ -14,6 +15,7 @@ import {
 import { hashQueryKeyByOptions } from "./utils.js";
 
 class QueryCache {
+  // queries 변수를 사용해 메모리에 캐시 데이터를 저장한다.
   private queries: Map<string, Query<unknown>>;
   private listeners: Set<() => void>;
 
@@ -31,8 +33,7 @@ class QueryCache {
   };
 
   add = <TData = unknown>(query: Query<TData>) => {
-    if (!this.queries.has(query.queryHash)) {
-      // 타입 단언을 안전하게 변경
+    if (this.queries.has(query.queryHash) === false) {
       this.queries.set(query.queryHash, query as unknown as Query<unknown>);
 
       this.notify();
@@ -47,6 +48,13 @@ class QueryCache {
     return Array.from(this.queries.values());
   };
 
+  /**
+   * 쿼리 인스턴스를 생성하거나 기존 인스턴스를 반환한다.
+   * @param client
+   * @param options
+   * @param state
+   * @returns
+   */
   build = <TData = unknown>(
     client: QueryClientType,
     options: QueryOptions<TData>,
@@ -55,6 +63,11 @@ class QueryCache {
     const queryKey = options.queryKey || [];
     const queryHash =
       options.queryHash ?? hashQueryKeyByOptions(queryKey, options);
+
+    /*
+      만약 queries에 Query가 캐싱되어 있는 경우, 캐싱된 Query 인스턴스를 반환한다.
+      Query 인스턴스가 없는 경우, 새로운 Query 인스턴스를 생성하고 캐싱한 후 반환한다.
+    */
 
     let query = this.get(queryHash) as Query<TData> | undefined;
 
@@ -77,7 +90,6 @@ class QueryCache {
   };
 
   remove<TData = unknown>(query: Query<TData>): void {
-    // 맵에서 쿼리 조회
     const queryInMap = this.queries.get(query.queryHash);
 
     if (queryInMap) {
