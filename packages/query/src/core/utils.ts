@@ -139,5 +139,3 @@ export function resolveEnabled(
 ): boolean | undefined {
   return typeof enabled === "function" ? enabled(query) : enabled;
 }
-
-export const skipToken = Symbol();

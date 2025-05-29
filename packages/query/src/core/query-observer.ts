@@ -95,9 +95,7 @@ class QueryObserver<TData = unknown> {
     return this.getQuery().state;
   }
 
-  subscribe = (callback) => {
-    this.notify = callback;
-
+  subscribe = (callback: () => void) => {
     const query = this.getQuery();
     const unsubscribeQuery = query.subscribe(this);
 
