@@ -1,7 +1,7 @@
 /*
   Query
   - 단일 쿼리를 표현하는 객체.
-  - 데이터 상태(data) 와 요청 상태(status, error 등) 를 관리한다.
+  - 데이터 상태(data) 와 요청 상태(status, error 등)를 관리한다.
   - fetch 함수와 옵션을 갖고 있으며, fetch()를 통해 비동기 데이터를 가져온다.
   - 내부적으로 요청 deduplication (중복 요청 제거) 로직을 포함한다.
   - 동일한 쿼리가 요청 중이면 동일한 Promise를 공유한다.
@@ -93,17 +93,20 @@ type QueryAction<TData = unknown> =
     };
 
 class Query<TData = unknown> {
-  private gcTime: number;
-  private gcTimeout?: ReturnType<typeof setTimeout>;
   readonly queryKey: unknown[];
   readonly queryHash: string;
+
+  // QueryCache에서 캐싱되어 있는 Query를 제거하지 않는 시간.
+  private gcTime: number;
+  private gcTimeout?: ReturnType<typeof setTimeout>;
+
   private options!: QueryOptions<TData>; // definite assignment assertion
   state: QueryState<TData>;
 
   private initialState: QueryState<TData>;
   private cache: QueryCache;
   private client: QueryClientType;
-  observers: QueryObserver[];
+  private observers: QueryObserver[];
   private defaultOptions?: QueryOptions<TData>;
   private promise: Promise<TData | undefined> | null;
 
@@ -131,7 +134,13 @@ class Query<TData = unknown> {
   };
 
   protected scheduleGc = () => {
+    // Query에 구독이 발생될 때 마다 gcTimeout을 초기화한다.
     this.clearGcTimeout();
+
+    /*
+      Query가 생성되는 시점에 setTimeout을 설정한다.
+      gcTime timeout이 호출되면 QueryCache에게 제거를 요청한다.
+    */
 
     if (isValidTimeout(this.gcTime)) {
       this.gcTimeout = setTimeout(() => {
@@ -163,6 +172,7 @@ class Query<TData = unknown> {
         return d !== observer;
       });
 
+      // 구독이 해제될 때 구독된 구독자가 없다면 scheduleGcTimeout을 통해 gcTime timeout이 다시 할당된다.
       if (this.observers.length === 0) {
         this.scheduleGc();
       }

@@ -123,6 +123,18 @@ export function isValidTimeout(value: unknown): value is number {
 }
 
 export function timeUntilStale(updatedAt: number, staleTime?: number): number {
+  /*
+    staleTime: 캐시된 data가 신선한 상태(fresh)로 남아있는 시간.
+      - 특정 data에 대해 설정해준 staleTime이 지나게되면, 그 data는 신선하지 않은 상태(stale)로 간주된다.
+      - 특정 쿼리 키에 대한 data를 다시 fetch 해와야 하는 상황일 때,
+        - 해당하는 data가 fresh한 상태라면, API 호출 없이 캐싱된 data가 다시 사용된다.
+        - 해당하는 data가 stale한 상태라면, API 호출을 통해 신선한 data를 다시 fetch해오고, 이 data를 cache에 저장한다.
+    
+    - updatedAt + staleTime: 데이터가 stale 상태가 되는 시간 타임스탬프
+    - Date.now(): 현재 시간 타임스탬프
+    - 둘의 차이: 데이터가 stale이 되기까지 남은 시간(ms)
+    - Math.max(..., 0): 음수가 나오면(이미 stale 상태) 0을 반환
+  */
   return Math.max(updatedAt + (staleTime || 0) - Date.now(), 0);
 }
 
