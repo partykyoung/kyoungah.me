@@ -1,10 +1,10 @@
-/**
- * 쿼리 캐시 관리를 위한 파일
- * 이 파일은 쿼리 데이터를 저장하고 관리하는 기능을 제공합니다.
- *
- * 생성 시 QueryCache를 초기화하여 this.queryCache에 저장한다.
- * 쿼리를 생성할 때 defaultOptions를 바탕으로 쿼리 기본 동작을 구성한다.
+/*
+  QueryCache
+  - Query 인스턴스들을 저장하고 관리하는 저장소.
+  - 쿼리를 생성(build), 삭제(remove), 검색(find)할 수 있다.
+  - Query 상태가 변경되었을 때 등록된 리스너들에게 알림(notification)을 전달한다.
  */
+
 import {
   Query,
   type QueryClientType,

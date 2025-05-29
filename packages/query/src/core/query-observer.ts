@@ -1,7 +1,15 @@
+/* 
+  QueryObserver
+  - 특정 쿼리에 대한 구독자 역할.
+  - QueryClient와 연결되어 있으며, 필요한 쿼리를 QueryCache에서 가져온다.
+  - 구독 시 Query에 옵저버로 등록되어 쿼리 상태 변경 시 콜백을 통해 알림을 받는다.
+  - 여러 컴포넌트에서 동일한 key로 쿼리를 구독할 경우, 동일한 Query 인스턴스를 공유하고 각자 QueryObserver가 연결된다.
+    - 이미 fetch()가 진행된 경우 중복 요청 없이 캐시된 데이터를 이용하거나, 진행 중인 요청을 공유한다.
+*/
+
 import type { QueryState, QueryOptions as BaseQueryOptions } from "./query.js";
 import { resolveEnabled, resolveStaleTime } from "./utils.js";
 
-// QueryClient 타입
 type QueryClientType = {
   getQueryCache: () => {
     build: <TData = unknown>(

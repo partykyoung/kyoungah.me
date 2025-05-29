@@ -4,15 +4,14 @@ import { getPosts } from "../../api/get-posts";
 import { useQuery } from "@kyoungah.me/query";
 
 function useGetPosts() {
-  const [posts, setPosts] = React.useState<Post[]>([]);
-  useQuery({
+  const { data } = useQuery({
     queryKey: ["posts"],
     queryFn: getPosts,
-    enabled: true,
+    enabled: false,
     staleTime: Infinity,
   });
 
-  return { posts };
+  return { posts: [] };
 }
 
 export { useGetPosts };
