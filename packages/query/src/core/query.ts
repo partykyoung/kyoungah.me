@@ -7,7 +7,7 @@
   - 동일한 쿼리가 요청 중이면 동일한 Promise를 공유한다.
 */
 
-import { isValidTimeout, timeUntilStale } from "./utils.js";
+import { isValidTimeout, resolveEnabled, timeUntilStale } from "./utils.js";
 import type { QueryCache } from "./query-cache.js";
 
 // 쿼리 상태 타입 정의
@@ -51,6 +51,10 @@ export interface QueryOptions<TData = unknown> {
 export interface QueryObserver {
   onQueryUpdate: () => void;
   notify: () => void;
+  options: {
+    enabled?: boolean | (() => boolean);
+    [key: string]: unknown;
+  };
 }
 
 function getDefaultState<TData>(
@@ -287,6 +291,12 @@ class Query<TData = unknown> {
     }
 
     return this.promise;
+  };
+
+  isActive = () => {
+    return this.observers.some(
+      (observer) => resolveEnabled(observer.options.enabled, this) !== false
+    );
   };
 
   isStaleByTime = (staleTime = 0) => {

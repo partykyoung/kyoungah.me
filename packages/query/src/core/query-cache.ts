@@ -12,7 +12,11 @@ import {
   type QueryOptions,
   type QueryState,
 } from "./query.js";
-import { hashQueryKeyByOptions } from "./utils.js";
+import {
+  hashQueryKeyByOptions,
+  matchQuery,
+  type QueryFilters,
+} from "./utils.js";
 
 class QueryCache {
   // queries 변수를 사용해 메모리에 캐시 데이터를 저장한다.
@@ -46,6 +50,26 @@ class QueryCache {
 
   getAll = () => {
     return Array.from(this.queries.values());
+  };
+
+  find = (filters: QueryFilters) => {
+    const defaultedFilters = { exact: true, ...filters };
+
+    return this.getAll().find((query) =>
+      matchQuery(
+        defaultedFilters,
+        query as unknown as import("./utils.js").Query
+      )
+    );
+  };
+
+  findAll = (filters: QueryFilters = {}) => {
+    const queries = this.getAll();
+    return Object.keys(filters).length > 0
+      ? queries.filter((query) =>
+          matchQuery(filters, query as unknown as import("./utils.js").Query)
+        )
+      : queries;
   };
 
   /**

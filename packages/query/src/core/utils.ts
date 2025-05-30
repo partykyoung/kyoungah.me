@@ -1,4 +1,83 @@
 /**
+ * 쿼리 필터링을 위한 옵션 타입입니다.
+ */
+export interface QueryFilters {
+  /**
+   * 쿼리 타입 필터입니다. 'all', 'active', 'inactive' 중 하나를 지정할 수 있습니다.
+   * - 'all': 모든 쿼리를 대상으로 합니다. (기본값)
+   * - 'active': 활성화된 쿼리만 대상으로 합니다.
+   * - 'inactive': 비활성화된 쿼리만 대상으로 합니다.
+   */
+  type?: "all" | "active" | "inactive";
+
+  /**
+   * true일 경우 queryKey가 정확히 일치하는지 확인합니다.
+   * false일 경우 partialMatchKey를 사용하여 부분 일치하는지 확인합니다.
+   */
+  exact?: boolean;
+
+  /**
+   * 쿼리의 fetch 상태로 필터링합니다.
+   */
+  fetchStatus?: string;
+
+  /**
+   * 사용자 정의 조건으로 필터링하는 함수입니다.
+   */
+  predicate?: (query: Query) => boolean;
+
+  /**
+   * 쿼리 키로 필터링합니다.
+   */
+  queryKey?: unknown;
+
+  /**
+   * 쿼리의 stale 상태로 필터링합니다.
+   */
+  stale?: boolean;
+}
+
+/**
+ * 쿼리 객체 인터페이스입니다.
+ */
+export interface Query {
+  /**
+   * 쿼리 키
+   */
+  queryKey: unknown;
+
+  /**
+   * 쿼리 해시값
+   */
+  queryHash: string;
+
+  /**
+   * 쿼리 옵션
+   */
+  options: Record<string, unknown>;
+
+  /**
+   * 쿼리의 현재 상태
+   */
+  state: {
+    /**
+     * 쿼리의 fetch 상태
+     */
+    fetchStatus: string;
+  };
+
+  /**
+   * 쿼리가 활성화되었는지 확인하는 함수
+   */
+  isActive(): boolean;
+
+  /**
+   * 쿼리가 stale 상태인지 확인하는 함수
+   */
+  isStale(): boolean;
+}
+
+/**
  * 두 값이 부분적으로 일치하는지 확인해주는 함수입니다.
  * a에 b의 모든 속성이 일치하면 true를 반환합니다.
  * 재귀적으로 객체의 모든 속성을 비교하여 확인하는 함수입니다.
@@ -150,4 +229,56 @@ export function resolveEnabled(
   query: unknown
 ): boolean | undefined {
   return typeof enabled === "function" ? enabled(query) : enabled;
+}
+
+/**
+ * 필터 조건에 쿼리가 일치하는지 확인하는 함수입니다.
+ * @param filters 필터링 옵션입니다.
+ * @param query 확인할 쿼리 객체입니다.
+ * @returns 필터 조건에 일치하면 true, 아니면 false를 반환합니다.
+ */
+export function matchQuery(filters: QueryFilters, query: Query): boolean {
+  const {
+    type = "all",
+    exact,
+    fetchStatus,
+    predicate,
+    queryKey,
+    stale,
+  } = filters;
+
+  if (queryKey) {
+    if (exact) {
+      if (query.queryHash !== hashQueryKeyByOptions(queryKey, query.options)) {
+        return false;
+      }
+    } else if (partialMatchKey(query.queryKey, queryKey) === false) {
+      return false;
+    }
+  }
+
+  if (type !== "all") {
+    const isActive = query.isActive();
+
+    if (type === "active" && !isActive) {
+      return false;
+    }
+    if (type === "inactive" && isActive) {
+      return false;
+    }
+  }
+
+  if (typeof stale === "boolean" && query.isStale() !== stale) {
+    return false;
+  }
+
+  if (fetchStatus && fetchStatus !== query.state.fetchStatus) {
+    return false;
+  }
+
+  if (predicate && !predicate(query)) {
+    return false;
+  }
+
+  return true;
 }

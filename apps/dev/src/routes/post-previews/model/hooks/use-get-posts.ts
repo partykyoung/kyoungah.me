@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import type { Post } from "../types/post";
 import { getPosts } from "../../api/get-posts";
-import { useQuery } from "@kyoungah.me/query";
+import { useQuery, useQueryClient } from "@kyoungah.me/query";
 
 function useGetPosts() {
+  const [page, setPage] = useState<number | null>(null);
+  const queryClient = useQueryClient();
   const { data } = useQuery({
-    queryKey: ["posts"],
+    queryKey: ["posts", page],
     queryFn: getPosts,
-    enabled: false,
-    staleTime: Infinity,
+    enabled: page !== null,
   });
+
+  useEffect(() => {
+    const postsCache = queryClient.getQueriesData({
+      type: "active",
+      queryKey: ["posts"],
+    });
+
+    setPage(postsCache.length + 1);
+  }, []);
 
   return { posts: [] };
 }
