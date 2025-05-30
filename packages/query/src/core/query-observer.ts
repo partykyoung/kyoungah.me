@@ -9,8 +9,12 @@
     - 이미 fetch()가 진행된 경우 중복 요청 없이 캐시된 데이터를 이용하거나, 진행 중인 요청을 공유한다.
 */
 
-import type { QueryState, QueryOptions as BaseQueryOptions } from "./query.js";
-import { resolveEnabled, resolveStaleTime } from "./utils.js";
+import type { QueryOptions as BaseQueryOptions, Query } from "./query.js";
+import {
+  resolveEnabled,
+  resolveStaleTime,
+  shallowEqualObjects,
+} from "./utils.js";
 
 type QueryClientType = {
   getQueryCache: () => {
@@ -19,30 +23,12 @@ type QueryClientType = {
       options: QueryOptionsType<TData>
     ) => Query<TData>;
     remove: <TData = unknown>(query: Query<TData>) => void;
-    notify: <TData = unknown>(event: {
-      query: Query<TData>;
-      type: string;
-      action?: unknown;
-    }) => void;
+    notify: () => void;
   };
   defaultQueryOptions: <TData = unknown>(
     options: QueryOptionsType<TData>
   ) => QueryOptionsType<TData>;
 };
-
-// Query 인터페이스
-interface Query<TData = unknown> {
-  state: QueryState<TData>;
-  queryKey: unknown;
-  queryHash: string;
-  options: QueryOptionsType<TData>;
-  observers: QueryObserver<TData>[];
-  subscribe: (observer: QueryObserver<TData>) => () => void;
-  fetch: () => Promise<TData>;
-  addObserver: (observer: QueryObserver<TData>) => void;
-  removeObserver: (observer: QueryObserver<TData>) => void;
-  isStaleByTime: (staleTime?: number) => boolean;
-}
 
 // 옵션 타입
 type QueryOptionsType<TData = unknown> = BaseQueryOptions<TData> & {
@@ -61,10 +47,25 @@ function isStale<TData = unknown>(
   );
 }
 
+function shouldFetchOptionally(
+  query: any,
+  prevQuery: any,
+  options: any,
+  prevOptions: any
+): boolean {
+  return (
+    (query !== prevQuery ||
+      resolveEnabled(prevOptions.enabled, query) === false) &&
+    (!options.suspense || query.state.status !== "error") &&
+    isStale(query, options)
+  );
+}
+
 function noop() {}
 
 // 핵심 옵저버 클래스
 class QueryObserver<TData = unknown> {
+  private currentQuery: Query<TData>;
   private client: QueryClientType;
   private options: QueryOptionsType<TData>;
   private notifyCallback = noop;
@@ -78,6 +79,47 @@ class QueryObserver<TData = unknown> {
     this.client = client;
     this.options = options ?? ({} as QueryOptionsType<TData>);
   }
+
+  updateQuery = () => {
+    const query = this.client.getQueryCache().build(this.client, this.options);
+
+    if (query === this.currentQuery) {
+      return;
+    }
+
+    this.currentQuery = query;
+  };
+
+  setOptions = (options: QueryOptionsType<TData>) => {
+    const prevOptions = this.options;
+    const prevQuery = this.currentQuery;
+
+    this.options = this.client.defaultQueryOptions(options);
+
+    this.updateQuery();
+    this.currentQuery.setOptions(this.options);
+
+    if (
+      prevOptions._defaulted &&
+      !shallowEqualObjects(this.options, prevOptions)
+    ) {
+      this.client.getQueryCache().notify();
+    }
+
+    // Fetch if there are subscribers
+    if (
+      shouldFetchOptionally(
+        this.currentQuery,
+        prevQuery,
+        this.options,
+        prevOptions
+      )
+    ) {
+      this.currentQuery.fetch();
+    }
+
+    this.onQueryUpdate();
+  };
 
   /**
    * 쿼리 업데이트 시 호출되는 메서드
