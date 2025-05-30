@@ -2,15 +2,15 @@
   "servers": {
     "Framelink Figma MCP": {
       "command": "npx",
-      "args": [
-        "-y",
-        "figma-developer-mcp",
-        "--figma-api-key=FIGMA_API_KEY",
-        "--stdio"
-      ],
-      "env": {
-        "FIGMA_API_KEY": "${env:FIGMA_API_KEY}"
-      }
+      "args": ["-y", "figma-developer-mcp", "--stdio"]
     }
-  }
+  },
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "API KEY",
+      "description": "Enter your Figma API key",
+      "password": true
+    }
+  ]
 }
