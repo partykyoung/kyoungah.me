@@ -1,17 +1,20 @@
 "use client";
 
-import { useGetTags } from "../../model/hooks/use-get-tags";
+import { Tags, Tag } from "@kyoungah.me/ui/build/components/tags";
 
-function Tags() {
+import { useGetTags } from "../../model/hooks/use-get-tags";
+import { root } from "./tags.css";
+
+function Tagsd() {
   const { tags } = useGetTags();
 
   return (
-    <ul>
+    <Tags className={root}>
       {tags.map((tag) => (
-        <li key={tag}>{tag}</li>
+        <Tag key={tag}>{tag}</Tag>
       ))}
-    </ul>
+    </Tags>
   );
 }
 
-export { Tags };
+export { Tagsd as Tags };

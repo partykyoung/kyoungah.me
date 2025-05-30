@@ -1,11 +1,21 @@
 import { globalStyle } from "@vanilla-extract/css";
 
 globalStyle("html, body", {
-  fontFamily: `var(--font-roboto), var(--font-pretendard), var(--font-fira-code), var(--default-font-family)`,
+  fontFamily: `var(--font-noto-sans-kr), var(--font-roboto), 'Noto Sans KR', 'Roboto', var(--font-fira-code), var(--default-font-family)`,
+});
+
+// 한글 폰트 설정 (한국어 텍스트에 Noto Sans KR 적용)
+globalStyle(":lang(ko), :lang(ko) *", {
+  fontFamily: `var(--font-noto-sans-kr), 'Noto Sans KR', var(--default-font-family)`,
+});
+
+// 영문 폰트 설정 (영어 텍스트에 Roboto 적용)
+globalStyle(":lang(en), :lang(en) *", {
+  fontFamily: `var(--font-roboto), 'Roboto', var(--default-font-family)`,
 });
 
 globalStyle("code, pre", {
-  fontFamily: "Fira Code",
+  fontFamily: `var(--font-fira-code), 'Fira Code', monospace`,
 });
 
 globalStyle(":root", {

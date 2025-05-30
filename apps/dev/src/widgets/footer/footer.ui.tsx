@@ -5,7 +5,7 @@ import { footerLink, footerRoot } from "./footer.ui.css";
 function Footer() {
   return (
     <footer className={footerRoot}>
-      <span>Powered by Gatsby, Hosted by GitHub Pages.</span>
+      <span>Powered by Next.js, Hosted by GitHub Pages.</span>
       <span>
         ©
         <a
