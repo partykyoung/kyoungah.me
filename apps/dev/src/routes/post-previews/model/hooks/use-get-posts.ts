@@ -21,7 +21,7 @@ function useGetPosts() {
     setPage(postsCache.length > 0 ? postsCache.length : 1);
   }, []);
 
-  return { posts: [] };
+  return { posts: data?.posts ?? [] };
 }
 
 export { useGetPosts };

@@ -1,5 +1,4 @@
-import localFont from "next/font/local";
-import { Roboto, Fira_Code } from "next/font/google";
+import { Noto_Sans_KR, Roboto, Fira_Code } from "next/font/google";
 
 import "@kyoungah.me/ui/build/styles/global.css";
 import "@kyoungah.me/ui/build/styles/typography.css";
@@ -10,35 +9,18 @@ import { Header } from "../src/widgets/header/header.ui";
 import { Footer } from "../src/widgets/footer/footer.ui";
 import { QueryClientProvider } from "@/app/providers/query-client-provider";
 
+const notoSansKR = Noto_Sans_KR({
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-noto-sans-kr",
+  display: "swap",
+});
+
 const roboto = Roboto({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
   variable: "--font-roboto",
   display: "swap",
-});
-
-const pretendard = localFont({
-  src: "../public/fonts/pretendard-variable.woff2",
-  weight: "45 920",
-  display: "swap",
-  fallback: [
-    "Pretendard Variable",
-    "Pretendard",
-    "-apple-system",
-    "BlinkMacSystemFont",
-    "system-ui",
-    "Roboto",
-    "Helvetica Neue",
-    "Segoe UI",
-    "Apple SD Gothic Neo",
-    "Noto Sans KR",
-    "Malgun Gothic",
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    "Segoe UI Symbol",
-    "sans-serif",
-  ],
-  variable: "--font-pretendard",
 });
 
 const firaCode = Fira_Code({
@@ -55,8 +37,8 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
-      className={`${roboto.variable} ${pretendard.variable} ${firaCode.variable}`}
+      lang="ko"
+      className={`${roboto.variable} ${notoSansKR.variable} ${firaCode.variable}`}
     >
       <body>
         <QueryClientProvider>

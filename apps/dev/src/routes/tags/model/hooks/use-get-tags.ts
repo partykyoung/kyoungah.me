@@ -1,16 +1,14 @@
-import React from "react";
+import { useQuery } from "@kyoungah.me/query";
+
 import { getTags } from "../../api/get-tags";
 
 function useGetTags() {
-  const [tags, setTags] = React.useState<string[]>([]);
+  const { data } = useQuery({
+    queryKey: ["tags"],
+    queryFn: getTags,
+  });
 
-  React.useEffect(() => {
-    getTags().then((data) => {
-      setTags((prevState) => prevState.concat(data.tags));
-    });
-  }, []);
-
-  return { tags };
+  return { tags: data?.tags ?? [] };
 }
 
 export { useGetTags };

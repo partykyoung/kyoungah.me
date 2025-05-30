@@ -117,4 +117,11 @@ function Code({ className, ...props }: React.HTMLAttributes<HTMLElement>) {
   return <code className={clsx(styles.code, className)} {...props} />;
 }
 
-export { H1, H2, H3, H4, H5, H6, P, Ul, Ol, Li, Link, Img, Code };
+function Caption({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLParagraphElement>) {
+  return <p className={clsx(styles.caption, className)} {...props} />;
+}
+
+export { H1, H2, H3, H4, H5, H6, P, Ul, Ol, Li, Link, Img, Code, Caption };
