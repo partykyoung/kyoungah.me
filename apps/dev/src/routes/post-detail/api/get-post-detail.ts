@@ -9,7 +9,7 @@ import rehypeExpressiveCode from "rehype-expressive-code";
 const cwd = process.cwd();
 
 const rehypeExpressiveCodeOptions = {
-  themes: ["one-dark-pro"],
+  themes: ["one-light"],
   plugins: [pluginCollapsibleSections(), pluginLineNumbers()],
 };
 
