@@ -47,11 +47,11 @@ function isStale<TData = unknown>(
   );
 }
 
-function shouldFetchOptionally(
-  query: any,
-  prevQuery: any,
-  options: any,
-  prevOptions: any
+function shouldFetchOptionally<TData = unknown>(
+  query: Query<TData>,
+  prevQuery: Query<TData> | undefined,
+  options: QueryOptionsType<TData>,
+  prevOptions: QueryOptionsType<TData>
 ): boolean {
   return (
     (query !== prevQuery ||
@@ -65,9 +65,10 @@ function noop() {}
 
 // 핵심 옵저버 클래스
 class QueryObserver<TData = unknown> {
-  private currentQuery: Query<TData>;
+  private currentQuery!: Query<TData>; // 확정 할당 어설션 사용
   private client: QueryClientType;
-  private options: QueryOptionsType<TData>;
+  // Query.ts에서 정의된 QueryObserver 인터페이스와 호환되도록 options를 public으로 변경
+  public options: QueryOptionsType<TData>;
   private notifyCallback = noop;
 
   /**
@@ -88,6 +89,9 @@ class QueryObserver<TData = unknown> {
     }
 
     this.currentQuery = query;
+
+    // 타입 호환성을 위해 타입 단언 사용
+    query.subscribe(this as unknown as QueryObserver);
   };
 
   setOptions = (options: QueryOptionsType<TData>) => {
@@ -106,7 +110,6 @@ class QueryObserver<TData = unknown> {
       this.client.getQueryCache().notify();
     }
 
-    // Fetch if there are subscribers
     if (
       shouldFetchOptionally(
         this.currentQuery,
@@ -162,7 +165,8 @@ class QueryObserver<TData = unknown> {
     this.notifyCallback = callback;
 
     const query = this.getQuery();
-    const unsubscribeQuery = query.subscribe(this);
+    // 타입 호환성을 위해 타입 단언 사용
+    const unsubscribeQuery = query.subscribe(this as unknown as QueryObserver);
 
     /* 
       마지막 업데이트 시간이 없거나 staleTime이 지났으면 오래되었으면 다시 가져온다.

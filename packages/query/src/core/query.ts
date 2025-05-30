@@ -167,7 +167,7 @@ class Query<TData = unknown> {
     }
   }
 
-  protected subscribe = (observer: QueryObserver) => {
+  subscribe = (observer: QueryObserver) => {
     this.observers.push(observer);
     this.clearGcTimeout();
 
