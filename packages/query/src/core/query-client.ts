@@ -9,7 +9,7 @@
 
 import { QueryCache } from "./query-cache.js";
 
-import { hashQueryKeyByOptions, partialMatchKey } from "./utils.js";
+import { hashQueryKeyByOptions, type QueryFilters } from "./utils.js";
 
 interface QueryDefaults {
   queryKey: unknown[];
@@ -91,6 +91,17 @@ class QueryClient {
     return this.queryCache;
   };
 
+  getQueryDefaults = (queryKey?: unknown[]): Record<string, unknown> => {
+    if (!queryKey) {
+      return {};
+    }
+
+    const keyHash = hashQueryKeyByOptions(queryKey);
+    const queryDefaults = this.queryDefaults.get(keyHash);
+
+    return queryDefaults?.defaultOptions ?? {};
+  };
+
   /**
    * 특정 쿼리 키에 해당하는 데이터를 조회한다.
    * 캐시에서 직접 데이터를 가져오므로 네트워크 요청을 발생시키지 않는다.
@@ -109,38 +120,6 @@ class QueryClient {
   };
 
   /**
-   * 특정 쿼리 키에 대한 기본 옵션을 가져온다.
-   * 쿼리 키와 부분적으로 일치하는 모든 기본 설정을 찾아 병합한다.
-   * 이는 특정 API 엔드포인트나 데이터 유형에 대한 일관된 설정을 유지하는 데 유용하다.
-   *
-   * @param queryKey 쿼리 키 - 문자열, 배열 또는 다른 직렬화 가능한 값
-   * @returns 해당 쿼리 키와 일치하는 모든 기본 옵션의 병합 결과
-   */
-  getQueryDefaults(queryKey?: unknown[]): Record<string, unknown> {
-    // 쿼리 키가 없으면 빈 객체를 반환한다.
-    if (!queryKey) {
-      return {};
-    }
-
-    // 모든 등록된 기본 옵션을 배열로 변환한다.
-    const defaults = Array.from(this.queryDefaults.values());
-
-    const result: Record<string, unknown> = {};
-
-    /**
-     * 쿼리 키와 부분적으로 일치하는 모든 기본 옵션을 병합한다.
-     * ex) ['posts']는 ['posts', 1]과 부분일치 한다.
-     */
-    defaults.forEach((queryDefault) => {
-      if (partialMatchKey(queryKey, queryDefault.queryKey)) {
-        Object.assign(result, queryDefault.defaultOptions);
-      }
-    });
-
-    return result;
-  }
-
-  /**
    * 특정 쿼리 키에 해당하는 상태를 조회한다.
    * 상태에는 데이터뿐만 아니라 로딩 상태, 에러, 마지막 업데이트 시간 등 추가 정보가 포함된다.
    *
@@ -154,6 +133,13 @@ class QueryClient {
     // 쿼리 해시로 캐시에서 전체 상태 정보에 접근한다.
     const queryHash = options.queryHash as string;
     return this.queryCache.get(queryHash)?.state;
+  };
+
+  getQueriesData = <TData = unknown>(filters: QueryFilters) => {
+    return this.queryCache.findAll(filters).map(({ queryKey, state }) => {
+      const data = state.data as TData | undefined;
+      return [queryKey, data] as const;
+    });
   };
 }
 
