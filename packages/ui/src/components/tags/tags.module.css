@@ -1,11 +1,51 @@
 .tags {
   display: flex;
-  gap: 0.5rem;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tags-sm {
+  gap: 12px;
+}
+
+.tags-md {
+  gap: 12px;
 }
 
 .tag {
-  background-color: rgba(var(--grey100-rgb), 0.4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(var(--grey100-rgb), 1);
   color: rgba(var(--primary-rgb), 1);
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
+  border-radius: 4px;
+  font-weight: var(--font-weight-regular);
+}
+
+.tag-sm {
+  height: 25px;
+  padding: 6px 12px;
+  font-size: var(--font-size-small);
+  line-height: 1.2;
+}
+
+.tag-md {
+  height: 30px;
+  padding: 6px 12px;
+  font-size: var(--font-size-body-sm);
+  line-height: 1.2;
+}
+
+/* 모바일 대응 */
+@media (max-width: 991px) {
+  .tags-md {
+    /* 모바일에서는 md 사이즈도 sm 사이즈와 동일하게 처리 */
+    gap: 12px;
+  }
+
+  .tag-md {
+    height: 25px;
+    padding: 6px 12px;
+    font-size: var(--font-size-small);
+  }
 }
