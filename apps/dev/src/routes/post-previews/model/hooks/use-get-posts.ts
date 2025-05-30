@@ -18,7 +18,7 @@ function useGetPosts() {
       queryKey: ["posts"],
     });
 
-    setPage(postsCache.length + 1);
+    setPage(postsCache.length > 0 ? postsCache.length : 1);
   }, []);
 
   return { posts: [] };
