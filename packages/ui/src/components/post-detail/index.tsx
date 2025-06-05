@@ -102,34 +102,34 @@ function PostDetailLink<T extends HTMLAnchorElement = HTMLAnchorElement>({
 
 interface PostDetailImgProps<T> extends React.ImgHTMLAttributes<T> {
   asChild?: boolean;
-  figureClassName?: string;
-  figcaptionClassName?: string;
 }
 
 function PostDetailImg<T extends HTMLImageElement = HTMLImageElement>({
   asChild,
   className,
-  figureClassName,
-  figcaptionClassName,
-  alt,
   ...props
 }: PostDetailImgProps<T>) {
   const Comp = asChild ? Slot : "img";
-
-  // If alt text is provided, render the image inside a figure with a caption
-  if (alt) {
-    return (
-      <figure className={clsx(styles.figure, figureClassName)}>
-        <Comp className={clsx(styles.img, className)} alt={alt} {...props} />
-        <figcaption className={clsx(styles.figcaption, figcaptionClassName)}>
-          {alt}
-        </figcaption>
-      </figure>
-    );
-  }
-
-  // Otherwise just render the image
   return <Comp className={clsx(styles.img, className)} {...props} />;
+}
+
+// ----------- figure ----------- //
+
+interface PostDetailFigureProps extends React.HTMLAttributes<HTMLElement> {}
+
+function PostDetailFigure({ className, ...props }: PostDetailFigureProps) {
+  return <figure className={clsx(styles.figure, className)} {...props} />;
+}
+
+// ----------- figcaption ----------- //
+
+interface PostDetailFigCaptionProps extends React.HTMLAttributes<HTMLElement> {}
+
+function PostDetailFigCaption({
+  className,
+  ...props
+}: PostDetailFigCaptionProps) {
+  return <figcaption className={clsx(styles.caption, className)} {...props} />;
 }
 
 // ----------- span ----------- //
@@ -153,6 +153,8 @@ export {
   type PostDetailLiProps,
   type PostDetailLinkProps,
   type PostDetailImgProps,
+  type PostDetailFigureProps,
+  type PostDetailFigCaptionProps,
   type PostDetailSpanProps,
   PostDetailH1,
   PostDetailH2,
@@ -166,5 +168,7 @@ export {
   PostDetailLi,
   PostDetailLink,
   PostDetailImg,
+  PostDetailFigure,
+  PostDetailFigCaption,
   PostDetailSpan,
 };
