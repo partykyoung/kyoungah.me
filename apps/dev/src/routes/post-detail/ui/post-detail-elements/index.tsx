@@ -60,7 +60,11 @@ function Link({
 
 function Img({ className, ...props }: Omit<ImageProps, "fill">) {
   return (
-    <PostDetail.PostDetailImg asChild className={clsx(className)}>
+    <PostDetail.PostDetailImg
+      asChild
+      alt={props.alt}
+      className={clsx(className)}
+    >
       <ClientImage {...props} />
     </PostDetail.PostDetailImg>
   );

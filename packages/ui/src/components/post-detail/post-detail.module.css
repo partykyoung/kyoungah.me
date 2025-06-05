@@ -150,23 +150,28 @@
   text-decoration: underline;
 }
 
+.figure {
+  margin: 48px auto;
+  max-width: 100%;
+}
+
 .img {
   display: block;
+  margin: 48px auto;
   max-width: 100%;
   height: auto;
-  margin: 48px auto;
-  border-radius: 4px;
+}
+
+.figure .img {
+  margin: 0 auto;
 }
 
 .caption {
-  font-size: var(--font-size-small);
-  line-height: var(--line-height-small);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-sm);
   font-weight: var(--font-weight-regular);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  margin-top: -2rem;
-  margin-bottom: 2rem;
+  margin-top: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
