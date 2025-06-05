@@ -82,14 +82,6 @@ export const link = style({
   },
 });
 
-export const code = style({
-  padding: "0.2em 0.4em",
-  backgroundColor: "rgba(var(--grey100-rgb), 0.4)",
-  borderRadius: "3px",
-  fontSize: "85%",
-  fontWeight: "var(--font-weight-regular)",
-});
-
 export const caption = style({
   fontSize: "var(--font-size-small)",
   lineHeight: "var(--line-height-small)",

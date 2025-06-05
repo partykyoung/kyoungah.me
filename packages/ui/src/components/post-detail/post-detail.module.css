@@ -1,9 +1,31 @@
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  margin-top: 48px;
+  margin-bottom: 16px;
+}
+
+:is(.h1, .h2, .h3, .h4, .h5, .h6) + .h1,
+:is(.h1, .h2, .h3, .h4, .h5, .h6) + .h2,
+:is(.h1, .h2, .h3, .h4, .h5, .h6) + .h3,
+:is(.h1, .h2, .h3, .h4, .h5, .h6) + .h4,
+:is(.h1, .h2, .h3, .h4, .h5, .h6) + .h5,
+:is(.h1, .h2, .h3, .h4, .h5, .h6) + .h6 {
+  margin-top: 16px;
+}
+
 .h1 {
+  font-size: 36px;
   font-size: var(--font-size-h1);
   line-height: var(--line-height-h1);
   font-weight: var(--font-weight-bold);
   word-break: keep-all;
   overflow-wrap: break-word;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .h2 {
@@ -12,6 +34,8 @@
   font-weight: var(--font-weight-bold);
   word-break: keep-all;
   overflow-wrap: break-word;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .h3 {
@@ -20,22 +44,30 @@
   font-weight: var(--font-weight-bold);
   word-break: keep-all;
   overflow-wrap: break-word;
+  margin-top: 1.75rem;
+  margin-bottom: 1.25rem;
 }
 
 .h4 {
+  font-size: var(--font-size-h4);
   font-size: var(--font-size-h4);
   line-height: var(--line-height-h4);
   font-weight: var(--font-weight-bold);
   word-break: keep-all;
   overflow-wrap: break-word;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .h5 {
+  font-size: var(--font-size-h5);
   font-size: var(--font-size-h5);
   line-height: var(--line-height-h5);
   font-weight: var(--font-weight-bold);
   word-break: keep-all;
   overflow-wrap: break-word;
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
 }
 
 .h6 {
@@ -44,6 +76,8 @@
   font-weight: var(--font-weight-bold);
   word-break: keep-all;
   overflow-wrap: break-word;
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
 }
 
 .p {
@@ -52,7 +86,29 @@
   font-weight: var(--font-weight-regular);
   word-break: keep-all;
   overflow-wrap: break-word;
-  font-smoothing: antialiased;
+  margin-bottom: 1.5rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.body-lg {
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-body-lg);
+  font-weight: var(--font-weight-regular);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  margin-bottom: 1.5rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.body-sm {
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-sm);
+  font-weight: var(--font-weight-regular);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  margin-bottom: 1.25rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -60,11 +116,15 @@
 .ul {
   word-break: keep-all;
   overflow-wrap: break-word;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .ol {
   word-break: keep-all;
   overflow-wrap: break-word;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .li {
@@ -73,6 +133,7 @@
   font-weight: var(--font-weight-regular);
   word-break: keep-all;
   overflow-wrap: break-word;
+  margin-bottom: 0.5rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -82,6 +143,11 @@
   line-height: var(--line-height-body);
   font-weight: var(--font-weight-regular);
   text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  text-decoration: underline;
 }
 
 .img {
@@ -89,12 +155,18 @@
   max-width: 100%;
   height: auto;
   margin: 48px auto;
+  border-radius: 4px;
 }
 
 .caption {
   font-size: var(--font-size-small);
   line-height: var(--line-height-small);
   font-weight: var(--font-weight-regular);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  margin-top: -2rem;
+  margin-bottom: 2rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
