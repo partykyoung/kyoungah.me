@@ -7,90 +7,43 @@ import { ClientImage } from "./client-image";
 import * as styles from "./post-detail-elements.css";
 
 function H1({ className, ...props }: PostDetail.PostDetailH1Props) {
-  return (
-    <PostDetail.PostDetailH1
-      className={clsx(styles.heading, className)}
-      {...props}
-    />
-  );
+  return <PostDetail.PostDetailH1 {...props} />;
 }
 
 function H2({ className, ...props }: PostDetail.PostDetailH2Props) {
-  return (
-    <PostDetail.PostDetailH2
-      className={clsx(styles.heading, className)}
-      {...props}
-    />
-  );
+  return <PostDetail.PostDetailH2 {...props} />;
 }
 
 function H3({ className, ...props }: PostDetail.PostDetailH3Props) {
-  return (
-    <PostDetail.PostDetailH3
-      className={clsx(styles.heading, className)}
-      {...props}
-    />
-  );
+  return <PostDetail.PostDetailH3 {...props} />;
 }
 
 function H4({ className, ...props }: PostDetail.PostDetailH4Props) {
-  return (
-    <PostDetail.PostDetailH4
-      className={clsx(styles.heading, className)}
-      {...props}
-    />
-  );
+  return <PostDetail.PostDetailH4 {...props} />;
 }
 
 function H5({ className, ...props }: PostDetail.PostDetailH5Props) {
-  return (
-    <PostDetail.PostDetailH5
-      className={clsx(styles.heading, className)}
-      {...props}
-    />
-  );
+  return <PostDetail.PostDetailH5 {...props} />;
 }
 
 function H6({ className, ...props }: PostDetail.PostDetailH6Props) {
-  return (
-    <PostDetail.PostDetailH6
-      className={clsx(styles.heading, className)}
-      {...props}
-    />
-  );
+  return <PostDetail.PostDetailH6 {...props} />;
 }
 
 function P({ className, ...props }: PostDetail.PostDetailPProps) {
-  return (
-    <PostDetail.PostDetailP className={clsx(styles.p, className)} {...props} />
-  );
+  return <PostDetail.PostDetailP {...props} />;
 }
 
 function Ul({ className, ...props }: PostDetail.PostDetailUlProps) {
-  return (
-    <PostDetail.PostDetailUl
-      className={clsx(styles.list, className)}
-      {...props}
-    />
-  );
+  return <PostDetail.PostDetailUl {...props} />;
 }
 
 function Ol({ className, ...props }: PostDetail.PostDetailOlProps) {
-  return (
-    <PostDetail.PostDetailOl
-      className={clsx(styles.list, className)}
-      {...props}
-    />
-  );
+  return <PostDetail.PostDetailOl {...props} />;
 }
 
 function Li({ className, ...props }: PostDetail.PostDetailLiProps) {
-  return (
-    <PostDetail.PostDetailLi
-      className={clsx(styles.li, className)}
-      {...props}
-    />
-  );
+  return <PostDetail.PostDetailLi {...props} />;
 }
 
 function Link({
@@ -99,7 +52,7 @@ function Link({
 }: LinkProps &
   Pick<React.AnchorHTMLAttributes<HTMLAnchorElement>, "className">) {
   return (
-    <PostDetail.PostDetailLink asChild className={clsx(styles.link, className)}>
+    <PostDetail.PostDetailLink asChild className={clsx(className)}>
       <NextLink {...props} />
     </PostDetail.PostDetailLink>
   );
@@ -107,14 +60,10 @@ function Link({
 
 function Img({ className, ...props }: Omit<ImageProps, "fill">) {
   return (
-    <PostDetail.PostDetailImg asChild className={clsx(styles.img, className)}>
+    <PostDetail.PostDetailImg asChild className={clsx(className)}>
       <ClientImage {...props} />
     </PostDetail.PostDetailImg>
   );
-}
-
-function Code({ className, ...props }: React.HTMLAttributes<HTMLElement>) {
-  return <code className={clsx(styles.code, className)} {...props} />;
 }
 
 function Caption({
@@ -124,4 +73,4 @@ function Caption({
   return <p className={clsx(styles.caption, className)} {...props} />;
 }
 
-export { H1, H2, H3, H4, H5, H6, P, Ul, Ol, Li, Link, Img, Code, Caption };
+export { H1, H2, H3, H4, H5, H6, P, Ul, Ol, Li, Link, Img, Caption };

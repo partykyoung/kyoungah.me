@@ -1,13 +1,13 @@
 ---
 title: Next.js App Router에서 로컬 HTTPS 설정하기
 date: 2024-11-10 14:31:26
-tags: ['Next.js']
+tags: ["Next.js"]
 publish: true
 ---
 
 Next.js로 어드민을 신규 개발하면서 로컬 환경에 HTTPS 환경을 구축한 경험을 공유하고자 한다.
 
-회사 프로젝트는 Mac(M1)에서 Next.js 14 App Router 버전으로 진행되었으며, 이 글을 작성하며 생성한 프로젝트는 Mac(M1)에서 Next.js 15 App Router 버전으로 진행되었다. 마지막에 next.config.js 설정 관련 부분을 제외하면 두 버전은 차이가 없다.
+회사 프로젝트는 Mac(M1)에서 Next.js 14 App Router 버전으로 진행되었으며, 이 글에서 사용한 프로젝트는 Mac(M1)에서 Next.js 15 App Router 버전으로 진행되었다. 마지막에 next.config.js 설정 관련 부분을 제외하면 두 버전은 차이가 없다.
 
 ## 이슈 발생 배경
 

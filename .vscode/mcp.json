@@ -1,17 +1,20 @@
 {
   "servers": {
     "Framelink Figma MCP": {
+      "type": "stdio",
       "command": "npx",
-      "args": ["-y", "figma-developer-mcp", "--stdio"],
-      "env": {
-        "FIGMA_API_KEY": "${input:figmaAPIKey}"
-      }
+      "args": [
+        "-y",
+        "figma-developer-mcp",
+        "--figma-api-key=${input:figma-api-key}",
+        "--stdio"
+      ]
     }
   },
   "inputs": [
     {
       "type": "promptString",
-      "id": "figmaAPIKey",
+      "id": "figma-api-key",
       "description": "Enter your figma API key",
       "password": true
     }

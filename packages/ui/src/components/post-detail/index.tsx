@@ -102,15 +102,33 @@ function PostDetailLink<T extends HTMLAnchorElement = HTMLAnchorElement>({
 
 interface PostDetailImgProps<T> extends React.ImgHTMLAttributes<T> {
   asChild?: boolean;
+  figureClassName?: string;
+  figcaptionClassName?: string;
 }
 
 function PostDetailImg<T extends HTMLImageElement = HTMLImageElement>({
   asChild,
   className,
+  figureClassName,
+  figcaptionClassName,
+  alt,
   ...props
 }: PostDetailImgProps<T>) {
   const Comp = asChild ? Slot : "img";
 
+  // If alt text is provided, render the image inside a figure with a caption
+  if (alt) {
+    return (
+      <figure className={clsx(styles.figure, figureClassName)}>
+        <Comp className={clsx(styles.img, className)} alt={alt} {...props} />
+        <figcaption className={clsx(styles.figcaption, figcaptionClassName)}>
+          {alt}
+        </figcaption>
+      </figure>
+    );
+  }
+
+  // Otherwise just render the image
   return <Comp className={clsx(styles.img, className)} {...props} />;
 }
 
