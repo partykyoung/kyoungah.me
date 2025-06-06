@@ -1,67 +1,48 @@
 import * as runtime from "react/jsx-runtime";
 import { ImageProps } from "next/image";
 import { LinkProps } from "next/link";
-import clsx from "clsx";
 
 import * as PostDetailEmements from "../post-detail-elements";
 
 const sharedComponents = {
-  h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
-    return (
-      <PostDetailEmements.H2 className={clsx("h2", className)} {...props} />
-    );
+  h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
+    return <PostDetailEmements.H2 {...props} />;
   },
-  h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
-    return (
-      <PostDetailEmements.H3 className={clsx("h3", className)} {...props} />
-    );
+  h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
+    return <PostDetailEmements.H3 {...props} />;
   },
-  h4: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
-    return (
-      <PostDetailEmements.H4 className={clsx("h4", className)} {...props} />
-    );
+  h4: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
+    return <PostDetailEmements.H4 {...props} />;
   },
-  h5: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
-    return (
-      <PostDetailEmements.H5 className={clsx("h5", className)} {...props} />
-    );
+  h5: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
+    return <PostDetailEmements.H5 {...props} />;
   },
-  h6: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
-    return (
-      <PostDetailEmements.H6 className={clsx("h6", className)} {...props} />
-    );
+  h6: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
+    return <PostDetailEmements.H6 {...props} />;
   },
-  p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => {
-    return <PostDetailEmements.P className={clsx("p", className)} {...props} />;
+  p: (props: React.HTMLAttributes<HTMLParagraphElement>) => {
+    return <PostDetailEmements.P {...props} />;
   },
-  ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => {
-    return (
-      <PostDetailEmements.Ul className={clsx("ul", className)} {...props} />
-    );
+  ul: (props: React.HTMLAttributes<HTMLUListElement>) => {
+    return <PostDetailEmements.Ul {...props} />;
   },
-  ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => {
-    return (
-      <PostDetailEmements.Ol className={clsx("ol", className)} {...props} />
-    );
+  ol: (props: React.HTMLAttributes<HTMLOListElement>) => {
+    return <PostDetailEmements.Ol {...props} />;
   },
-  li: ({ className, ...props }: React.HTMLAttributes<HTMLLIElement>) => {
-    return (
-      <PostDetailEmements.Li className={clsx("li", className)} {...props} />
-    );
+  li: (props: React.HTMLAttributes<HTMLLIElement>) => {
+    return <PostDetailEmements.Li {...props} />;
   },
-  a: ({
-    className,
-    ...props
-  }: LinkProps &
-    Pick<React.AnchorHTMLAttributes<HTMLAnchorElement>, "className">) => {
-    return (
-      <PostDetailEmements.Link className={clsx("link", className)} {...props} />
-    );
+  a: (
+    props: LinkProps &
+      Pick<React.AnchorHTMLAttributes<HTMLAnchorElement>, "className">
+  ) => {
+    return <PostDetailEmements.Link {...props} />;
   },
-  img: ({ className, ...props }: ImageProps) => {
-    return (
-      <PostDetailEmements.Img className={clsx("img", className)} {...props} />
-    );
+  img: (props: ImageProps) => {
+    return <PostDetailEmements.Img {...props} />;
+  },
+  div: (props: React.HTMLAttributes<HTMLDivElement>) => {
+    return <PostDetailEmements.Div {...props} />;
   },
 };
 
@@ -77,7 +58,9 @@ interface MDXProps {
 }
 
 // MDXContent component
-export const MDXContent = ({ code, components = {} }: MDXProps) => {
-  const Component = useMDXComponent(code);
-  return <Component components={{ ...sharedComponents, ...components }} />;
+export const MDXContent = (props: MDXProps) => {
+  const Component = useMDXComponent(props.code);
+  return (
+    <Component components={{ ...sharedComponents, ...props.components }} />
+  );
 };

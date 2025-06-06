@@ -1,48 +1,51 @@
+"use client";
+
 import React from "react";
 import { ImageProps } from "next/image";
 import NextLink, { LinkProps } from "next/link";
 import clsx from "clsx";
 import * as PostDetail from "@kyoungah.me/ui/build/components/post-detail";
 import { ClientImage } from "./client-image";
+
 import * as styles from "./post-detail-elements.css";
 
-function H1({ className, ...props }: PostDetail.PostDetailH1Props) {
+function H1(props: PostDetail.PostDetailH1Props) {
   return <PostDetail.PostDetailH1 {...props} />;
 }
 
-function H2({ className, ...props }: PostDetail.PostDetailH2Props) {
+function H2(props: PostDetail.PostDetailH2Props) {
   return <PostDetail.PostDetailH2 {...props} />;
 }
 
-function H3({ className, ...props }: PostDetail.PostDetailH3Props) {
+function H3(props: PostDetail.PostDetailH3Props) {
   return <PostDetail.PostDetailH3 {...props} />;
 }
 
-function H4({ className, ...props }: PostDetail.PostDetailH4Props) {
+function H4(props: PostDetail.PostDetailH4Props) {
   return <PostDetail.PostDetailH4 {...props} />;
 }
 
-function H5({ className, ...props }: PostDetail.PostDetailH5Props) {
+function H5(props: PostDetail.PostDetailH5Props) {
   return <PostDetail.PostDetailH5 {...props} />;
 }
 
-function H6({ className, ...props }: PostDetail.PostDetailH6Props) {
+function H6(props: PostDetail.PostDetailH6Props) {
   return <PostDetail.PostDetailH6 {...props} />;
 }
 
-function P({ className, ...props }: PostDetail.PostDetailPProps) {
+function P(props: PostDetail.PostDetailPProps) {
   return <PostDetail.PostDetailP {...props} />;
 }
 
-function Ul({ className, ...props }: PostDetail.PostDetailUlProps) {
+function Ul(props: PostDetail.PostDetailUlProps) {
   return <PostDetail.PostDetailUl {...props} />;
 }
 
-function Ol({ className, ...props }: PostDetail.PostDetailOlProps) {
+function Ol(props: PostDetail.PostDetailOlProps) {
   return <PostDetail.PostDetailOl {...props} />;
 }
 
-function Li({ className, ...props }: PostDetail.PostDetailLiProps) {
+function Li(props: PostDetail.PostDetailLiProps) {
   return <PostDetail.PostDetailLi {...props} />;
 }
 
@@ -70,11 +73,8 @@ function Img({ className, ...props }: Omit<ImageProps, "fill">) {
   );
 }
 
-function Caption({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={clsx(styles.caption, className)} {...props} />;
+function Div({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={clsx(styles.div, className)} {...props} />;
 }
 
-export { H1, H2, H3, H4, H5, H6, P, Ul, Ol, Li, Link, Img, Caption };
+export { H1, H2, H3, H4, H5, H6, P, Ul, Ol, Li, Link, Img, Div };
