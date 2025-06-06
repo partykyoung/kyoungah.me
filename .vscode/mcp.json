@@ -1,4 +1,12 @@
 {
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "figma-api-key-3",
+      "description": "Enter your figma API key",
+      "password": true
+    }
+  ],
   "servers": {
     "Framelink Figma MCP": {
       "type": "stdio",
@@ -6,17 +14,9 @@
       "args": [
         "-y",
         "figma-developer-mcp",
-        "--figma-api-key=${input:figma-api-key}",
+        "--figma-api-key=${input:figma-api-key-3}",
         "--stdio"
       ]
     }
-  },
-  "inputs": [
-    {
-      "type": "promptString",
-      "id": "figma-api-key",
-      "description": "Enter your figma API key",
-      "password": true
-    }
-  ]
+  }
 }

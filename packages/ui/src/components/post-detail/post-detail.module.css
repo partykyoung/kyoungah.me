@@ -22,6 +22,7 @@
   font-size: var(--font-size-h1);
   line-height: var(--line-height-h1);
   font-weight: var(--font-weight-bold);
+  color: rgba(var(--grey900-rgb), 1);
   word-break: keep-all;
   overflow-wrap: break-word;
   margin-top: 2rem;
@@ -32,6 +33,7 @@
   font-size: var(--font-size-h2);
   line-height: var(--line-height-h2);
   font-weight: var(--font-weight-bold);
+  color: rgba(var(--grey900-rgb), 1);
   word-break: keep-all;
   overflow-wrap: break-word;
   margin-top: 2rem;
@@ -42,6 +44,7 @@
   font-size: var(--font-size-h3);
   line-height: var(--line-height-h3);
   font-weight: var(--font-weight-bold);
+  color: rgba(var(--grey900-rgb), 1);
   word-break: keep-all;
   overflow-wrap: break-word;
   margin-top: 1.75rem;
@@ -53,6 +56,7 @@
   font-size: var(--font-size-h4);
   line-height: var(--line-height-h4);
   font-weight: var(--font-weight-bold);
+  color: rgba(var(--grey900-rgb), 1);
   word-break: keep-all;
   overflow-wrap: break-word;
   margin-top: 1.5rem;
@@ -64,6 +68,7 @@
   font-size: var(--font-size-h5);
   line-height: var(--line-height-h5);
   font-weight: var(--font-weight-bold);
+  color: rgba(var(--grey900-rgb), 1);
   word-break: keep-all;
   overflow-wrap: break-word;
   margin-top: 1.25rem;
@@ -74,6 +79,7 @@
   font-size: var(--font-size-h6);
   line-height: var(--line-height-h6);
   font-weight: var(--font-weight-bold);
+  color: rgba(var(--grey900-rgb), 1);
   word-break: keep-all;
   overflow-wrap: break-word;
   margin-top: 1.25rem;
@@ -142,12 +148,14 @@
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
   font-weight: var(--font-weight-regular);
+  color: rgba(var(--blue500-rgb), 1);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .link:hover {
   text-decoration: underline;
+  color: rgba(var(--blue600-rgb), 1);
 }
 
 .figure {
@@ -169,6 +177,7 @@
 .caption {
   font-size: var(--font-size-body-sm);
   line-height: var(--line-height-body-sm);
+  color: rgba(var(--grey500-rgb), 1);
   font-weight: var(--font-weight-regular);
   text-align: center;
   margin-top: 16px;

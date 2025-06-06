@@ -5,9 +5,12 @@
 .title {
   font-size: var(--font-size-body-lg);
   line-height: var(--line-height-body-lg);
+  color: rgba(var(--grey900-rgb), 1);
+  font-weight: var(--font-weight-bold);
 }
 
 .date {
   font-size: var(--font-size-body-sm);
   line-height: var(--line-height-body-sm);
+  color: rgba(var(--grey500-rgb), 1);
 }

@@ -9,10 +9,14 @@ interface ButtonProps
     React.ButtonHTMLAttributes<HTMLButtonElement>
   > {
   asChild?: boolean;
+  variant?: "primary" | "secondary" | "ghost";
+  size?: "sm" | "md" | "lg";
 }
 
 function Button({
   asChild = false,
+  variant = "primary",
+  size = "md",
   children,
   className,
   ...props
@@ -20,7 +24,10 @@ function Button({
   const Comp = asChild ? Slot : "button";
 
   return (
-    <Comp className={clsx(styles.root, className)} {...props}>
+    <Comp 
+      className={clsx(styles.root, styles[variant], styles[size], className)} 
+      {...props}
+    >
       {children}
     </Comp>
   );

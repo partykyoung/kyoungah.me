@@ -11,6 +11,7 @@
   display: inline-block;
   border-radius: 9999px;
   border-style: solid;
+  border-color: rgba(var(--blue500-rgb), 1);
   border-bottom-color: transparent;
   border-left-color: transparent;
   animation: spin 1s linear infinite;
