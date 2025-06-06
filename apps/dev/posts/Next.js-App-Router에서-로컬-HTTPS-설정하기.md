@@ -44,7 +44,7 @@ the attempt to set a cookie via set-cookie header was blocked because its domain
 - Domain: 해당 쿠키가 어느 도메인(및 서브도메인)에 대해 유효한지를 지정한다.
   - API 서버가 개발서버에 배포되었기 때문에 domain.example 도메인과 모든 하위 도메인(api.domain.example, www.domain.example 등)에서 쿠키가 사용된다.
 - Secure: HTTPS 연결을 통해서만 쿠키가 전송되도록 보장한다.
-  - 마찬가지로 https 연결을 통해사면 쿠키가 전송된다.
+  - 마찬가지로 https 연결을 통해서만 쿠키가 전송된다.
 - MaxAge: 쿠키의 유효 시간을 설정한다.
   - 회사 코드 보안상의 이유로 임시로 밀리초(milliseconds) 단위로 설정했는데 일반적으로는 초(second) 단위로 설정하는 경우가 많다.
 - SameSite: 쿠키가 크로스 사이트 요청 시 어떻게 전송될지를 제어한다.
@@ -69,22 +69,24 @@ api에서 Next.js Api Route로 쿠키를 가지고 오는 것 까지는 이슈�
 Host 파일은 컴퓨터의 운영 체제에서 사용되는 텍스트 파일로, 도메인 이름과 IP 주소를 매핑하는 역할을 한다. 네트워크 요청 시 DNS 서버를 거치지 않고 직접 매핑된 IP 주소를 사용하기 때문에 로컬 환경에서 테스트하거나 특정 도메인을 임시로 변경하는 데 유용하다.
 
 Host 파일에서 localhost의 도메인 이름 api 도메인에 맞춰 변경해주자.
+<br/>
 
 ```
 sudo vi /private/etc/hosts
 ```
 
 Mac(M1) 에서는 터미널을 실행한 후 위의 명령어로 hosts 파일을 열 수 있다.
+<br/>
 
 ```
 127.0.0.1 local.kyoungah.me
 ```
 
-![host 파일 편집](/images/posts/Next.js-App-Router-로컬-개발환경에서-HTTPS-환경-구축하기-6.png)
+IP와 원하는 도메인 주소를 입력하면 도메인 변경은 완료다.
 
-마지막 줄에 IP와 원하는 도메인 주소를 입력하면 도메인 변경은 완료다.
+![IP 및 도메인 추가가 완료된 모습이다.](/images/posts/Next.js-App-Router-로컬-개발환경에서-HTTPS-환경-구축하기-6.png)
 
-![위에서 설정한 도메인으로 출력](/images/posts/Next.js-App-Router-로컬-개발환경에서-HTTPS-환경-구축하기-3.png)
+![이제 위에 설정한 도메인으로 로컬 서버에 접속할 수 있다.](/images/posts/Next.js-App-Router-로컬-개발환경에서-HTTPS-환경-구축하기-3.png)
 
 ### localhost에서 HTTPS 허용하기
 
@@ -93,6 +95,7 @@ Mac(M1) 에서는 터미널을 실행한 후 위의 명령어로 hosts 파일을
 HTTP에는 도청, 위장, 변조 등의 취약점이 있다. 이를 보완하기 위해 SSL(보안 소켓 계층) 또는 TLS(전송 계층 보안) 인증서를 사용하여 HTTP 통신 내용을 암호화 한다. 이러한 기술을 활용한 HTTP가 바로 HTTPS(HTTP Secure)이다.
 
 따라서 HTTPS 환경을 구축하기 위해서는 SSL 또는 TLS 인증서가 필수적이다.
+<br/>
 
 ```
 brew install mkcert
@@ -100,6 +103,7 @@ brew install mkcert
 
 [mkcert](https://github.com/FiloSottile/mkcert)를 사용하면 로컬에서 신뢰할 수 있는 개발 인증서를 만들 수 있다. 없으면 먼저 설치해주자.
 
+<br/>
 ```
 mkcert "*.kyoungah.me"
 ```
@@ -107,11 +111,15 @@ mkcert "*.kyoungah.me"
 mkcert 명령어를 사용하여 원하는 도메인을 위한 SSL인증서를 생성한다.
 pem, -key.pem 2개의 파일이 생성되고 해당 파일을 ssl인증서로 사용하면 된다.
 
+<br/>
+
 ```
 mkcert "*.kyoungah.me" localhost 127.0.0.1
 ```
 
 여러개의 도메인에 유효한 인증서도 생성할 수 있다.
+
+<br/>
 
 [next dev 옵션](https://nextjs.org/docs/app/api-reference/cli/next)을 보면 `--experimental-https`, `--experimental-https-key`, `--experimental-https-cert` 라는 옵션이 있다.
 
@@ -119,6 +127,8 @@ mkcert "*.kyoungah.me" localhost 127.0.0.1
   - --experimental-https-key, --experimental-https-cert 옵션 없이 실행하면 자동으로 localhost SSL 인증서를 생성한다.
 - --experimental-https-key는 HTTPS 키 파일의 경로이다.
 - --experimental-https-cert는 HTTPS 인증서 파일의 경로이다.
+
+<br/>
 
 ```
 next dev --experimental-https --experimental-https-key _wildcard.kyoungah.me+3-key.pem --experimental-https-cert _wildcard.kyoungah.me+3.pem
