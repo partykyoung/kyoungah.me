@@ -44,6 +44,12 @@ const sharedComponents = {
   div: (props: React.HTMLAttributes<HTMLDivElement>) => {
     return <PostDetailEmements.Div {...props} />;
   },
+  figure: (props: React.HTMLAttributes<HTMLElement>) => {
+    return <PostDetailEmements.Figure {...props} />;
+  },
+  figcaption: (props: React.HTMLAttributes<HTMLElement>) => {
+    return <PostDetailEmements.FigureCaption {...props} />;
+  },
 };
 
 const useMDXComponent = (code: string) => {

@@ -1,6 +1,7 @@
 import fs from "fs";
 import matter from "gray-matter";
 import { compile } from "@mdx-js/mdx";
+import rehypeFigure from "rehype-figure";
 
 import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
@@ -28,7 +29,10 @@ async function getPostDetail(slug: string): Promise<{
   const code = await compile(content, {
     outputFormat: "function-body",
     remarkPlugins: [],
-    rehypePlugins: [[rehypeExpressiveCode, rehypeExpressiveCodeOptions]],
+    rehypePlugins: [
+      [rehypeExpressiveCode, rehypeExpressiveCodeOptions],
+      rehypeFigure,
+    ],
   });
 
   return {

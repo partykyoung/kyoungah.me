@@ -140,39 +140,6 @@ function PostDetailSpan({ className, ...props }: PostDetailSpanProps) {
   return <span className={clsx(styles.span, className)} {...props} />;
 }
 
-// ----------- image figure ----------- //
-
-interface PostDetailImageFigureProps<T> extends React.ImgHTMLAttributes<T> {
-  asChild?: boolean;
-  figureClassName?: string;
-  figCaptionClassName?: string;
-}
-
-function PostDetailImageFigure<T extends HTMLImageElement = HTMLImageElement>({
-  asChild,
-  alt,
-  className,
-  figureClassName,
-  figCaptionClassName,
-  ...props
-}: PostDetailImageFigureProps<T>) {
-  if (alt) {
-    return (
-      <PostDetailFigure>
-        <PostDetailImg
-          asChild={asChild}
-          className={className}
-          alt={alt}
-          {...props}
-        />
-        <PostDetailFigCaption>{alt}</PostDetailFigCaption>
-      </PostDetailFigure>
-    );
-  }
-
-  return <PostDetailImg asChild={asChild} className={className} {...props} />;
-}
-
 export {
   type PostDetailH1Props,
   type PostDetailH2Props,
@@ -188,7 +155,6 @@ export {
   type PostDetailImgProps,
   type PostDetailFigureProps,
   type PostDetailFigCaptionProps,
-  type PostDetailImageFigureProps,
   type PostDetailSpanProps,
   PostDetailH1,
   PostDetailH2,
@@ -205,5 +171,4 @@ export {
   PostDetailFigure,
   PostDetailFigCaption,
   PostDetailSpan,
-  PostDetailImageFigure,
 };
