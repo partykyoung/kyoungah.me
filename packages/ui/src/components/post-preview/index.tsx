@@ -41,8 +41,6 @@ function PostPreviewDate({
   );
 }
 
-function PostPreviewTags() {}
-
 function PostPreviewExcerpt({
   children,
   ...props
@@ -55,6 +53,5 @@ export {
   PostPreviewTitle,
   PostPreviewThumbnail,
   PostPreviewDate,
-  PostPreviewTags,
   PostPreviewExcerpt,
 };
