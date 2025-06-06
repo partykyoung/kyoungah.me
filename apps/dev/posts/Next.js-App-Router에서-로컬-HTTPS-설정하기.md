@@ -39,8 +39,6 @@ the attempt to set a cookie via set-cookie header was blocked because its domain
   }
 ```
 
-위의 쿠키 속성을 살펴보자.
-
 - HttpOnly: JavaScript를 통해 쿠키 값에 접근하는 것을 막는다.
   - true 이므로 JavaScript를 통해 쿠키 값에 접근할 수 없다.
 - Domain: 해당 쿠키가 어느 도메인(및 서브도메인)에 대해 유효한지를 지정한다.

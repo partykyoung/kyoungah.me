@@ -63,13 +63,22 @@ function Link({
 
 function Img({ className, ...props }: Omit<ImageProps, "fill">) {
   return (
-    <PostDetail.PostDetailImageFigure
-      asChild
-      alt={props.alt}
-      className={clsx(className)}
-    >
+    <PostDetail.PostDetailImg asChild className={clsx(className)}>
       <ClientImage {...props} />
-    </PostDetail.PostDetailImageFigure>
+    </PostDetail.PostDetailImg>
+  );
+}
+
+function Figure({ className, ...props }: PostDetail.PostDetailFigureProps) {
+  return <PostDetail.PostDetailFigure className={clsx(className)} {...props} />;
+}
+
+function FigureCaption({
+  className,
+  ...props
+}: PostDetail.PostDetailFigCaptionProps) {
+  return (
+    <PostDetail.PostDetailFigCaption className={clsx(className)} {...props} />
   );
 }
 
@@ -77,4 +86,20 @@ function Div({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return <div className={clsx(styles.div, className)} {...props} />;
 }
 
-export { H1, H2, H3, H4, H5, H6, P, Ul, Ol, Li, Link, Img, Div };
+export {
+  H1,
+  H2,
+  H3,
+  H4,
+  H5,
+  H6,
+  P,
+  Ul,
+  Ol,
+  Li,
+  Link,
+  Img,
+  Div,
+  Figure,
+  FigureCaption,
+};
