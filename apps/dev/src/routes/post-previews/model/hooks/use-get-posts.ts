@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import type { Post } from "../types/post";
 import { getPosts } from "../../api/get-posts";
-import { useQuery, useQueryClient } from "@kyoungah.me/query";
+import { useQuery, useQueryClient } from "@kyoungah/query";
 
 function useGetPosts() {
   const [page, setPage] = useState<number | null>(null);

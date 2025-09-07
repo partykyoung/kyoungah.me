@@ -1,5 +1,5 @@
 {
-  "name": "@kyoungah.me/script",
+  "name": "@kyoungah/script",
   "type": "module",
   "version": "1.0.0",
   "description": "",
@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@kyoungah.me/typescript-config": "workspace:*",
+    "@kyoungah/typescript-config": "workspace:*",
     "@types/node": "^20",
     "typescript": "^5.8.3"
   },

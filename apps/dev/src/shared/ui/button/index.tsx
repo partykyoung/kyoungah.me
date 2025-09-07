@@ -5,7 +5,7 @@ import { buttonVariants, type ButtonVariants } from "./button.css";
 import {
   Button as BaseButton,
   type ButtonProps as BaseButtonProps,
-} from "@kyoungah.me/ui/build/components/button";
+} from "@kyoungah/ui/build/components/button";
 import clsx from "clsx";
 
 interface ButtonProps

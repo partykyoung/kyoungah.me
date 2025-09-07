@@ -1,6 +1,6 @@
 "use client";
 
-import { Tags, Tag } from "@kyoungah.me/ui/build/components/tags";
+import { Tags, Tag } from "@kyoungah/ui/build/components/tags";
 
 import { useGetTags } from "../../model/hooks/use-get-tags";
 import { root } from "./tags.css";

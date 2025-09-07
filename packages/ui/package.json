@@ -1,5 +1,5 @@
 {
-  "name": "@kyoungah.me/ui",
+  "name": "@kyoungah/ui",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -15,8 +15,8 @@
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.26.0",
-    "@kyoungah.me/eslint-config": "workspace:*",
-    "@kyoungah.me/typescript-config": "workspace:*",
+    "@kyoungah/eslint-config": "workspace:*",
+    "@kyoungah/typescript-config": "workspace:*",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-node-resolve": "^16.0.0",

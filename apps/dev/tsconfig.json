@@ -1,5 +1,5 @@
 {
-  "extends": "@kyoungah.me/typescript-config/react.json",
+  "extends": "@kyoungah/typescript-config/react.json",
   "compilerOptions": {
     "target": "ES2017",
     "lib": [

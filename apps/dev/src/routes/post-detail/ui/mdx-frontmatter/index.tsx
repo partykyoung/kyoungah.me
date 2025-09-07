@@ -2,8 +2,8 @@
 
 import dayjs from "dayjs";
 
-import { Tags, Tag } from "@kyoungah.me/ui/build/components/tags";
-import { PostDetailSpan } from "@kyoungah.me/ui/build/components/post-detail";
+import { Tags, Tag } from "@kyoungah/ui/build/components/tags";
+import { PostDetailSpan } from "@kyoungah/ui/build/components/post-detail";
 
 import { H1 } from "../post-detail-elements";
 

@@ -10,7 +10,7 @@ function Header() {
         <Link href="/">
           <img
             src="/images/logo.png"
-            alt="dev.kyoungah.me"
+            alt="dev.kyoungah.com"
             className={style.headerLogo}
           />
         </Link>

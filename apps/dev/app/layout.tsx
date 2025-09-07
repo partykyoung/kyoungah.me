@@ -1,8 +1,8 @@
 import { Noto_Sans_KR, Roboto, Fira_Code } from "next/font/google";
 
-import "@kyoungah.me/ui/build/styles/global.css";
-import "@kyoungah.me/ui/build/styles/typography.css";
-import "@kyoungah.me/ui/build/styles/color-palette.css";
+import "@kyoungah/ui/build/styles/global.css";
+import "@kyoungah/ui/build/styles/typography.css";
+import "@kyoungah/ui/build/styles/color-palette.css";
 import "../src/app/styles/global.css.ts";
 
 import { Header } from "../src/widgets/header/header.ui";

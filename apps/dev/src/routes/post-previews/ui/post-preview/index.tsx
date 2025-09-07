@@ -6,7 +6,7 @@ import {
   PostPreview as BasePostPreview,
   PostPreviewDate,
   PostPreviewTitle,
-} from "@kyoungah.me/ui/build/components/post-preview";
+} from "@kyoungah/ui/build/components/post-preview";
 
 import { postPreviewDate, postPreviewTitle } from "./post-preview.css";
 import type { Post } from "../../model/types/post";

@@ -1,6 +1,6 @@
 "use client";
 
-import { QueryClient, QueryClientContextProvider } from "@kyoungah.me/query";
+import { QueryClient, QueryClientContextProvider } from "@kyoungah/query";
 
 const queryClient = new QueryClient({
   defaultOptions: {

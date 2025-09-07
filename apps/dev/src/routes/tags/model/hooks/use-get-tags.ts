@@ -1,4 +1,4 @@
-import { useQuery } from "@kyoungah.me/query";
+import { useQuery } from "@kyoungah/query";
 
 import { getTags } from "../../api/get-tags";
 

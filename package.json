@@ -1,5 +1,5 @@
 {
-  "name": "kyoungah-me",
+  "name": "kyoungah",
   "private": true,
   "scripts": {
     "build": "turbo build",
