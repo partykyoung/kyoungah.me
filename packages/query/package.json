@@ -37,9 +37,9 @@
     "@types/react": "^19.1.6",
     "eslint": "^9.27.0",
     "tsup": "^8.5.0",
-    "typescript": "^5.8.3"
+    "typescript": "catalog:"
   },
   "dependencies": {
-    "react": "^19.0.0"
+    "react": "catalog:"
   }
 }

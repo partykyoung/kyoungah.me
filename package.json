@@ -1,5 +1,5 @@
 {
-  "name": "kyoungah",
+  "name": "kyoungah.com",
   "private": true,
   "scripts": {
     "build": "turbo build",
@@ -10,11 +10,11 @@
   },
   "devDependencies": {
     "prettier": "^3.2.5",
-    "turbo": "^2.2.3",
-    "typescript": "^5.4.5",
+    "turbo": "^2.7.2",
+    "typescript": "catalog:",
     "vitest": "^3.1.1"
   },
-  "packageManager": "pnpm@8.15.6",
+  "packageManager": "pnpm@9.15.4",
   "engines": {
     "node": ">=18"
   }

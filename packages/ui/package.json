@@ -28,13 +28,13 @@
     "rollup": "^4.34.9",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
-    "typescript": "~5.6.3"
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "@radix-ui/react-slot": "^1.1.1",
     "clsx": "^2.1.1",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react": "catalog:",
+    "react-dom": "catalog:"
   },
   "keywords": [],
   "license": "ISC"
