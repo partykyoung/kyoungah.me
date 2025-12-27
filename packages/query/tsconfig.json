@@ -1,5 +1,5 @@
 {
-  "extends": "@kyoungah/typescript-config/react.json",
+  "extends": "@kyoungah/config-typescript/react.json",
   "compilerOptions": {
     "outDir": "./build",
     "rootDir": "./",

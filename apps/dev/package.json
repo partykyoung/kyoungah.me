@@ -39,7 +39,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@kyoungah/script": "workspace:*",
-    "@kyoungah/typescript-config": "workspace:*",
+    "@kyoungah/config-typescript": "workspace:*",
     "@types/mdx": "^2.0.13",
     "@types/node": "^20",
     "@types/react": "^19",

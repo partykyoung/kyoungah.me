@@ -31,8 +31,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@kyoungah/eslint-config": "workspace:*",
-    "@kyoungah/typescript-config": "workspace:*",
+    "@kyoungah/config-eslint": "workspace:*",
+    "@kyoungah/config-typescript": "workspace:*",
     "@types/node": "^20",
     "@types/react": "^19.1.6",
     "eslint": "^9.27.0",

@@ -1,12 +1,7 @@
 {
-  "name": "@kyoungah/eslint-config",
+  "name": "@kyoungah.com/config-eslint",
   "version": "0.0.0",
   "private": true,
-  "files": [
-    "library.js",
-    "next.js",
-    "react-internal.js"
-  ],
   "devDependencies": {
     "@eslint/js": "^9.14.0",
     "@typescript-eslint/eslint-plugin": "^7.1.0",

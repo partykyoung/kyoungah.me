@@ -1,13 +1,13 @@
 {
-  "extends": "@kyoungah/typescript-config/react.json",
-    "compilerOptions": {
-      "rootDir": "src",
-      "outDir": "./build",
-      "declaration": true, // 타입 정의 파일 생성
-      "declarationMap": true, // 타입 정의 소스맵 생성
-      "emitDeclarationOnly": true, // JS 파일은 생성하지 않음
-      "moduleResolution": "bundler" // 번들러 타입
-    },
-    "include": ["src", "global.d.ts"],
-    "exclude": ["node_modules", "build"]
-  }
+  "extends": "@kyoungah/config-typescript/react.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "./build",
+    "declaration": true, // 타입 정의 파일 생성
+    "declarationMap": true, // 타입 정의 소스맵 생성
+    "emitDeclarationOnly": true, // JS 파일은 생성하지 않음
+    "moduleResolution": "bundler" // 번들러 타입
+  },
+  "include": ["src", "global.d.ts"],
+  "exclude": ["node_modules", "build"]
+}

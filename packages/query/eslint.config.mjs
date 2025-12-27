@@ -1,4 +1,4 @@
-import eslintConfig from "@kyoungah/eslint-config/eslint.config.mjs";
+import eslintConfig from "@kyoungah/config-eslint/eslint.config.mjs";
 
 export default [
   ...eslintConfig,

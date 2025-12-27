@@ -1,5 +1,5 @@
 {
-  "extends": "@kyoungah/typescript-config/base.json",
+  "extends": "@kyoungah/config-typescript/base.json",
   "compilerOptions": {
     "outDir": "./build",
     "rootDir": "./",
